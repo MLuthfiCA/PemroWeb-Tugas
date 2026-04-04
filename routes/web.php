@@ -10,7 +10,7 @@ Route::get('/dashboard', [DashboardController::class, 'index']);
 
 // Tambahan untuk sidebar
 Route::get('/katalog', function () {
-    return 'Halaman Katalog Buku';
+    return view('katalog');
 });
 
 Route::get('/riwayat', function () {
