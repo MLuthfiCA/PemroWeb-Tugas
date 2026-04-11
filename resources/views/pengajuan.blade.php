@@ -1,55 +1,104 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form Peminjaman Buku</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .bg-custom-maroon { background-color: #632024; }
+    </style>
 </head>
-<body>
+<body class="bg-white flex flex-col min-h-screen font-sans">
 
-<div class="d-flex">
-
-    <!-- Sidebar -->
-    @include('layouts.sidebar')
-
-    <!-- Content -->
-    <div class="p-4" style="width:100%;">
-        <h3>Form Peminjaman Buku</h3>
-
-        <form>
-
-            <div class="mb-3">
-                <label class="form-label">Nama Peminjam</label>
-                <input type="text" class="form-control" placeholder="Masukkan nama">
+    <header class="bg-custom-maroon text-white p-4 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            
+            <div class="flex items-center">
+                <img src="{{ asset('logo.png') }}" alt="Logo" class="w-16 h-16 object-contain">
+                <span class="ml-3 text-xl font-semibold">ReadSpace Library</span>
             </div>
 
-            <div class="mb-3">
-                <label class="form-label">NIM</label>
-                <input type="text" class="form-control" placeholder="Masukkan NIM">
+            <nav class="hidden md:flex space-x-8 items-center">
+                <a href="#" class="hover:text-gray-300 transition">Homepage</a>
+                <a href="#" class="hover:text-gray-300 transition">search</a>
+                <a href="#" class="hover:text-gray-300 transition">about us</a>
+                <div class="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center cursor-pointer">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                    </svg>
+                </div>
+            </nav>
+
+        </div>
+    </header>
+
+    <main class="flex-grow container mx-auto py-10 px-4">
+        <h2 class="text-3xl font-normal text-center mb-10 text-gray-800">Form Peminjaman Buku</h2>
+        
+        <div class="flex flex-col lg:flex-row gap-8">
+            <div class="flex-grow">
+                <form action="#" method="POST" class="space-y-4">
+                    
+                    <div>
+                        <label class="block text-lg font-medium mb-1">Nama Peminjam</label>
+                        <input type="text" placeholder="Masukkan Nama" class="w-full p-2 bg-gray-500 text-white placeholder-gray-200 rounded focus:outline-none focus:ring-2 focus:ring-maroon-400">
+                    </div>
+
+                    <div>
+                        <label class="block text-lg font-medium mb-1">NIM</label>
+                        <input type="text" placeholder="Masukkan NIM" class="w-full p-2 bg-gray-500 text-white placeholder-gray-200 rounded focus:outline-none focus:ring-2 focus:ring-maroon-400">
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-lg font-medium mb-1">Tanggal Pinjam</label>
+                            <input type="date" class="w-full p-2 bg-gray-500 text-white rounded focus:outline-none focus:ring-2 focus:ring-maroon-400">
+                        </div>
+                        <div>
+                            <label class="block text-lg font-medium mb-1">Tanggal Kembali</label>
+                            <input type="date" class="w-full p-2 bg-gray-500 text-white rounded focus:outline-none focus:ring-2 focus:ring-maroon-400">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-lg font-medium mb-1">ID Buku</label>
+                        <input type="text" placeholder="Masukkan ID Buku" class="w-full p-2 bg-gray-500 text-white placeholder-gray-200 rounded focus:outline-none focus:ring-2 focus:ring-maroon-400">
+                    </div>
+
+                    <div>
+                        <label class="block text-lg font-medium mb-1">Judul Buku</label>
+                        <input type="text" placeholder="Masukkan Judul Buku" class="w-full p-2 bg-gray-500 text-white placeholder-gray-200 rounded focus:outline-none focus:ring-2 focus:ring-maroon-400">
+                    </div>
+
+                    <div class="pt-4">
+                        <button type="submit" class="bg-custom-maroon text-white px-8 py-2 rounded hover:bg-opacity-90 transition">
+                            Pinjam Buku
+                        </button>
+                    </div>
+                </form>
             </div>
 
-            <div class="mb-3">
-                <label class="form-label">ID Buku</label>
-                <input type="number" class="form-control" placeholder="Masukkan ID buku">
+            <div class="hidden lg:block w-64 bg-gray-300 rounded-sm shadow-inner"></div>
+        </div>
+    </main>
+
+    <footer class="bg-[#333333] text-white py-10 px-4 mt-auto">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 text-sm">
+            <div>
+                <p class="font-semibold">Logo poltek</p>
             </div>
-
-            <div class="mb-3">
-                <label class="form-label">Judul Buku</label>
-                <input type="text" class="form-control" placeholder="Masukkan judul buku">
+            <div>
+                <p>Penjelasan singkat aplikasi kami</p>
             </div>
-
-            <div class="mb-3">
-                <label class="form-label">Tanggal Pinjam</label>
-                <input type="date" class="form-control">
+            <div>
+                <p class="font-semibold">Alamat Poltek</p>
             </div>
-
-            <button type="button" class="btn btn-primary">
-                Pinjam Buku
-            </button>
-
-        </form>
-    </div>
-
-</div>
+            <div>
+                <p class="font-semibold">hubungi kami</p>
+            </div>
+        </div>
+    </footer>
 
 </body>
 </html>
