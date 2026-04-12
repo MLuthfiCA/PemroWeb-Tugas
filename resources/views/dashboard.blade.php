@@ -4,53 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Perpustakaan Digital</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-light">
+<body class="bg-gray-50 dark:bg-gray-900">
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
-        <div class="container">
-            <a class="navbar-brand" href="#">Perpustakaan Digital</a>
-            <div class="navbar-nav ms-auto">
-                <a class="nav-link active" href="#">Dashboard</a>
-                <a class="nav-link" href="#">Logout</a>
-            </div>
+    <aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
+        <div class="h-full px-3 py-4 overflow-y-auto bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+            <a href="#" class="flex items-center ps-2.5 mb-5 text-xl font-bold text-blue-600">Perpus Digital</a>
+            <ul class="space-y-2 font-medium">
+                <li>
+                    <a href="/dashboard" class="flex items-center p-2 text-blue-600 bg-blue-50 rounded-lg group">
+                        <span class="ms-3">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/katalog" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 group">
+                        <span class="ms-3">Katalog Buku</span>
+                    </a>
+                </li>
+                <li>
+                    <button type="button" class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
+                        <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Layanan</span>
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/></svg>
+                    </button>
+                    <ul id="dropdown-example" class="hidden py-2 space-y-2">
+                        <li><a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Peminjaman Saya</a></li>
+                        <li><a href="#" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Riwayat</a></li>
+                    </ul>
+                </li>
+            </ul>
         </div>
-    </nav>
+    </aside>
 
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card border-0 shadow-sm p-4">
-                    <h2 class="fw-bold text-dark">Selamat Datang di Sistem Perpustakaan Digital</h2>
-                    <p class="text-secondary">Anda masuk sebagai anggota tim PBL. Di sini Anda bisa mengelola data buku dan peminjaman.</p>
-                    <hr>
-                    
-                    <div class="row mt-4">
-                        <div class="col-md-4">
-                            <div class="card bg-primary text-white p-3 border-0">
-                                <h5>Total Buku</h5>
-                                <h2 class="fw-bold">120</h2>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card bg-success text-white p-3 border-0">
-                                <h5>Buku Dipinjam</h5>
-                                <h2 class="fw-bold">15</h2>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card bg-warning text-dark p-3 border-0">
-                                <h5>Anggota Baru</h5>
-                                <h2 class="fw-bold">8</h2>
-                            </div>
-                        </div>
-                    </div>
+    <div class="p-4 sm:ml-64">
+        <div class="p-6 bg-white rounded-xl shadow-sm border border-gray-200">
+            <h2 class="text-3xl font-extrabold text-gray-900 mb-2">Selamat Datang, Anggota PBL! 👋</h2>
+            <p class="text-gray-500 mb-6">Kelola data buku fisik dan pantau status peminjaman mahasiswa di sini.</p>
+            
+            <hr class="mb-8">
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="p-6 bg-blue-600 rounded-2xl shadow-lg shadow-blue-200">
+                    <h5 class="text-blue-100 font-medium">Total Koleksi Buku</h5>
+                    <h2 class="text-4xl font-bold text-white mt-2">120</h2>
+                </div>
+                <div class="p-6 bg-emerald-500 rounded-2xl shadow-lg shadow-emerald-200">
+                    <h5 class="text-emerald-50 text-emerald-100 font-medium">Buku Sedang Dipinjam</h5>
+                    <h2 class="text-4xl font-bold text-white mt-2">15</h2>
+                </div>
+                <div class="p-6 bg-amber-400 rounded-2xl shadow-lg shadow-amber-100">
+                    <h5 class="text-amber-900 font-medium font-medium">Antrean Anggota Baru</h5>
+                    <h2 class="text-4xl font-bold text-amber-900 mt-2">8</h2>
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 </body>
 </html>
