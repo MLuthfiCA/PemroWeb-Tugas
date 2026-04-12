@@ -60,4 +60,39 @@
         </div>
     </div>
 </div>
+
+<footer class="bg-[#632024] text-white py-10">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
+            
+            <div class="flex justify-center md:justify-start items-center">
+                <img src="{{ asset('images/readspace-library.png') }}" 
+                     alt="Logo Readspace" 
+                     class="h-20 w-auto object-contain"> </div>
+
+            <div>
+                <h6 class="font-bold mb-2">Readspace Library</h6>
+                <p class="text-sm text-gray-300 leading-relaxed">
+                    Readspace Library adalah platform perpustakaan digital yang kami rancang untuk memudahkan mahasiswa dalam peminjaman buku serta memudahkan sistem perpustakan.
+                </p>
+            </div>
+
+            <div>
+                <h6 class="font-bold mb-2">Politeknik Negeri Batam</h6>
+                <p class="text-sm text-gray-300">
+                    Jl. Ahmad Yani, Batam Kota, Kota Batam, Kepulauan Riau, Indonesia.
+                </p>
+            </div>
+
+            <div>
+                <h6 class="font-bold mb-2">Hubungi Kami</h6>
+                <p class="text-sm text-gray-300">
+                    Email: readspacelibrary@poltek.ac.id<br>
+                    Telp: (021) 673528
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
 @endsection
