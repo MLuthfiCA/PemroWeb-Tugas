@@ -2,18 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <title>Sistem Perpustakaan</title>
+    <title>ReadSpace</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <div class="d-flex">
-        @include('layouts.sidebar')
+<body class="bg-[#fdf8f4]">
 
-        <div class="content p-4 w-100">
-            @yield('content')
-        </div>
+    <!-- Navbar (ini yang bikin semua halaman sama) -->
+    @include('layouts.navbar')
+
+    <!-- Content -->
+    <div class="p-6">
+        @yield('content')
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
