@@ -45,7 +45,7 @@
         </div>
 
         <h2 class="text-center text-blue-600 font-bold text-xl py-4">
-            System Perpustakaan Digital
+            Sistem Perpustakaan Digital
         </h2>
 
         <form class="max-w-xl mx-auto flex flex-col">
