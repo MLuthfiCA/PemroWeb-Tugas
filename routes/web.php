@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RiwayatController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LoginController;
+use Illuminate\Http\Request;
 
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/contact', [HomeController::class, 'contact']);
@@ -14,17 +15,43 @@ Route::get('/riwayat', [RiwayatController::class, 'tampilkanRiwayat']);
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
 Route::get('/login', [LoginController::class, 'login']);
-
+Route::get('/', fn() => view('home'))->name('home');
+Route::get('/search', fn() => view('search'))->name('search');
+Route::get('/about', fn() => view('about'))->name('about');
+Route::get('/profile', fn() => view('profile'))->name('profile');
 
 Route::get('/login', function () {
     return view('login');
 });
 
-Route::get('/katalog', function () {
-    return view('katalog');
-});
+Route::get('/katalog', function (Request $request) {
+    // 1. Data buku (Simulasi data database)
+    $semuaBuku = collect([
+        ['judul' => 'Laskar Pelangi', 'penulis' => 'Andrea Hirata', 'genre' => 'Drama', 'status' => 'Tersedia'],
+        ['judul' => 'Bumi', 'penulis' => 'Tere Liye', 'genre' => 'Fantasi', 'status' => 'Tersedia'],
+        ['judul' => 'Filosofi Teras', 'penulis' => 'Henry Manampiring', 'genre' => 'Self-Dev', 'status' => 'Dipinjam'],
+    ]);
 
+    // 2. Ambil kata kunci dari input search bar
+    $query = $request->input('query');
+
+    // 3. Filter data berdasarkan judul atau penulis (jika ada pencarian)
+    if ($query) {
+        $hasilBuku = $semuaBuku->filter(function ($item) use ($query) {
+            return str_contains(strtolower($item['judul']), strtolower($query)) || 
+                   str_contains(strtolower($item['penulis']), strtolower($query));
+        });
+    } else {
+        $hasilBuku = $semuaBuku;
+    }
+
+    // 4. Kirim hasilnya ke view katalog
+    return view('katalog', ['daftarBuku' => $hasilBuku]);
+});
 
 Route::get('/pengajuan', function () {
     return view('pengajuan');
 });
+Route::get('/about', function () {
+    return view('about'); 
+})->name('about');

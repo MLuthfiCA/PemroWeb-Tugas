@@ -2,23 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 class RiwayatController extends Controller
 {
-    public function dataPeminjaman(){
-        return [
-            ['id_pengguna' => 3323, 'judul' => 'Laut Bercerita', 'tanggal_pinjam' => '01-04-2026'],
-            ['id_pengguna' => 3325, 'judul' => 'Off The Record', 'tanggal_pinjam' => '25-03-2026'],
-        ];
-    }
+public function tampilkanRiwayat()
+{
+    // Data simulasi peminjaman
+    $peminjaman = collect([
+        [
+            'id_pengguna' => 'USR001', 
+            'judul' => 'Laskar Pelangi', 
+            'tanggal_pinjam' => '2026-04-01',
+            // Logika fiks 1 minggu (7 hari)
+            'batas_kembali' => date('Y-m-d', strtotime('2026-04-01 + 7 days')) 
+        ],
+        [
+            'id_pengguna' => 'USR002', 
+            'judul' => 'Bumi', 
+            'tanggal_pinjam' => '2026-04-05',
+            'batas_kembali' => date('Y-m-d', strtotime('2026-04-05 + 7 days'))
+        ],
+    ]);
 
-    public function tampilkanRiwayat() {
-        $peminjaman = $this->dataPeminjaman();
-        $pengembalian = [
-            ['id_pengguna' => '3321', 'judul' => 'Filosofi Teras', 'tanggal_kembali' => '02-04-2026'],
-            ['id_pengguna' => '3320', 'judul' => 'Bumi Manusia', 'tanggal_kembali' => '01-04-2026'],
-            ];
+    $pengembalian = collect([
+        ['id_pengguna' => 'USR001', 'judul' => 'Filosofi Teras', 'tanggal_kembali' => '2026-03-25'],
+    ]);
+
     return view('riwayat', compact('peminjaman', 'pengembalian'));
-    }
+}
 }
