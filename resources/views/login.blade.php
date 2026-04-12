@@ -45,7 +45,7 @@
         </div>
 
         <h2 class="text-center text-blue-600 font-bold text-xl py-4">
-            System Perpustakaan Digital
+            Sistem Perpustakaan Digital
         </h2>
 
         <form class="max-w-xl mx-auto flex flex-col">
@@ -65,8 +65,3 @@
     </div>
 </body>
 </html>
-<<<<<<< HEAD
-?>
-    
-=======
->>>>>>> b1a73220847d09a2d83a24d16e8e6a32940bce2f
