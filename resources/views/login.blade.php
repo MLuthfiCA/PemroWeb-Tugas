@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-</html>
     <title>Login</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
