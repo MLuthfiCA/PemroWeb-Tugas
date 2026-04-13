@@ -20,21 +20,23 @@
             </div>
 
         <nav class="flex justify-between items-center px-8 py-4 bg-[#d5b893] text-white shadow-lg">
-    <!-- Menu -->
-    <div class="flex items-center space-x-6">
-        <a href="/" class="hover:text-[#632024] transition">Home</a>
-        <a href="/search" class="hover:text-[#632024] transition">Search</a>
-        <a href="{{ route('about') }}" class="hover:text-[#6322024] transition font-semibold">About Us</a>
-    </div>
+    <div class="container mx-auto flex justify-between items-center">
 
-    <!-- Profile Icon -->
-    
-    <!-- Profile -->
-    <div class="ml-6">
-        <a href="{{ route('about') }}" 
-        class="w-10 h-10 bg-[#d5b893] rounded-full flex items-center justify-center 
-                hover:scale-110 transition duration-300 shadow-md">
-            
+    <!-- MENU + PROFILE -->
+    <div class="flex items-center gap-6">
+
+        <!-- Menu -->
+        <nav class="flex items-center space-x-6">
+            <a href="/" class="hover:text-[#d5b893] transition">Home</a>
+            <a href="/search" class="hover:text-[#d5b893] transition">Search</a>
+            <a href="{{ route('about') }}" class="hover:text-[#d5b893] transition">About Us</a>
+        </nav>
+
+        <!-- Profile -->
+        <a href="{{ route('/profile') }}" 
+           class="w-10 h-10 bg-[#d5b893] rounded-full flex items-center justify-center 
+                  hover:scale-110 transition duration-300 shadow-md">
+
             <svg xmlns="http://www.w3.org/2000/svg" 
                 class="h-6 w-6 text-[#632024]" 
                 viewBox="0 0 20 20" fill="currentColor">
@@ -43,8 +45,10 @@
                     clip-rule="evenodd" />
             </svg>
 
+        </a>
 
-    </a>
+    </div>
+</div>
 
 </nav>
         </div>

@@ -12,7 +12,7 @@
             <img src="{{ asset('images/readspace-library.png') }}" class="w-[260px] h-[260px] pt-5">
         </div>
 
-        <h2 class="text-center text-blue-600 font-bold text-xl py-4">
+        <h2 class="text-center text-red-#632034 font-bold text-xl py-4">
             ReadSpace Library 
         </h2>
 
