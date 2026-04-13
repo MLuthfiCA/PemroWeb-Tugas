@@ -6,7 +6,7 @@
     <title>Form Peminjaman Buku</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .bg-custom-maroon { background-color: #632024; }
+        .bg-custom-maroon { background-color: #d5b893; }
     </style>
 </head>
 <body class="bg-white flex flex-col min-h-screen font-sans">
@@ -15,16 +15,16 @@
         <div class="container mx-auto flex justify-between items-center">
             
             <div class="flex items-center">
-                <img src="{{ asset('logo.png') }}" alt="Logo" class="w-16 h-16 object-contain">
+                <img src="{{ asset('images/readspace-library.png') }}" alt="Logo" class="w-20 h-20 object-contain">
                 <span class="ml-3 text-xl font-semibold">ReadSpace Library</span>
             </div>
 
-        <nav class="flex justify-between items-center px-8 py-4 bg-[#632024] text-white shadow-lg">
+        <nav class="flex justify-between items-center px-8 py-4 bg-[#d5b893] text-white shadow-lg">
     <!-- Menu -->
     <div class="flex items-center space-x-6">
-        <a href="/" class="hover:text-[#d5b893] transition">Home</a>
-        <a href="/search" class="hover:text-[#d5b893] transition">Search</a>
-        <a href="{{ route('about') }}" class="hover:text-[#d5b893] transition font-semibold">About Us</a>
+        <a href="/" class="hover:text-[#632024] transition">Home</a>
+        <a href="/search" class="hover:text-[#632024] transition">Search</a>
+        <a href="{{ route('about') }}" class="hover:text-[#6322024] transition font-semibold">About Us</a>
     </div>
 
     <!-- Profile Icon -->
@@ -58,7 +58,7 @@
             <div class="bg-white rounded-2xl shadow-md p-6 text-center 
             hover:shadow-xl hover:-translate-y-2 transition duration-300">
 
-    <div class="bg-[#d5b893] h-32 mb-4 rounded-xl"></div>
+    <div class="bg-[#632024] h-32 mb-4 rounded-xl"></div>
 
     <p class="font-semibold text-lg text-[#632024]">M. Luthfi Causart Azavi</p>
     <p class="text-sm text-gray-600">NIM : 3312501052</p>
@@ -68,7 +68,7 @@
         <div class="bg-white rounded-2xl shadow-md p-6 text-center 
             hover:shadow-xl hover:-translate-y-2 transition duration-300">
 
-    <div class="bg-[#d5b893] h-32 mb-4 rounded-xl"></div>
+    <div class="bg-[#632024] h-32 mb-4 rounded-xl"></div>
 
     <p class="font-semibold text-lg text-[#632024]">Muhammad Risky Kurnia</p>
     <p class="text-sm text-gray-600">NIM : 3312501056</p>
@@ -79,7 +79,7 @@
             <div class="bg-white rounded-2xl shadow-md p-6 text-center 
             hover:shadow-xl hover:-translate-y-2 transition duration-300">
 
-    <div class="bg-[#d5b893] h-32 mb-4 rounded-xl"></div>
+    <div class="bg-[#632024] h-32 mb-4 rounded-xl"></div>
 
     <p class="font-semibold text-lg text-[#632024]">Siti Halimah Chania</p>
     <p class="text-sm text-gray-600">NIM : 3312501057</p>
@@ -90,7 +90,7 @@
         <div class="bg-white rounded-2xl shadow-md p-6 text-center 
             hover:shadow-xl hover:-translate-y-2 transition duration-300">
 
-    <div class="bg-[#d5b893] h-32 mb-4 rounded-xl"></div>
+    <div class="bg-[#632024] h-32 mb-4 rounded-xl"></div>
 
     <p class="font-semibold text-lg text-[#632024]">Zahrah Athirah Badiah</p>
     <p class="text-sm text-gray-600">NIM : 3312501060</p>
