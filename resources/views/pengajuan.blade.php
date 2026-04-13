@@ -6,7 +6,7 @@
     <title>Form Peminjaman Buku</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .bg-custom-maroon { background-color: #632024; }
+        .bg-custom-cream { background: color #632202; }
     </style>
 </head>
 <body class="bg-white flex flex-col min-h-screen font-sans">
@@ -19,10 +19,12 @@
                 <span class="ml-3 text-xl font-semibold">ReadSpace Library</span>
             </div>
 
-            <nav class="hidden md:flex space-x-8 items-center">
-                <a href="#" class="hover:text-gray-300 transition">Homepage</a>
-                <a href="#" class="hover:text-gray-300 transition">search</a>
-                <a href="#" class="hover:text-gray-300 transition">about us</a>
+            <div class="flex items-center space-x-6">
+        <a href="/" class="hover:text-[#632024] transition">Home</a>
+        <a href="/search" class="hover:text-[#632024] transition">Search</a>
+        <a href="{{ route('about') }}" class="hover:text-[#6322024] transition font-semibold">About Us</a>
+    </div>
+
                 <div class="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
@@ -83,14 +85,14 @@
         </div>
     </main>
 
-    <footer class="bg-[#632024] text-white py-10">
+    <footer class="bg-[#d5b893] text-white py-10">
     <div class="container mx-auto px-4">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
             
             <div class="flex justify-center md:justify-start items-center">
                 <img src="{{ asset('images/readspace-library.png') }}" 
                      alt="Logo Readspace" 
-                     class="h-20 w-auto object-contain"> </div>
+                     class="h-25w-auto object-contain"> </div>
 
             <div>
                 <h6 class="font-bold mb-2">Readspace Library</h6>
