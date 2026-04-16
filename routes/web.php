@@ -5,8 +5,9 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RiwayatController;
 use App\Http\Controllers\AuthController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use App\Http\Controllers\ProfileController;
+
 
 Route::get('/contact', [HomeController::class, 'contact']);
 Route::get('/dashboard', [DashboardController::class, 'index']);
@@ -15,10 +16,15 @@ Route::get('/register', [AuthController::class, 'showRegister'])->name('register
 Route::post('/register', [AuthController::class, 'register']);
 Route::get('/search', fn() => view('search'))->name('search');
 
-
 Route::get('/login', function () {
     return view('login');
-});
+})->name('login');
+Route::post('/logout', function (Request $request) {
+    Auth::logout();
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+    return redirect('/login'); // Bagusnya balik ke login setelah keluar
+})->name('logout');
 
 Route::get('/katalog', function (Request $request) {
     // 1. Data buku (Simulasi data database)
@@ -62,8 +68,7 @@ Route::get('/profile', function () {
     return view('profile', compact('daftarBuku'));
 })->name('profile');
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/admin/profile', [ProfileController::class, 'profile'])->name('admin.profile');
+// Halaman Profil Admin
+Route::get('/admin/profile', function () {
+    return view('admin.profile');
+})->name('admin.profile'); // Nama unik: admin.profile
