@@ -15,6 +15,7 @@ Route::get('/register', [AuthController::class, 'showRegister'])->name('register
 Route::post('/register', [AuthController::class, 'register']);
 Route::get('/search', fn() => view('search'))->name('search');
 
+
 Route::get('/login', function () {
     return view('login');
 });

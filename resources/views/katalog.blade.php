@@ -9,11 +9,10 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 
- <style>
+    <style>
         /* Perbaikan: Nama class disamakan jadi bg-custom-maroon */
         .bg-custom-maroon { background-color: #632024; }
     </style>
-</head>
 <body class="bg-white flex flex-col min-h-screen font-sans">
 <header class="bg-custom-maroon text-white p-4 shadow-md">
         <div class="container mx-auto flex justify-between items-center">
@@ -54,11 +53,22 @@
         </div>
     </header>
 
-
         <div x-show="showSearch" x-transition:enter="transition ease-out duration-300"
             x-transition:enter-start="opacity-0 -translate-y-4" x-transition:enter-end="opacity-100 translate-y-0"
             x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 translate-y-0"
             x-transition:leave-end="opacity-0 -translate-y-4" class="max-w-7xl mx-auto px-4 mt-4 pb-2" x-cloak>
+
+            <div x-show="showSearch" 
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0 -translate-y-4"
+             x-transition:enter-end="opacity-100 translate-y-0"
+             x-transition:leave="transition ease-in duration-200"
+             x-transition:leave-start="opacity-100 translate-y-0"
+             x-transition:leave-end="opacity-0 -translate-y-4"
+             class="max-w-7xl mx-auto px-4 mt-4 pb-2"
+             x-cloak>
+            
+>>>>>>> Stashed changes
             <form action="/katalog" method="GET" class="max-w-md mx-auto relative">
                 <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                     <svg class="w-4 h-4 text-stone-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
