@@ -33,7 +33,7 @@
         </nav>
 
         <!-- Profile -->
-        <a href="{{ route('/profile') }}" 
+        <a href="{{ route('profile') }}" 
            class="w-10 h-10 bg-[#d5b893] rounded-full flex items-center justify-center 
                   hover:scale-110 transition duration-300 shadow-md">
 
@@ -62,40 +62,50 @@
         </p>
 <main>
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-            @forelse($daftarBuku as $buku)
-                <div class="bg-white border border-stone-100 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 {{ $buku['status'] == 'Dipinjam' ? 'opacity-75 bg-stone-50' : '' }}">
-                    <div class="h-56 {{ $buku['status'] == 'Dipinjam' ? 'bg-stone-200' : 'bg-amber-100' }} rounded-t-3xl flex items-center justify-center p-6 border-b border-stone-100">
-                        <span class="{{ $buku['status'] == 'Dipinjam' ? 'text-stone-500' : 'text-amber-800' }} text-sm font-medium uppercase tracking-wider">Cover Buku</span>
-                    </div>
-                    
-                    <div class="p-6">
-                        <div class="flex justify-between items-start gap-2 mb-2">
-                            <h5 class="text-xl font-bold tracking-tight {{ $buku['status'] == 'Dipinjam' ? 'text-stone-500' : 'text-red-950' }} leading-tight">
-                                {{ $buku['judul'] }}
-                            </h5>
-                            <span class="{{ $buku['status'] == 'Tersedia' ? 'bg-green-100 text-green-900' : 'bg-red-100 text-red-900' }} text-[10px] font-bold px-3 py-1 rounded-full whitespace-nowrap uppercase">
-                                {{ $buku['status'] }}
-                            </span>
-                        </div>
-                        
-                        <p class="text-sm {{ $buku['status'] == 'Dipinjam' ? 'text-stone-400' : 'text-red-900' }} font-medium mb-4">{{ $buku['penulis'] }}</p>
-                        
-                        <div class="pt-4 border-t border-stone-100 mb-6">
-                            <p class="text-xs text-stone-500 uppercase font-bold mb-1">Genre</p>
-                            <p class="text-sm text-stone-800">{{ $buku['genre'] }}</p>
-                        </div>
-@if(false)
-    <button data-modal-target="modal-pinjam" data-modal-toggle="modal-pinjam" class="w-full text-white bg-red-950 hover:bg-red-900 font-semibold rounded-xl text-sm px-5 py-3 transition-all shadow-md">
-        Pinjam Buku Fisik
-    </button>
-@else
-    <button disabled class="w-full text-white bg-stone-400 font-semibold rounded-xl text-sm px-5 py-3 cursor-not-allowed">
-        Tidak Tersedia
-    </button>
-@endif
-                    </div>
-                </div>
-            @empty
+           @forelse($daftarBuku as $buku)
+<div class="bg-white border border-stone-100 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 {{ ($buku->status ?? '') == 'Dipinjam' ? 'opacity-75 bg-stone-50' : '' }}">
+    
+    <div class="h-56 {{ ($buku->status ?? '') == 'Dipinjam' ? 'bg-stone-200' : 'bg-amber-100' }} rounded-t-3xl flex items-center justify-center p-6 border-b border-stone-100">
+        <span class="{{ ($buku->status ?? '') == 'Dipinjam' ? 'text-stone-500' : 'text-amber-800' }} text-sm font-medium uppercase tracking-wider">
+            Cover Buku
+        </span>
+    </div>
+    
+    <div class="p-6">
+        <div class="flex justify-between items-start gap-2 mb-2">
+            
+            <h5 class="text-xl font-bold tracking-tight {{ ($buku->status ?? '') == 'Dipinjam' ? 'text-stone-500' : 'text-red-950' }} leading-tight">
+                {{ $buku->judul ?? '-' }}
+            </h5>
+
+            <span class="{{ ($buku->status ?? '') == 'Tersedia' ? 'bg-green-100 text-green-900' : 'bg-red-100 text-red-900' }} text-[10px] font-bold px-3 py-1 rounded-full uppercase">
+                {{ $buku->status ?? '-' }}
+            </span>
+
+        </div>
+        
+        <p class="text-sm {{ ($buku->status ?? '') == 'Dipinjam' ? 'text-stone-400' : 'text-red-900' }} font-medium mb-4">
+            {{ $buku->penulis ?? '-' }}
+        </p>
+        
+        <div class="pt-4 border-t border-stone-100 mb-6">
+            <p class="text-xs text-stone-500 uppercase font-bold mb-1">Genre</p>
+            <p class="text-sm text-stone-800">{{ $buku->genre ?? '-' }}</p>
+        </div>
+
+        @if(($buku->status ?? '') == 'Tersedia')
+            <button class="w-full text-white bg-red-950 hover:bg-red-900 font-semibold rounded-xl text-sm px-5 py-3 transition-all shadow-md">
+                Pinjam Buku Fisik
+            </button>
+        @else
+            <button disabled class="w-full text-white bg-stone-400 font-semibold rounded-xl text-sm px-5 py-3 cursor-not-allowed">
+                Tidak Tersedia
+            </button>
+        @endif
+
+    </div>
+</div>
+@empty
                 <div class="col-span-full text-center py-20 bg-stone-50 rounded-3xl border-2 border-dashed border-stone-200">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-stone-300 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
@@ -108,7 +118,7 @@
 
 
 
-    <footer class="bg-[#d5b893] text-white py-10">
+<footer class="bg-[#d5b893] text-white py-10">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
                 

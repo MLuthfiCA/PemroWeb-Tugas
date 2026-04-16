@@ -5,15 +5,14 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RiwayatController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\LoginController;
 use Illuminate\Http\Request;
+
 
 Route::get('/contact', [HomeController::class, 'contact']);
 Route::get('/dashboard', [DashboardController::class, 'index']);
 Route::get('/riwayat', [RiwayatController::class, 'tampilkanRiwayat']);
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
-Route::get('/', fn() => view('home'))->name('home');
 Route::get('/search', fn() => view('search'))->name('search');
 
 Route::get('/login', function () {
@@ -43,7 +42,7 @@ Route::get('/katalog', function (Request $request) {
 
     // 4. Kirim hasilnya ke view katalog
     return view('katalog', ['daftarBuku' => $hasilBuku]);
-});
+})->name('katalog');
 
 Route::get('/pengajuan', function () {
     return view('pengajuan');
@@ -52,23 +51,17 @@ Route::get('/about', function () {
     return view('about'); 
 })->name('about');
 
+// Halaman Profil Mahasiswa
 Route::get('/profile', function () {
-
     $daftarBuku = [
-        [
-            'judul' => 'Laskar Pelangi',
-            'penulis' => 'Andrea Hirata',
-            'genre' => 'Novel',
-            'status' => 'Pernah Dipinjam'
-        ],
-        [
-            'judul' => 'Bumi',
-            'penulis' => 'Tere Liye',
-            'genre' => 'Fantasi',
-            'status' => 'Pernah Dipinjam'
-        ]
+        ['judul' => 'Laskar Pelangi'],
+        ['judul' => 'Bumi']
     ];
 
-    return view('/profile', compact('daftarBuku'));
+    return view('profile', compact('daftarBuku'));
+})->name('profile');
 
-})->name('/profile');
+// Halaman Profil Admin
+Route::get('/admin/profile', function () {
+    return view('admin.profile');
+})->name('admin.profile'); // Nama unik: admin.profile

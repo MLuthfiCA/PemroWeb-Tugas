@@ -9,38 +9,51 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 
-<body class="bg-stone-50 text-stone-900 font-sans" x-data="{ showSearch: false }">
-
-    <nav class="bg-red-950 p-4 sticky top-0 z-50 shadow-md">
-        <div class="max-w-7xl mx-auto flex justify-between items-center px-4 md:px-8">
-            <a href="/" class="flex items-center space-x-2">
-                <span class="text-white text-2xl font-bold">ReadSpace Library</span>
-            </a>
-
-            <div class="flex items-center space-x-8">
-                <div class="hidden md:flex items-center space-x-10 text-white">
-                    <a href="/" class="hover:text-[#d5b893] transition">Home</a>
-                    
-                    <button @click="showSearch = !showSearch"
-                        class="hover:text-amber-200 transition focus:outline-none flex items-center gap-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                        </svg>
-                        Search
-                    </button>
-
-                    <a href="#" class="font-semibold text-amber-200 transition">About Us</a>
-                </div>
-
-                <a href="{{ route('about') }}" class="group ml-2">
-                    <div class="bg-amber-100 rounded-full w-10 h-10 flex items-center justify-center border border-amber-200 shadow-inner transform group-hover:scale-110 transition duration-300">
-                        <span class="text-red-950 font-bold">RS</span>
-                    </div>
-                </a>
+ <style>
+        /* Perbaikan: Nama class disamakan jadi bg-custom-maroon */
+        .bg-custom-maroon { background-color: #632024; }
+    </style>
+</head>
+<body class="bg-white flex flex-col min-h-screen font-sans">
+<header class="bg-custom-maroon text-white p-4 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            
+            <div class="flex items-center">
+                <img src="{{ asset('images/logo.rsl.2.png') }}" alt="Logo" class="w-20 h-20 object-contain">
+                <span class="ml-3 text-xl font-semibold">ReadSpace Library</span>
             </div>
+
+        <nav class="flex justify-between items-center px-8 py-4 bg-[#632024] text-white shadow-lg">
+    <!-- Menu -->
+    <div class="flex items-center space-x-6">
+        <a href="{{ route('katalog') }}" class="hover:text-[#d5b893] transition">Home</a>
+        <a href="/search" class="hover:text-[#d5b893] transition">Search</a>
+        <a href="{{ route('about') }}" class="hover:text-[#d5b893] transition">About Us</a>
+    </div>
+
+    <!-- Profile Icon -->
+    
+    <!-- Profile -->
+    <div class="ml-6">
+        <a href="{{ route('about') }}" 
+        class="w-10 h-10 bg-[#d5b893] rounded-full flex items-center justify-center 
+                hover:scale-110 transition duration-300 shadow-md">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" 
+                class="h-6 w-6 text-[#632024]" 
+                viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" 
+                    d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" 
+                    clip-rule="evenodd" />
+            </svg>
+
+
+    </a>
+
+</nav>
         </div>
+    </header>
+
 
         <div x-show="showSearch" x-transition:enter="transition ease-out duration-300"
             x-transition:enter-start="opacity-0 -translate-y-4" x-transition:enter-end="opacity-100 translate-y-0"
@@ -174,28 +187,31 @@
         </div>
     </div>
 
-    <footer class="bg-[#632024] text-white py-12 mt-20">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 text-center md:text-left">
-                <div class="flex justify-center md:justify-start">
-                    <img src="{{ asset('images/readspace-library.png') }}" alt="Logo Readspace"
-                        class="h-24 w-auto object-contain">
+    <footer class="bg-[#d5b893] text-white py-10">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
+                
+                <div class="flex justify-center md:justify-start items-center">
+                    <img src="{{ asset('images/readspace-library.png') }}" alt="Logo Readspace" class="h-20 w-auto object-contain">
                 </div>
+
                 <div>
-                    <h6 class="font-bold mb-4 uppercase text-amber-200">Readspace Library</h6>
-                    <p class="text-sm text-gray-300 leading-relaxed">
-                        Platform perpustakaan digital untuk memudahkan mahasiswa Polibatam dalam meminjam buku fisik dan
-                        digital secara terintegrasi.
+                    <h6 class="font-bold mb-2">Readspace Library</h6>
+                    <p class="text-sm text-gray-100 leading-relaxed">
+                        Readspace Library adalah platform perpustakaan digital yang kami rancang untuk memudahkan mahasiswa dalam peminjaman buku serta memudahkan sistem perpustakan.
                     </p>
                 </div>
+
                 <div>
-                    <h6 class="font-bold mb-4 uppercase text-amber-200">Politeknik Negeri Batam</h6>
-                    <p class="text-sm text-gray-300">Jl. Ahmad Yani, Batam Kota, Kota Batam, Kepulauan Riau, Indonesia.
+                    <h6 class="font-bold mb-2">Politeknik Negeri Batam</h6>
+                    <p class="text-sm text-gray-100">
+                        Jl. Ahmad Yani, Batam Kota, Kota Batam, Kepulauan Riau, Indonesia.
                     </p>
                 </div>
+
                 <div>
-                    <h6 class="font-bold mb-4 uppercase text-amber-200">Hubungi Kami</h6>
-                    <p class="text-sm text-gray-300">
+                    <h6 class="font-bold mb-2">Hubungi Kami</h6>
+                    <p class="text-sm text-gray-100">
                         Email: readspacelibrary@poltek.ac.id<br>
                         Telp: (021) 673528
                     </p>
@@ -203,7 +219,7 @@
             </div>
         </div>
     </footer>
-
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
     <style>
         [x-cloak] {
