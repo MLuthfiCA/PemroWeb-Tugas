@@ -16,7 +16,7 @@
             </a>
             
             <div class="flex items-center space-x-8 text-white">
-                <a href="/" class="hover:text-amber-200 transition">Home</a>
+                <a href="katalog" class="hover:text-amber-200 transition">Home</a>
                 
                 <button @click="showSearch = !showSearch" class="hover:text-amber-200 transition focus:outline-none flex items-center gap-1">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -25,7 +25,7 @@
                     Search
                 </button>
                 
-                <a href="#" class="font-semibold text-amber-200 transition">About Us</a>
+                <a href="about" class="font-semibold text-amber-200 transition">About Us</a>
             </div>
 
             <div class="bg-amber-100 rounded-full w-10 h-10 flex items-center justify-center border border-amber-200 shadow-inner">

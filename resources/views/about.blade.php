@@ -5,38 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form Peminjaman Buku</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        .bg-custom-maroon { background-color: #d5b893; }
+        <style>
+        /* Perbaikan: Nama class disamakan jadi bg-custom-maroon */
+        .bg-custom-maroon { background-color: #632024; }
     </style>
 </head>
 <body class="bg-white flex flex-col min-h-screen font-sans">
-
-    <header class="bg-custom-maroon text-white p-4 shadow-md">
+<header class="bg-custom-maroon text-white p-4 shadow-md">
         <div class="container mx-auto flex justify-between items-center">
             
             <div class="flex items-center">
-                <img src="{{ asset('images/readspace-library.png') }}" alt="Logo" class="w-20 h-20 object-contain">
+                <img src="{{ asset('images/logo.rsl.2.png') }}" alt="Logo" class="w-20 h-20 object-contain">
                 <span class="ml-3 text-xl font-semibold">ReadSpace Library</span>
             </div>
 
-        <nav class="flex justify-between items-center px-8 py-4 bg-[#d5b893] text-white shadow-lg">
-    <div class="container mx-auto flex justify-between items-center">
+        <nav class="flex justify-between items-center px-8 py-4 bg-[#632024] text-white shadow-lg">
+    <!-- Menu -->
+    <div class="flex items-center space-x-6">
+        <a href="{{ route('katalog') }}" class="hover:text-[#d5b893] transition">Home</a>
+        <a href="/search" class="hover:text-[#d5b893] transition">Search</a>
+        <a href="{{ route('about') }}" class="hover:text-[#d5b893] transition">About Us</a>
+    </div>
 
-    <!-- MENU + PROFILE -->
-    <div class="flex items-center gap-6">
-
-        <!-- Menu -->
-        <nav class="flex items-center space-x-6">
-            <a href="/" class="hover:text-[#d5b893] transition">Home</a>
-            <a href="/search" class="hover:text-[#d5b893] transition">Search</a>
-            <a href="{{ route('about') }}" class="hover:text-[#d5b893] transition">About Us</a>
-        </nav>
-
-        <!-- Profile -->
-        <a href="{{ route('/profile') }}" 
-           class="w-10 h-10 bg-[#d5b893] rounded-full flex items-center justify-center 
-                  hover:scale-110 transition duration-300 shadow-md">
-
+    <!-- Profile Icon -->
+    
+    <!-- Profile -->
+    <div class="ml-6">
+        <a href="{{ route('profile') }}" 
+        class="w-10 h-10 bg-[#d5b893] rounded-full flex items-center justify-center 
+                hover:scale-110 transition duration-300 shadow-md">
+            
             <svg xmlns="http://www.w3.org/2000/svg" 
                 class="h-6 w-6 text-[#632024]" 
                 viewBox="0 0 20 20" fill="currentColor">
@@ -45,10 +43,8 @@
                     clip-rule="evenodd" />
             </svg>
 
-        </a>
 
-    </div>
-</div>
+    </a>
 
 </nav>
         </div>
