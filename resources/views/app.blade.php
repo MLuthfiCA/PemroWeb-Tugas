@@ -10,10 +10,7 @@
     <!-- Navbar (ini yang bikin semua halaman sama) -->
     @include('layouts.navbar')
 
-    <!-- Content -->
-    <div class="p-6">
-        @yield('content')
-    </div>
+    
 
 </body>
 </html>

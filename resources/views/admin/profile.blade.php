@@ -1,37 +1,58 @@
-@extends('layouts.app')
+@extends('admin.layouts.app')
 
 @section('content')
-<div class="max-w-4xl mx-auto mt-10 bg-white p-8 rounded-xl shadow-md">
+<div class="container mx-auto px-6 py-8">
 
-    <h2 class="text-2xl font-bold mb-6 text-[#632024]">
-        Profile Admin
-    </h2>
-
-    <div class="flex items-center gap-6">
-        
-        <!-- Foto -->
-        <div class="w-24 h-24 bg-[#d5b893] rounded-full flex items-center justify-center text-3xl text-white">
-            {{ strtoupper(substr(auth()->user()->name ?? 'A', 0, 1)) }}
-        </div>
-
-        <!-- Info -->
-        <div>
-            <p class="text-lg font-semibold">
-                Nama: {{ auth()->user()->name ?? 'Admin' }}
-            </p>
-            <p>
-                Email: {{ auth()->user()->email ?? 'admin@gmail.com' }}
-            </p>
-            <p>Role: Admin</p>
-        </div>
-
+    <div class="mb-8">
+        <h1 class="text-2xl font-bold text-gray-800">Halo, Admin!</h1>
+        <p class="text-gray-600">Berikut daftar buku yang sedang dipinjam</p>
     </div>
+   <div class="w-full grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    @forelse($books as $book)
+        <div class="bg-white border border-gray-100 rounded-xl shadow-md hover:shadow-lg transition overflow-hidden">
+            <!-- Header dengan Peminjam -->
+            <div class="bg-gradient-to-r from-blue-500 to-blue-600 px-4 py-3 text-white">
+                <p class="text-xs uppercase tracking-wider font-semibold opacity-90">Peminjam</p>
+                <p class="text-xl font-bold">{{ $book->peminjam ?? 'N/A' }}</p>
+            </div>
 
-    <div class="mt-6">
-        <button class="bg-[#632024] text-white px-4 py-2 rounded-lg hover:bg-[#4a1a1d]">
-            Edit Profile
-        </button>
-    </div>
+            <!-- Content -->
+            <div class="p-4">
+                <div class="mb-3">
+                    <p class="text-xs text-gray-500 uppercase font-bold tracking-wider mb-1">👤 Peminjam</p>
+                    <p class="font-semibold text-gray-800 text-sm">{{ $book->peminjam ?? 'N/A' }}</p>
+                    <p class="text-xs text-gray-500 mt-1">NIM: <span class="font-mono font-bold">{{ $book->nim ?? 'N/A' }}</span></p>
+                </div>
 
+                <div class="mb-3">
+                    <p class="text-xs text-gray-500 uppercase font-bold tracking-wider mb-1">Judul Buku</p>
+                    <p class="font-semibold text-gray-800 text-sm">{{ $book->judul }}</p>
+                </div>
+
+                <div class="mb-3">
+                    <p class="text-xs text-gray-500 uppercase font-bold tracking-wider mb-1">Penulis</p>
+                    <p class="text-xs text-gray-600">{{ $book->penulis }}</p>
+                </div>
+
+                <!-- Alert Jatuh Tempo -->
+                <div class="bg-red-50 border-l-4 border-red-500 rounded px-3 py-2 mb-3">
+                    <p class="text-xs text-red-600 uppercase font-bold tracking-wider mb-1">⏰ Jatuh Tempo</p>
+                    <p class="text-sm font-bold text-red-600">{{ $book->jatuh_tempo }}</p>
+                </div>
+            </div>
+
+            <!-- Footer Status -->
+            <div class="bg-gray-50 px-4 py-2 border-t border-gray-100 flex justify-between items-center">
+                <span class="bg-blue-50 text-blue-600 text-xs font-bold px-2 py-1 rounded-full">Dipinjam</span>
+                <button class="text-xs text-blue-600 hover:text-blue-800 font-semibold">Kembali →</button>
+            </div>
+        </div>
+    @empty
+        <div class="col-span-full py-12 text-center text-gray-400">
+            <p class="text-lg">📚 Belum ada buku yang dipinjam</p>
+        </div>
+    @endforelse
+
+</div>
 </div>
 @endsection

@@ -6,7 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RiwayatController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\ProfileController;
 
 Route::get('/contact', [HomeController::class, 'contact']);
 Route::get('/dashboard', [DashboardController::class, 'index']);
@@ -62,7 +62,8 @@ Route::get('/profile', function () {
     return view('profile', compact('daftarBuku'));
 })->name('profile');
 
-// Halaman Profil Admin
-Route::get('/admin/profile', function () {
-    return view('admin.profile');
-})->name('admin.profile'); // Nama unik: admin.profile
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/admin/profile', [ProfileController::class, 'profile'])->name('admin.profile');
