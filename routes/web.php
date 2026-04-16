@@ -7,14 +7,15 @@ use App\Http\Controllers\RiwayatController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Http\Request;
+use App\Http\Controllers\AdminController;
 
 Route::get('/contact', [HomeController::class, 'contact']);
 Route::get('/dashboard', [DashboardController::class, 'index']);
 Route::get('/riwayat', [RiwayatController::class, 'tampilkanRiwayat']);
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
-Route::get('/', fn() => view('home'))->name('home');
 Route::get('/search', fn() => view('search'))->name('search');
+Route::get('/profile', [AdminController::class, 'profile'])->name('profile');
 
 Route::get('/login', function () {
     return view('login');

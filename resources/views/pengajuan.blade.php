@@ -22,7 +22,7 @@
         <nav class="flex justify-between items-center px-8 py-4 bg-[#632024] text-white shadow-lg">
     <!-- Menu -->
     <div class="flex items-center space-x-6">
-        <a href="/" class="hover:text-[#d5b893] transition">Home</a>
+        <a href="{{ route('katalog') }}" class="hover:text-[#d5b893] transition">Home</a>
         <a href="/search" class="hover:text-[#d5b893] transition">Search</a>
         <a href="{{ route('about') }}" class="hover:text-[#d5b893] transition">About Us</a>
     </div>
@@ -70,11 +70,11 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <label class="block text-lg font-medium mb-1">Tanggal Pinjam</label>
-                            <input type="date" class="w-full p-2 bg-gray-500 text-white rounded focus:outline-none focus:ring-2 focus:ring-red-400">
+                            <input type="date" id="tanggal_pinjam" class="w-full p-2 bg-gray-500 text-white rounded">
                         </div>
                         <div>
                             <label class="block text-lg font-medium mb-1">Tanggal Kembali</label>
-                            <input type="date" class="w-full p-2 bg-gray-500 text-white rounded focus:outline-none focus:ring-2 focus:ring-red-400">
+                            <input type="date" id="tanggal_kembali" class="w-full p-2 bg-gray-500 text-white rounded">
                         </div>
                     </div>
 
@@ -132,6 +132,21 @@
             </div>
         </div>
     </footer>
+<script>
+document.getElementById('tanggal_pinjam').addEventListener('change', function() {
+    let startDate = new Date(this.value);
 
+    // Tambah 7 hari langsung
+    startDate.setDate(startDate.getDate() + 7);
+
+    // Format ke YYYY-MM-DD
+    let year = startDate.getFullYear();
+    let month = String(startDate.getMonth() + 1).padStart(2, '0');
+    let day = String(startDate.getDate()).padStart(2, '0');
+
+    document.getElementById('tanggal_kembali').value = `${year}-${month}-${day}`;
+});
+
+</script>
 </body>
 </html>
