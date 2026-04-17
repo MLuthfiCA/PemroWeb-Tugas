@@ -47,8 +47,8 @@
                     </div>
 
                 @if($buku['status'] == 'Tersedia')
-                    <a href="{{ route('pengajuan', ['judul' => $buku['judul'], 'id' => 'B-' . rand(100, 999)]) }}" 
-                    class="block text-center w-full text-white bg-[#431212] ...">
+                    <a href="{{ route('pengajuan', ['judul' => $buku['judul'], 'id' => 'B-' . rand(100, 999)]) }}"
+                    class="block text-center w-full text-white bg-[#431212] hover:bg-red-900 font-semibold rounded-full text-sm px-5 py-3 transition-all shadow-md">
                         Pinjam Buku Fisik
                     </a>
                 @else
