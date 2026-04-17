@@ -102,3 +102,4 @@ Route::get('/admin/profile', function () {
     ]);
     return view('admin.profile', compact('books'));
 })->name('admin.profile');
+

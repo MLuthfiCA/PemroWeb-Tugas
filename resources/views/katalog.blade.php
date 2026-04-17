@@ -1,18 +1,18 @@
 @extends('app')
 
 @section('content')
-    <div class="flex flex-col md:flex-row md:items-center justify-between mb-10 pb-4 border-b border-stone-200">
-        <div>
-            <h1 class="text-4xl font-extrabold text-red-950">Katalog Buku</h1>
-            <p class="text-stone-500 text-lg mt-1">Pilih dan ajukan pinjaman buku fisikmu.</p>
-        </div>
-        @if(request('query'))
-            <div class="mt-4 md:mt-0 text-sm bg-amber-50 px-4 py-2 rounded-lg border border-amber-100">
-                Menampilkan hasil untuk: <span class="font-bold text-red-950">"{{ request('query') }}"</span>
-                <a href="/katalog" class="ml-2 text-red-700 hover:underline">Hapus Filter</a>
-            </div>
-        @endif
+  <div class="flex flex-col md:flex-row md:items-center justify-between mb-10 pb-4 border-b border-stone-200">
+    <div>
+        <h1 class="text-4xl font-extrabold text-red-950">Katalog Buku</h1>
+        <p class="text-stone-500 text-lg mt-1">Pilih dan ajukan pinjaman buku fisikmu.</p>
     </div>
+    @if(request('query'))
+        <div class="mt-4 md:mt-0 text-sm bg-amber-50 px-4 py-2 rounded-lg border border-amber-100">
+            Menampilkan hasil untuk: <span class="font-bold text-red-950">"{{ request('query') }}"</span>
+            <a href="/katalog" class="ml-2 text-red-700 hover:underline">Hapus Filter</a>
+        </div>
+    @endif
+</div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         @forelse($daftarBuku as $buku)
@@ -65,38 +65,6 @@
             </div>
         @endforelse
     </div>
-
-    <footer class="bg-[#d5b893] text-white py-10 mt-20 relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen">
-        <div class="container mx-auto px-6 md:px-12">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left items-center">
-
-                <div class="flex justify-center md:justify-start">
-                    <img src="{{ asset('images/readspace-library.png') }}" alt="Logo" class="h-16 w-auto object-contain">
-                </div>
-
-                <div>
-                    <h6 class="font-bold mb-2 text-stone-900">Readspace Library</h6>
-                    <p class="text-sm text-stone-800 leading-relaxed">
-                        Platform perpustakaan digital untuk memudahkan mahasiswa.
-                    </p>
-                </div>
-
-                <div>
-                    <h6 class="font-bold mb-2 text-stone-900">Politeknik Negeri Batam</h6>
-                    <p class="text-sm text-stone-800">
-                        Jl. Ahmad Yani, Batam Kota, Batam.
-                    </p>
-                </div>
-
-                <div>
-                    <h6 class="font-bold mb-2 text-stone-900">Hubungi Kami</h6>
-                    <p class="text-sm text-stone-800">
-                        Email: readspacelibrary@poltek.ac.id
-                    </p>
-                </div>
-            </div>
-        </div>
-    </footer>
 
     <div id="modal-pinjam" tabindex="-1" aria-hidden="true"
         class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
