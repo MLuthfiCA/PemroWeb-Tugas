@@ -13,7 +13,7 @@
         <div class="flex items-center space-x-8" x-data="{ profileOpen: false, menuOpen: false }">
             
             <div class="hidden md:flex items-center space-x-6 font-medium">
-                <a href="{{ route('admin/katalog-admin') }}" class="hover:text-[#d5b893] transition text-lg">Home</a>
+                <a href="{{ route('admin.katalog') }}" class="hover:text-[#d5b893] transition text-lg">Home</a>
                 <a href="{{ route('search') }}" class="hover:text-[#d5b893] transition text-lg">Search</a>
                 <a href="{{ route('about') }}" class="hover:text-[#d5b893] transition text-lg">About Us</a>
             </div>
