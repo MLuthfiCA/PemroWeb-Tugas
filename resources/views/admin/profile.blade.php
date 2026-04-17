@@ -9,7 +9,21 @@
     </div>
    <div class="w-full grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
     @forelse($books as $book)
-        <div class="bg-white border border-gray-100 rounded-xl shadow-md hover:shadow-lg transition overflow-hidden">
+        <div class="bg-white border border-gray-100 rounded-3xl shadow-md hover:shadow-lg transition overflow-hidden">
+            <div class="h-56 {{ ($book->status ?? '') == 'Dipinjam' ? 'bg-stone-200' : 'bg-amber-100' }} rounded-t-3xl overflow-hidden flex items-center justify-center p-6 border-b border-stone-100">
+                @if(!empty($book->cover))
+                    <img
+                        src="{{ asset('storage/'.$book->cover) }}"
+                        alt="{{ $book->judul ?? 'Cover Buku' }}"
+                        class="w-full h-full object-cover"
+                    >
+                @else
+                    <span class="text-sm font-medium uppercase tracking-wider text-stone-500">
+                        Cover Buku
+                    </span>
+                @endif
+            </div>
+
             <!-- Header dengan Peminjam -->
             <div class="bg-gradient-to-r from-blue-500 to-blue-600 px-4 py-3 text-white">
                 <p class="text-xs uppercase tracking-wider font-semibold opacity-90">Peminjam</p>
