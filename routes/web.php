@@ -90,6 +90,8 @@ Route::get('/riwayat', [RiwayatController::class, 'tampilkanRiwayat']);
 
 
 // --- ADMIN ROUTES ---
+Route::get('/admin/data_user', [AdminController::class, 'tampilkanDataUser']);
+Route::delete('/admin/data_user/{id}', [AdminController::class, 'destroy']);
 Route::get('/admin/katalog', function () {
     return view('admin.katalog-admin');
 })->name('admin.katalog');
