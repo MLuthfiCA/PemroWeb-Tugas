@@ -46,17 +46,17 @@
                         <p class="text-sm text-stone-800">{{ $buku['genre'] }}</p>
                     </div>
 
-                    @if($buku['status'] == 'Tersedia')
-                        <button data-modal-target="modal-pinjam" data-modal-toggle="modal-pinjam"
-                            class="w-full text-white bg-red-950 hover:bg-red-900 font-semibold rounded-xl text-sm px-5 py-3 transition-all shadow-md">
-                            Pinjam Buku Fisik
-                        </button>
-                    @else
-                        <button disabled
-                            class="w-full text-white bg-stone-400 font-semibold rounded-xl text-sm px-5 py-3 cursor-not-allowed">
-                            Tidak Tersedia
-                        </button>
-                    @endif
+                @if($buku['status'] == 'Tersedia')
+                    <a href="{{ route('pengajuan', ['judul' => $buku['judul'], 'id' => 'B-' . rand(100, 999)]) }}" 
+                    class="block text-center w-full text-white bg-[#431212] ...">
+                        Pinjam Buku Fisik
+                    </a>
+                @else
+                    <button disabled
+                        class="w-full text-white bg-stone-400 font-semibold rounded-xl text-sm px-5 py-3 cursor-not-allowed">
+                        Tidak Tersedia
+                    </button>
+                @endif
                 </div>
             </div>
         @empty

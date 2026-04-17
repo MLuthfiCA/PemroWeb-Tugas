@@ -80,12 +80,12 @@
 
                     <div>
                         <label class="block text-lg font-medium mb-1">ID Buku</label>
-                        <input type="text" placeholder="Masukkan ID Buku" class="w-full p-2 bg-gray-500 text-white placeholder-gray-200 rounded focus:outline-none focus:ring-2 focus:ring-red-400">
+                       <input type="text" value="{{ request('id') }}" placeholder="Masukkan ID Buku" class="w-full p-2 bg-gray-500 text-white placeholder-gray-200 rounded focus:outline-none focus:ring-2 focus:ring-red-400">
                     </div>
 
                     <div>
                         <label class="block text-lg font-medium mb-1">Judul Buku</label>
-                        <input type="text" placeholder="Masukkan Judul Buku" class="w-full p-2 bg-gray-500 text-white placeholder-gray-200 rounded focus:outline-none focus:ring-2 focus:ring-red-400">
+                        <<input type="text" value="{{ request('judul') }}" placeholder="Masukkan Judul Buku" class="w-full p-2 bg-gray-500 text-white placeholder-gray-200 rounded focus:outline-none focus:ring-2 focus:ring-red-400">
                     </div>
 
                     <div class="pt-4">

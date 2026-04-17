@@ -21,6 +21,7 @@ Route::get('/search', fn() => view('search'))->name('search');
 Route::get('/login', function () {
     return view('login'); // Sesuaikan dengan nama file blade login kamu
 })->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 
 // 2. Route untuk MEMPROSES data saat tombol Log In diklik (ini yang sudah kamu buat)
 Route::post('/login', [LoginController::class, 'login'])->name('login.post');
@@ -68,9 +69,12 @@ Route::get('/katalog', function (Request $request) {
     return view('katalog', ['daftarBuku' => $hasilBuku]);
 })->name('katalog');
 
+// Hapus semua rute /pengajuan yang lama, ganti jadi ini satu saja:
 Route::get('/pengajuan', function () {
     return view('pengajuan');
-});
+})->name('pengajuan');
+
+// Tambahkan ini biar Navbar tidak error lagi
 Route::get('/about', function () {
     return view('about'); 
 })->name('about');
