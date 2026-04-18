@@ -118,3 +118,4 @@ Route::get('/dashboard', [DashboardController::class, 'index']);
 Route::get('/riwayat', [RiwayatController::class, 'tampilkanRiwayat']);
 
 
+
