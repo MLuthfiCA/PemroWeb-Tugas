@@ -9,6 +9,35 @@ use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
+// --- ADMIN ROUTES ---
+Route::get('/admin/katalog', function () {
+    return view('admin.katalog-admin');
+})->name('admin.katalog');
+
+Route::get('/admin/profile', function () {
+    $books = collect([
+        (object)[
+            'peminjam' => 'Budi',
+            'nim' => '123456',
+            'judul' => 'Filosofi Teras',
+            'penulis' => 'Henry Manampiring',
+            'jatuh_tempo' => '2026-04-20'
+        ],
+    ]);
+    return view('admin.profile', compact('books'));
+})->name('admin.profile');
+
+// Route untuk Manajemen Data User
+Route::get('/admin/users', function () {
+    $users = collect([
+        ['id' => 1, 'name' => 'Budi Santoso', 'email' => 'budi@student.polibatam.ac.id', 'role' => 'Mahasiswa', 'status' => 'Aktif'],
+        ['id' => 2, 'name' => 'Siti Aminah', 'email' => 'siti@student.polibatam.ac.id', 'role' => 'Mahasiswa', 'status' => 'Nonaktif'],
+        ['id' => 3, 'name' => 'Admin Readspace', 'email' => 'admin@readspace.com', 'role' => 'Admin', 'status' => 'Aktif'],
+    ]);
+
+    return view('admin.data-buku', compact('users'));
+})->name('admin.users');
+
 // --- GUEST & AUTH ROUTES ---
 Route::get('/login', function () {
     return view('login');
@@ -89,20 +118,3 @@ Route::get('/dashboard', [DashboardController::class, 'index']);
 Route::get('/riwayat', [RiwayatController::class, 'tampilkanRiwayat']);
 
 
-// --- ADMIN ROUTES ---
-Route::get('/admin/katalog', function () {
-    return view('admin.katalog-admin');
-})->name('admin.katalog');
-
-Route::get('/admin/profile', function () {
-    $books = collect([
-        (object)[
-            'peminjam' => 'Budi',
-            'nim' => '123456',
-            'judul' => 'Filosofi Teras',
-            'penulis' => 'Henry Manampiring',
-            'jatuh_tempo' => '2026-04-20'
-        ],
-    ]);
-    return view('admin.profile', compact('books'));
-})->name('admin.profile');
