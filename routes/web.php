@@ -8,20 +8,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Http\Controllers\BukuController;
 
-// --- ADMIN ROUTES ---
-
-// PERBAIKAN: Masukkan data buku ke route yang benar
-Route::get('/admin/katalog', function () {
-    // Kita buat data dummy untuk admin supaya tidak error
-    $Buku = collect([
-        ['judul' => 'Laskar Pelangi', 'penulis' => 'Andrea Hirata', 'genre' => 'Drama', 'status' => 'Tersedia'],
-        ['judul' => 'Bumi', 'penulis' => 'Tere Liye', 'genre' => 'Fantasi', 'status' => 'Tersedia'],
-        ['judul' => 'Filosofi Teras', 'penulis' => 'Henry Manampiring', 'genre' => 'Self-Dev', 'status' => 'Dipinjam'],
-    ]);
-
-    return view('admin.katalog-admin', compact('Buku'));
-})->name('admin.katalog');
 
 Route::get('/admin/profile', function () {
     $books = collect([
@@ -123,3 +111,36 @@ Route::get('/riwayat', [RiwayatController::class, 'tampilkanRiwayat']);
 Route::get('/admin/about', function () {
     return view('admin.about');
 })->name('admin.about');
+
+Route::prefix('admin')->group(function () {
+
+    Route::get('/katalog', function () {
+        $Buku = collect([
+            ['id' => 1, 'judul' => 'Laskar Pelangi', 'penulis' => 'Andrea Hirata', 'genre' => 'Drama', 'status' => 'Tersedia'],
+            ['id' => 2, 'judul' => 'Bumi', 'penulis' => 'Tere Liye', 'genre' => 'Fantasi', 'status' => 'Tersedia'],
+            ['id' => 3, 'judul' => 'Filosofi Teras', 'penulis' => 'Henry Manampiring', 'genre' => 'Self-Dev', 'status' => 'Dipinjam'],
+        ]);
+
+        return view('admin.katalog-admin', compact('Buku'));
+    })->name('admin.katalog');
+
+    // ✅ EDIT
+    Route::get('/katalog/{id}/edit', [BukuController::class, 'edit'])->name('admin.edit');
+
+    // ✅ UPDATE
+    Route::put('/katalog/{id}', [BukuController::class, 'update'])->name('admin.update');
+
+    // ✅ DELETE
+    Route::delete('/katalog/{id}', [BukuController::class, 'destroy'])->name('admin.delete');
+});
+
+$Buku = collect([
+    [
+        'id' => 1,
+        'judul' => 'Laskar Pelangi',
+        'penulis' => 'Andrea Hirata',
+        'genre' => 'Drama',
+        'status' => 'Tersedia',
+        'cover' => 'cover1.jpg'
+    ],
+]);
