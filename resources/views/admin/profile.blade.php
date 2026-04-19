@@ -69,8 +69,8 @@
 
 </div>
 
-<footer class="bg-[#d5b893] text-white py-10 w-full block m-0 border-none outline-none">
-        <div class="max-w-7xl mx-auto px-6">
+    <footer class="bg-[#d5b893] text-white py-10">
+        <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
                 
                 <div class="flex justify-center md:justify-start items-center">

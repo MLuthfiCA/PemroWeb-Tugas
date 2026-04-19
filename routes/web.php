@@ -5,91 +5,12 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RiwayatController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use App\Http\Controllers\LoginController;
+use App\Http\Controllers\BukuController;
 
 
-Route::get('/contact', [HomeController::class, 'contact']);
-Route::get('/dashboard', [DashboardController::class, 'index']);
-Route::get('/riwayat', [RiwayatController::class, 'tampilkanRiwayat']);
-Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
-Route::post('/register', [AuthController::class, 'register']);
-Route::get('/search', fn() => view('search'))->name('search');
-
-// 1. Route untuk MENAMPILKAN halaman login (saat pertama dibuka)
-Route::get('/login', function () {
-    return view('login'); // Sesuaikan dengan nama file blade login kamu
-})->name('login');
-Route::post('/login', [AuthController::class, 'login'])->name('login.post');
-
-// 2. Route untuk MEMPROSES data saat tombol Log In diklik (ini yang sudah kamu buat)
-Route::post('/login', [LoginController::class, 'login'])->name('login.post');
-// Route untuk Admin (dalam folder admin)
-Route::get('/admin/katalog', function () {
-    return view('admin.katalog-admin'); // folder admin, file katalog-admin.blade.php
-})->name('admin.katalog');
-
-// Route untuk Mahasiswa (di folder views utama)
-Route::get('/katalog', function () {
-    return view('katalog'); // file katalog.blade.php
-})->name('mahasiswa.katalog');
-
-
-Route::post('/login', [LoginController::class, 'login'])->name('login.post');
-Route::post('/logout', function (Request $request) {
-    Auth::logout();
-    $request->session()->invalidate();
-    $request->session()->regenerateToken();
-    return redirect('/login'); // Bagusnya balik ke login setelah keluar
-})->name('logout');
-
-Route::get('/katalog', function (Request $request) {
-    // 1. Data buku (Simulasi data database)
-    $semuaBuku = collect([
-        ['judul' => 'Laskar Pelangi', 'penulis' => 'Andrea Hirata', 'genre' => 'Drama', 'status' => 'Tersedia'],
-        ['judul' => 'Bumi', 'penulis' => 'Tere Liye', 'genre' => 'Fantasi', 'status' => 'Tersedia'],
-        ['judul' => 'Filosofi Teras', 'penulis' => 'Henry Manampiring', 'genre' => 'Self-Dev', 'status' => 'Dipinjam'],
-    ]);
-
-    // 2. Ambil kata kunci dari input search bar
-    $query = $request->input('query');
-
-    // 3. Filter data berdasarkan judul atau penulis (jika ada pencarian)
-    if ($query) {
-        $hasilBuku = $semuaBuku->filter(function ($item) use ($query) {
-            return str_contains(strtolower($item['judul']), strtolower($query)) || 
-                   str_contains(strtolower($item['penulis']), strtolower($query));
-        });
-    } else {
-        $hasilBuku = $semuaBuku;
-    }
-
-    // 4. Kirim hasilnya ke view katalog
-    return view('katalog', ['daftarBuku' => $hasilBuku]);
-})->name('katalog');
-
-// Hapus semua rute /pengajuan yang lama, ganti jadi ini satu saja:
-Route::get('/pengajuan', function () {
-    return view('pengajuan');
-})->name('pengajuan');
-
-// Tambahkan ini biar Navbar tidak error lagi
-Route::get('/about', function () {
-    return view('about'); 
-})->name('about');
-
-// Halaman Profil Mahasiswa
-Route::get('/profile', function () {
-    $daftarBuku = [
-        ['judul' => 'Laskar Pelangi'],
-        ['judul' => 'Bumi']
-    ];
-
-    return view('profile', compact('daftarBuku'));
-})->name('profile');
-
-// Halaman Profil Admin
 Route::get('/admin/profile', function () {
     $books = collect([
         (object)[
@@ -103,3 +24,123 @@ Route::get('/admin/profile', function () {
     return view('admin.profile', compact('books'));
 })->name('admin.profile');
 
+Route::get('/admin/users', function () {
+    return view('admin.datauser'); 
+})->name('admin.users');
+
+// --- GUEST & AUTH ROUTES ---
+Route::get('/login', function () {
+    return view('login');
+})->name('login');
+
+Route::post('/login', [LoginController::class, 'login'])->name('login.post');
+
+Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+Route::post('/register', [AuthController::class, 'register']);
+
+Route::post('/logout', function (Request $request) {
+    Auth::logout();
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+    return redirect('/login');
+})->name('logout');
+
+
+// --- USER / MAHASISWA ROUTES ---
+Route::get('/katalog', function (Request $request) {
+    $semuaBuku = collect([
+        ['judul' => 'Laskar Pelangi', 'penulis' => 'Andrea Hirata', 'genre' => 'Drama', 'status' => 'Tersedia'],
+        ['judul' => 'Bumi', 'penulis' => 'Tere Liye', 'genre' => 'Fantasi', 'status' => 'Tersedia'],
+        ['judul' => 'Filosofi Teras', 'penulis' => 'Henry Manampiring', 'genre' => 'Self-Dev', 'status' => 'Dipinjam'],
+    ]);
+
+    $query = $request->input('query');
+    if ($query) {
+        $hasilBuku = $semuaBuku->filter(function ($item) use ($query) {
+            return str_contains(strtolower($item['judul']), strtolower($query)) || 
+                   str_contains(strtolower($item['penulis']), strtolower($query));
+        });
+    } else {
+        $hasilBuku = $semuaBuku;
+    }
+    return view('katalog', ['daftarBuku' => $hasilBuku]);
+})->name('katalog');
+
+// Route Search Mahasiswa (Sudah diperbaiki tutup kurungnya)
+Route::get('/search', function (Request $request) {
+    $semuaBuku = collect([
+        (object)['id' => 1, 'judul' => 'Laskar Pelangi', 'penulis' => 'Andrea Hirata', 'cover' => ''],
+        (object)['id' => 2, 'judul' => 'Bumi', 'penulis' => 'Tere Liye', 'cover' => ''],
+        (object)['id' => 3, 'judul' => 'Filosofi Teras', 'penulis' => 'Henry Manampiring', 'cover' => ''],
+    ]);
+
+    $query = $request->input('query');
+    if ($query) {
+        $books = $semuaBuku->filter(function ($book) use ($query) {
+            return str_contains(strtolower($book->judul), strtolower($query)) || 
+                   str_contains(strtolower($book->penulis), strtolower($query));
+        });
+    } else {
+        $books = collect(); 
+    }
+    return view('search', compact('books'));
+})->name('search');
+
+Route::get('/katalog/{id}', function ($id) {
+    return "Halaman Detail untuk Buku ID: " . $id;
+})->name('katalog.detail');
+
+Route::get('/about', function () {
+    return view('about'); 
+})->name('about');
+
+Route::get('/profile', function () {
+    $daftarBuku = [['judul' => 'Laskar Pelangi'], ['judul' => 'Bumi']];
+    return view('profile', compact('daftarBuku'));
+})->name('profile');
+
+Route::get('/pengajuan', function () {
+    return view('pengajuan');
+})->name('pengajuan');
+
+Route::get('/contact', [HomeController::class, 'contact']);
+Route::get('/dashboard', [DashboardController::class, 'index']);
+Route::get('/riwayat', [RiwayatController::class, 'tampilkanRiwayat']);
+
+// --- AREA ADMIN ---
+Route::get('/admin/about', function () {
+    return view('admin.about');
+})->name('admin.about');
+
+Route::prefix('admin')->group(function () {
+
+    Route::get('/katalog', function () {
+        $Buku = collect([
+            ['id' => 1, 'judul' => 'Laskar Pelangi', 'penulis' => 'Andrea Hirata', 'genre' => 'Drama', 'status' => 'Tersedia'],
+            ['id' => 2, 'judul' => 'Bumi', 'penulis' => 'Tere Liye', 'genre' => 'Fantasi', 'status' => 'Tersedia'],
+            ['id' => 3, 'judul' => 'Filosofi Teras', 'penulis' => 'Henry Manampiring', 'genre' => 'Self-Dev', 'status' => 'Dipinjam'],
+        ]);
+
+        return view('admin.katalog-admin', compact('Buku'));
+    })->name('admin.katalog');
+
+    // ✅ EDIT
+    Route::get('/katalog/{id}/edit', [BukuController::class, 'edit'])->name('admin.edit');
+
+    // ✅ UPDATE
+    Route::put('/katalog/{id}', [BukuController::class, 'update'])->name('admin.update');
+
+    // ✅ DELETE
+    Route::delete('/katalog/{id}', [BukuController::class, 'destroy'])->name('admin.delete');
+});
+
+$Buku = collect([
+    [
+        'id' => 1,
+        'judul' => 'Laskar Pelangi',
+        'penulis' => 'Andrea Hirata',
+        'genre' => 'Drama',
+        'status' => 'Tersedia',
+        'cover' => 'cover1.jpg'
+    ],
+]);
