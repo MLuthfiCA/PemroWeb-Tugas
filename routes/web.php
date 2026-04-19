@@ -117,5 +117,7 @@ Route::get('/contact', [HomeController::class, 'contact']);
 Route::get('/dashboard', [DashboardController::class, 'index']);
 Route::get('/riwayat', [RiwayatController::class, 'tampilkanRiwayat']);
 
-
-
+// --- AREA ADMIN ---
+Route::get('/admin/about', function () {
+    return view('admin.about');
+})->name('admin.about');
