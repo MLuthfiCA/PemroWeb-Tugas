@@ -10,8 +10,17 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 // --- ADMIN ROUTES ---
+
+// PERBAIKAN: Masukkan data buku ke route yang benar
 Route::get('/admin/katalog', function () {
-    return view('admin.katalog-admin');
+    // Kita buat data dummy untuk admin supaya tidak error
+    $Buku = collect([
+        ['judul' => 'Laskar Pelangi', 'penulis' => 'Andrea Hirata', 'genre' => 'Drama', 'status' => 'Tersedia'],
+        ['judul' => 'Bumi', 'penulis' => 'Tere Liye', 'genre' => 'Fantasi', 'status' => 'Tersedia'],
+        ['judul' => 'Filosofi Teras', 'penulis' => 'Henry Manampiring', 'genre' => 'Self-Dev', 'status' => 'Dipinjam'],
+    ]);
+
+    return view('admin.katalog-admin', compact('Buku'));
 })->name('admin.katalog');
 
 Route::get('/admin/profile', function () {
@@ -27,7 +36,7 @@ Route::get('/admin/profile', function () {
     return view('admin.profile', compact('books'));
 })->name('admin.profile');
 
-// Route untuk Manajemen Data User
+// PERBAIKAN: Kembalikan ke view users yang benar, bukan katalog-admin
 Route::get('/admin/users', function () {
     $users = collect([
         ['id' => 1, 'name' => 'Budi Santoso', 'email' => 'budi@student.polibatam.ac.id', 'role' => 'Mahasiswa', 'status' => 'Aktif'],
@@ -35,7 +44,7 @@ Route::get('/admin/users', function () {
         ['id' => 3, 'name' => 'Admin Readspace', 'email' => 'admin@readspace.com', 'role' => 'Admin', 'status' => 'Aktif'],
     ]);
 
-    return view('admin.data-buku', compact('users'));
+   return view('admin.users', compact('users')); // Asumsi kamu punya file admin/users.blade.php
 })->name('admin.users');
 
 // --- GUEST & AUTH ROUTES ---

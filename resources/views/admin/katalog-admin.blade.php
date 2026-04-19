@@ -9,73 +9,73 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 
- <style>
-        /* Perbaikan: Nama class disamakan jadi bg-custom-maroon */
-        .bg-custom-maroon { background-color: #632024; }
-    </style>
+<style>
+    /* Perbaikan: Nama class disamakan jadi bg-custom-maroon */
+    .bg-custom-maroon {
+        background-color: #632024;
+    }
+</style>
 </head>
+
 <body class="bg-white flex flex-col min-h-screen font-sans">
-<header class="bg-custom-maroon text-white p-4 shadow-md">
+    <header class="bg-custom-maroon text-white p-4 shadow-md">
         <div class="container mx-auto flex justify-between items-center">
-            
+
             <div class="flex items-center">
                 <img src="{{ asset('images/logo.rsl.2.png') }}" alt="Logo" class="w-20 h-20 object-contain">
                 <span class="ml-3 text-xl font-semibold">ReadSpace Library</span>
             </div>
 
-        <nav class="flex justify-between items-center px-8 py-4 bg-[#632024] text-white shadow-lg">
-    <!-- Menu -->
-    <div class="flex items-center space-x-6">
-        <a href="{{ route('katalog') }}" class="hover:text-[#d5b893] transition">Home</a>
-        <a href="/search" class="hover:text-[#d5b893] transition">Search</a>
-        <a href="{{ route('about') }}" class="hover:text-[#d5b893] transition">About Us</a>
-    </div>
+            <nav class="flex justify-between items-center px-8 py-4 bg-[#632024] text-white shadow-lg">
+                <!-- Menu -->
+                <div class="flex items-center space-x-6">
+                    <a href="{{ route('katalog') }}" class="hover:text-[#d5b893] transition">Home</a>
+                    <a href="/search" class="hover:text-[#d5b893] transition">Search</a>
+                    <a href="{{ route('about') }}" class="hover:text-[#d5b893] transition">About Us</a>
+                </div>
 
-    <!-- Profile Icon -->
-    
-    <!-- Profile -->
-    <div class="ml-6">
-        <a href="{{ route('about') }}" 
-        class="w-10 h-10 bg-[#d5b893] rounded-full flex items-center justify-center 
+                <!-- Profile Icon -->
+
+                <!-- Profile -->
+                <div class="ml-6">
+                    <a href="{{ route('about') }}" class="w-10 h-10 bg-[#d5b893] rounded-full flex items-center justify-center 
                 hover:scale-110 transition duration-300 shadow-md">
-            
-            <svg xmlns="http://www.w3.org/2000/svg" 
-                class="h-6 w-6 text-[#632024]" 
-                viewBox="0 0 20 20" fill="currentColor">
-                <path fill-rule="evenodd" 
-                    d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" 
-                    clip-rule="evenodd" />
-            </svg>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#632024]" viewBox="0 0 20 20"
+                            fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                                clip-rule="evenodd" />
+                        </svg>
 
 
-    </a>
+                    </a>
 
-</nav>
+            </nav>
         </div>
     </header>
 
 
-        <div x-show="showSearch" x-transition:enter="transition ease-out duration-300"
-            x-transition:enter-start="opacity-0 -translate-y-4" x-transition:enter-end="opacity-100 translate-y-0"
-            x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 translate-y-0"
-            x-transition:leave-end="opacity-0 -translate-y-4" class="max-w-7xl mx-auto px-4 mt-4 pb-2" x-cloak>
-            <form action="/katalog" method="GET" class="max-w-md mx-auto relative">
-                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                    <svg class="w-4 h-4 text-stone-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                        fill="none" viewBox="0 0 20 20">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                    </svg>
-                </div>
-                <input type="search" name="query" id="search"
-                    class="block w-full p-3 ps-10 text-sm text-stone-900 border border-stone-200 rounded-2xl bg-white focus:ring-red-300 focus:border-red-950 shadow-sm"
-                    placeholder="Cari judul buku atau penulis..." value="{{ request('query') }}">
-                <button type="submit"
-                    class="text-white absolute end-2 bottom-1.5 bg-red-950 hover:bg-red-900 font-medium rounded-xl text-xs px-4 py-1.5 transition-colors">
-                    Cari
-                </button>
-            </form>
-        </div>
+    <div x-show="showSearch" x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0 -translate-y-4" x-transition:enter-end="opacity-100 translate-y-0"
+        x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 translate-y-0"
+        x-transition:leave-end="opacity-0 -translate-y-4" class="max-w-7xl mx-auto px-4 mt-4 pb-2" x-cloak>
+        <form action="/katalog" method="GET" class="max-w-md mx-auto relative">
+            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                <svg class="w-4 h-4 text-stone-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 20 20">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                </svg>
+            </div>
+            <input type="search" name="query" id="search"
+                class="block w-full p-3 ps-10 text-sm text-stone-900 border border-stone-200 rounded-2xl bg-white focus:ring-red-300 focus:border-red-950 shadow-sm"
+                placeholder="Cari judul buku atau penulis..." value="{{ request('query') }}">
+            <button type="submit"
+                class="text-white absolute end-2 bottom-1.5 bg-red-950 hover:bg-red-900 font-medium rounded-xl text-xs px-4 py-1.5 transition-colors">
+                Cari
+            </button>
+        </form>
+    </div>
     </nav>
 
     <main class="max-w-7xl mx-auto p-6 md:p-8">
@@ -125,38 +125,35 @@
                             <p class="text-sm text-stone-800">{{ $buku['genre'] }}</p>
                         </div>
 
-                        <div class="pt-4 border-t border-stone-100 mb-6">
-                            <p class="text-xs text-stone-500 uppercase font-bold mb-1">Genre</p>
-                            <p class="text-sm text-stone-800">{{ $buku['genre'] }}</p>
-                        </div>
+                        <div class="flex items-center justify-between pt-4 border-t border-stone-100 mt-auto">
+                            <span class="text-xs font-bold uppercase tracking-wider text-stone-400">Aksi Admin</span>
+                            <div class="flex space-x-3">
+                                {{-- Tombol Edit --}}
+                                <a href="/katalog/{{ $loop->index }}/edit"
+                                    class="p-2.5 bg-blue-50 text-blue-600 rounded-xl hover:bg-blue-600 hover:text-white transition-all duration-300 shadow-sm"
+                                    title="Edit Buku">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                        stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                    </svg>
+                                </a>
 
-                        <div class="flex justify-end space-x-2 mb-4">
-                            <a href="/katalog/{{ $loop->index }}/edit" class="p-2 text-stone-400 hover:text-blue-600 transition-colors" title="Edit Buku">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                                </svg>
-                            </a>
-    
-                            <button type="button" class="p-2 text-stone-400 hover:text-red-600 transition-colors" title="Hapus Buku" onclick="return confirm('Apakah Anda yakin ingin menghapus buku ini?')">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                </svg>
-                            </button>
+                                {{-- Tombol Hapus --}}
+                                <button type="button"
+                                    class="p-2.5 bg-red-50 text-red-600 rounded-xl hover:bg-red-600 hover:text-white transition-all duration-300 shadow-sm"
+                                    title="Hapus Buku"
+                                    onclick="return confirm('Apakah Anda yakin ingin menghapus buku ini?')">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                        stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
-
-                        @if($buku['status'] == 'Tersedia')
-                            <button data-modal-target="modal-pinjam" data-modal-toggle="modal-pinjam"
-                                class="w-full text-white bg-red-950 hover:bg-red-900 font-semibold rounded-xl text-sm px-5 py-3 transition-all shadow-md">
-                                Pinjam Buku Fisik
-                            </button>
-                        @else
-                            <button disabled
-                                class="w-full text-white bg-stone-400 font-semibold rounded-xl text-sm px-5 py-3 cursor-not-allowed">
-                                Tidak Tersedia
-                            </button>
-                        @endif
-                    </div>
-                </div>
+                    </div> 
+                </div> 
             @empty
                 <div
                     class="col-span-full text-center py-20 bg-stone-50 rounded-3xl border-2 border-dashed border-stone-200">
@@ -209,15 +206,17 @@
     <footer class="bg-[#d5b893] text-white py-10">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
-                
+
                 <div class="flex justify-center md:justify-start items-center">
-                    <img src="{{ asset('images/readspace-library.png') }}" alt="Logo Readspace" class="h-20 w-auto object-contain">
+                    <img src="{{ asset('images/readspace-library.png') }}" alt="Logo Readspace"
+                        class="h-20 w-auto object-contain">
                 </div>
 
                 <div>
                     <h6 class="font-bold mb-2">Readspace Library</h6>
                     <p class="text-sm text-gray-100 leading-relaxed">
-                        Readspace Library adalah platform perpustakaan digital yang kami rancang untuk memudahkan mahasiswa dalam peminjaman buku serta memudahkan sistem perpustakan.
+                        Readspace Library adalah platform perpustakaan digital yang kami rancang untuk memudahkan
+                        mahasiswa dalam peminjaman buku serta memudahkan sistem perpustakan.
                     </p>
                 </div>
 
@@ -238,7 +237,7 @@
             </div>
         </div>
     </footer>
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
     <style>
         [x-cloak] {
