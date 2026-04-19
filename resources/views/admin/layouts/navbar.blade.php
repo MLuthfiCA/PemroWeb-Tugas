@@ -16,7 +16,6 @@
                 <a href="{{ route('admin.katalog') }}" class="hover:text-[#d5b893] transition text-lg">Home</a>
                 <a href="{{ route('search') }}" class="hover:text-[#d5b893] transition text-lg">Search</a>
                 <a href="{{ route('admin.about') }}" class="hover:text-[#d5b893] transition text-lg">About Us</a>
-                <a href="{{ route('admin.users') }}" class="hover:text-[#d5b893] transition text-lg">Users</a>
             </div>
 
             <div class="flex items-center space-x-4">

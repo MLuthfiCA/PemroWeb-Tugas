@@ -36,15 +36,8 @@ Route::get('/admin/profile', function () {
     return view('admin.profile', compact('books'));
 })->name('admin.profile');
 
-// PERBAIKAN: Kembalikan ke view users yang benar, bukan katalog-admin
 Route::get('/admin/users', function () {
-    $users = collect([
-        ['id' => 1, 'name' => 'Budi Santoso', 'email' => 'budi@student.polibatam.ac.id', 'role' => 'Mahasiswa', 'status' => 'Aktif'],
-        ['id' => 2, 'name' => 'Siti Aminah', 'email' => 'siti@student.polibatam.ac.id', 'role' => 'Mahasiswa', 'status' => 'Nonaktif'],
-        ['id' => 3, 'name' => 'Admin Readspace', 'email' => 'admin@readspace.com', 'role' => 'Admin', 'status' => 'Aktif'],
-    ]);
-
-   return view('admin.users', compact('users')); // Asumsi kamu punya file admin/users.blade.php
+    return view('admin.datauser'); 
 })->name('admin.users');
 
 // --- GUEST & AUTH ROUTES ---
