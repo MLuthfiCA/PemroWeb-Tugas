@@ -220,7 +220,7 @@
             </h1>
 
             <p class="text-lg leading-relaxed fade-up delay-2" style="color:#6b4c30; max-width:480px;">
-                BiblioNusa menghadirkan ribuan koleksi buku, jurnal, dan referensi akademik dalam satu platform yang mudah diakses kapan pun dan di mana pun Anda berada.
+                ReadSpace Library menghadirkan ribuan koleksi buku dan referensi akademik dalam satu platform yang mudah diakses kapan pun dan di mana pun Anda berada.
             </p>
 
             <div class="flex flex-wrap gap-4 fade-up delay-3">
@@ -235,12 +235,12 @@
             <!-- Mini Stats -->
             <div class="flex gap-8 pt-4 fade-up delay-4">
                 <div>
-                    <div class="text-2xl font-bold font-display" style="color:#632024;">12.000+</div>
+                    <div class="text-2xl font-bold font-display" style="color:#632024;">5</div>
                     <div class="text-sm" style="color:#8a6040;">Judul Buku</div>
                 </div>
                 <div class="w-px" style="background:#d5b893;"></div>
                 <div>
-                    <div class="text-2xl font-bold font-display" style="color:#632024;">5.000+</div>
+                    <div class="text-2xl font-bold font-display" style="color:#632024;">5</div>
                     <div class="text-sm" style="color:#8a6040;">Anggota Aktif</div>
                 </div>
                 <div class="w-px" style="background:#d5b893;"></div>
@@ -401,7 +401,7 @@
                             <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
                         </svg>
                     </div>
-                    <span class="font-display text-lg font-bold" style="color:#d5b893;">BiblioNusa</span>
+                    <span class="font-display text-lg font-bold" style="color:#d5b893;">ReadSpace Library</span>
                 </div>
                 <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.65);">
                     Sistem perpustakaan online modern yang menghubungkan pembaca dengan koleksi buku berkualitas.
@@ -423,7 +423,7 @@
             <div>
                 <h4 class="font-semibold mb-4" style="color:#d5b893;">Kontak</h4>
                 <ul class="space-y-2 text-sm" style="color:rgba(255,255,255,0.65);">
-                    <li>📧 info@biblionusa.id</li>
+                    <li>📧 info@Readspace.id</li>
                     <li>📞 (021) 1234-5678</li>
                     <li>🕐 Senin – Jumat, 08.00–16.00</li>
                 </ul>
@@ -431,8 +431,8 @@
         </div>
 
         <div class="mt-12 pt-6 flex flex-col md:flex-row items-center justify-between gap-3 text-sm" style="border-top:1px solid rgba(213,184,147,0.2); color:rgba(255,255,255,0.45);">
-            <span>© {{ date('Y') }} BiblioNusa. Hak cipta dilindungi.</span>
-            <span>Dibuat dengan ❤️ untuk para pembaca Indonesia</span>
+            <span>© {{ date('Y') }} ReadSpace Library. Hak cipta dilindungi.</span>
+            <span>Dibuat dengan ❤️ untuk para pembaca perpustakaan Polibatam</span>
         </div>
     </div>
 </footer>
