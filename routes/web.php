@@ -66,7 +66,7 @@ Route::get('/katalog', function (Request $request) {
     return view('katalog', ['daftarBuku' => $hasilBuku]);
 })->name('katalog');
 
-// Route Search Mahasiswa (Sudah diperbaiki tutup kurungnya)
+// Route Search Mahasiswa 
 Route::get('/search', function (Request $request) {
     $semuaBuku = collect([
         (object)['id' => 1, 'judul' => 'Laskar Pelangi', 'penulis' => 'Andrea Hirata', 'cover' => ''],
@@ -114,33 +114,50 @@ Route::get('/admin/about', function () {
 
 Route::prefix('admin')->group(function () {
 
+    // DATA BUKU HARUS DI DALAM SINI
     Route::get('/katalog', function () {
         $Buku = collect([
-            ['id' => 1, 'judul' => 'Laskar Pelangi', 'penulis' => 'Andrea Hirata', 'genre' => 'Drama', 'status' => 'Tersedia'],
+            [
+                'id' => 1, 
+                'judul' => 'Laskar Pelangi', 
+                'penulis' => 'Andrea Hirata', 
+                'genre' => 'Drama', 
+                'status' => 'Tersedia',
+                'cover' => 'cover1.jpg'
+            ],
             ['id' => 2, 'judul' => 'Bumi', 'penulis' => 'Tere Liye', 'genre' => 'Fantasi', 'status' => 'Tersedia'],
             ['id' => 3, 'judul' => 'Filosofi Teras', 'penulis' => 'Henry Manampiring', 'genre' => 'Self-Dev', 'status' => 'Dipinjam'],
         ]);
 
+        // Mengirimkan variabel $Buku ke view
         return view('admin.katalog-admin', compact('Buku'));
     })->name('admin.katalog');
 
-    // ✅ EDIT
+    // Route edit, update, dan delete tetap seperti sebelumnya
     Route::get('/katalog/{id}/edit', [BukuController::class, 'edit'])->name('admin.edit');
-
-    // ✅ UPDATE
     Route::put('/katalog/{id}', [BukuController::class, 'update'])->name('admin.update');
-
-    // ✅ DELETE
     Route::delete('/katalog/{id}', [BukuController::class, 'destroy'])->name('admin.delete');
 });
 
-$Buku = collect([
-    [
-        'id' => 1,
-        'judul' => 'Laskar Pelangi',
-        'penulis' => 'Andrea Hirata',
-        'genre' => 'Drama',
-        'status' => 'Tersedia',
-        'cover' => 'cover1.jpg'
-    ],
-]);
+// --- ROUTE UNTUK HALAMAN EDIT BUKU ---
+Route::get('/admin/buku/{id}/edit', function ($id) {
+    // Kita buat data dummy di sini supaya variabel $buku tidak undefined
+    $semuaBuku = collect([
+        ['id' => 1, 'judul' => 'Laskar Pelangi', 'penulis' => 'Andrea Hirata', 'genre' => 'Drama', 'status' => 'Tersedia'],
+        ['id' => 2, 'judul' => 'Bumi', 'penulis' => 'Tere Liye', 'genre' => 'Fantasi', 'status' => 'Tersedia'],
+        ['id' => 3, 'judul' => 'Filosofi Teras', 'penulis' => 'Henry Manampiring', 'genre' => 'Self-Dev', 'status' => 'Dipinjam'],
+    ]);
+
+    $buku = $semuaBuku->firstWhere('id', $id);
+
+    if (!$buku) {
+        abort(404);
+    }
+
+    return view('admin.edit-buku', compact('buku'));
+})->name('admin.edit_buku'); 
+
+// Route untuk proses updatenya
+Route::put('/admin/buku/{id}', function ($id) {
+    return redirect()->route('admin.katalog')->with('success', 'Buku berhasil diupdate!');
+})->name('admin.update_buku');
