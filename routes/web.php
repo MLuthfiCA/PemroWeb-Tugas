@@ -11,6 +11,16 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\BukuController;
 
 
+
+
+Route::get('/contact', [HomeController::class, 'contact']);
+Route::get('/dashboard', [DashboardController::class, 'index']);
+Route::get('/riwayat', [RiwayatController::class, 'tampilkanRiwayat']);
+Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+Route::post('/register', [AuthController::class, 'register']);
+Route::get('/search', fn() => view('search'))->name('search');
+
+
 Route::get('/admin/profile', function () {
     $books = collect([
         (object)[

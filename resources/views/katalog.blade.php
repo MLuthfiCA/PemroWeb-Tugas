@@ -1,5 +1,6 @@
 @extends('app')
 
+<<<<<<< Updated upstream
 @section('content')
   <div class="flex flex-col md:flex-row md:items-center justify-between mb-10 pb-4 border-b border-stone-200">
     <div>
@@ -23,6 +24,67 @@
                     <span
                         class="{{ $buku['status'] == 'Dipinjam' ? 'text-stone-500' : 'text-amber-800' }} text-sm font-medium uppercase tracking-wider">Cover
                         Buku</span>
+=======
+    <style>
+        /* Perbaikan: Nama class disamakan jadi bg-custom-maroon */
+        .bg-custom-maroon { background-color: #632024; }
+    </style>
+</head>
+<body class="bg-white flex flex-col min-h-screen font-sans">
+<header class="bg-custom-maroon text-white p-4 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            
+            <div class="flex items-center">
+                <img src="{{ asset('images/logo.rsl.2.png') }}" alt="Logo" class="w-20 h-20 object-contain">
+                <span class="ml-3 text-xl font-semibold">ReadSpace Library</span>
+            </div>
+
+        <nav class="flex justify-between items-center px-8 py-4 bg-[#632024] text-white shadow-lg">
+    <!-- Menu -->
+    <div class="flex items-center space-x-6">
+        <a href="{{ route('katalog') }}" class="hover:text-[#d5b893] transition">Home</a>
+        <a href="/search" class="hover:text-[#d5b893] transition">Search</a>
+        <a href="{{ route('about') }}" class="hover:text-[#d5b893] transition">About Us</a>
+    </div>
+
+    <!-- Profile Icon -->
+    
+    <!-- Profile -->
+    <div class="ml-6">
+        <a href="{{ route('about') }}" 
+        class="w-10 h-10 bg-[#d5b893] rounded-full flex items-center justify-center 
+                hover:scale-110 transition duration-300 shadow-md">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" 
+                class="h-6 w-6 text-[#632024]" 
+                viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" 
+                    d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" 
+                    clip-rule="evenodd" />
+            </svg>
+
+
+    </a>
+
+</nav>
+        </div>
+    </header>
+            <div x-show="showSearch" 
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0 -translate-y-4"
+             x-transition:enter-end="opacity-100 translate-y-0"
+             x-transition:leave="transition ease-in duration-200"
+             x-transition:leave-start="opacity-100 translate-y-0"
+             x-transition:leave-end="opacity-0 -translate-y-4"
+             class="max-w-7xl mx-auto px-4 mt-4 pb-2"
+             x-cloak>
+            
+            <form action="/katalog" method="GET" class="max-w-md mx-auto relative">
+                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                    <svg class="w-4 h-4 text-stone-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                    </svg>
+>>>>>>> Stashed changes
                 </div>
 
                 <div class="p-6">
