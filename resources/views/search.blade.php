@@ -33,7 +33,7 @@
             </div>
         @empty
             <div class="col-span-full text-center py-20 text-stone-400">
-                <p class="text-xl">Sori, buku yang kamu cari tidak ditemukan 📚</p>
+                <p class="text-xl">Sorry, buku yang kamu cari tidak ditemukan 📚</p>
             </div>
         @endforelse
     </div>
