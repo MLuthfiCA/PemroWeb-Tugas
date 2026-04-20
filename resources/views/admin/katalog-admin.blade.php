@@ -63,22 +63,18 @@
 
     <div class="flex space-x-2">
 
-        {{-- EDIT (ICON PENSIL) --}}
-        <a href="{{ route('admin.edit', $buku['id']) }}" 
-           class="p-2 rounded-full hover:bg-blue-100 transition"
-           title="Edit">
+                        <!-- EDIT -->
+                        <a href="{{ route('admin.edit', $buku['id']) }}"
+                           class="p-2.5 bg-blue-50 text-blue-600 rounded-xl hover:bg-blue-600 hover:text-white transition shadow-sm"
+                           title="Edit Buku">
 
-            <svg xmlns="http://www.w3.org/2000/svg" 
-                 class="h-5 w-5 text-gray-500 hover:text-blue-600" 
-                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
+                                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                            </svg>
 
-                <path stroke-linecap="round" 
-                      stroke-linejoin="round" 
-                      stroke-width="2" 
-                      d="M15.232 5.232l3.536 3.536M9 13l6.768-6.768a2.5 2.5 0 113.536 3.536L12.536 16.536a2 2 0 01-.707.414L9 18l1.05-2.828a2 2 0 01.414-.707z"/>
-            </svg>
-
-        </a>
+                        </a>
 
         {{-- DELETE (ICON TONG SAMPAH) --}}
         <form action="{{ route('admin.delete', $buku['id']) }}" 

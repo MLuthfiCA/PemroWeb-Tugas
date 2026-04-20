@@ -68,16 +68,29 @@
         </div>
     </div>
 
-    <script>
-    document.getElementById('tanggal_pinjam').addEventListener('change', function() {
-        let startDate = new Date(this.value);
-        if(!isNaN(startDate)) {
-            startDate.setDate(startDate.getDate() + 7);
-            let year = startDate.getFullYear();
-            let month = String(startDate.getMonth() + 1).padStart(2, '0');
-            let day = String(startDate.getDate()).padStart(2, '0');
-            document.getElementById('tanggal_kembali').value = `${year}-${month}-${day}`;
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const tglPinjam = document.getElementById('tanggal_pinjam');
+        const tglKembali = document.getElementById('tanggal_kembali');
+
+        if (tglPinjam && tglKembali) {
+            tglPinjam.addEventListener('change', function() {
+                // Gunakan 'window.Date' untuk memberi tahu VS Code ini adalah JS global, bukan PHP
+                let startDate = new window.Date(this.value);
+                
+                if(!isNaN(startDate.getTime())) {
+                    // Tambah 7 hari otomatis
+                    startDate.setDate(startDate.getDate() + 7);
+                    
+                    // Format ke YYYY-MM-DD
+                    let year = startDate.getFullYear();
+                    let month = String(startDate.getMonth() + 1).padStart(2, '0');
+                    let day = String(startDate.getDate()).padStart(2, '0');
+                    
+                    tglKembali.value = `${year}-${month}-${day}`;
+                }
+            });
         }
     });
-    </script>
+</script>
 @endsection
