@@ -1,35 +1,69 @@
-<nav class="flex justify-between items-center px-6 py-6 bg-[#632024] text-white shadow-md">
-    
-    <div class="flex items-center gap-4">
-        <img src="{{ asset('images/logo.rsl.2.png') }}" alt="Logo" class="h-14 w-auto object-contain scale-110">
+<header class="fixed top-0 left-0 right-0 z-50 px-4 py-4 pointer-events-none">
+    <nav class="max-w-7xl mx-auto glass-panel px-8 py-4 flex items-center justify-between shadow-2xl shadow-red-100 pointer-events-auto border-white/60">
         
-        <span class="font-bold text-2xl tracking-tight">ReadSpace Library</span>
-    </div>
-    <div class="flex items-center gap-8">
-        <div class="hidden md:flex items-center gap-8 text-sm font-medium">
-            <a href="{{ route('katalog') }}" class="hover:text-[#d5b893] transition">Home</a>
-            <a href="{{ route('search') }}" class="hover:text-[#d5b893] transition">Search</a>
-            <a href="{{ route('about') }}" class="hover:text-[#d5b893] transition">About Us</a>
+        <!-- Logo Section -->
+        <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-burgundy-500 to-maroon flex items-center justify-center shadow-lg shadow-red-200">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                </svg>
+            </div>
+            <span class="font-bold text-xl text-gray-800 tracking-tight">ReadSpace</span>
         </div>
 
-        <div class="flex items-center relative">
-            <button id="dropdownUserButton" data-dropdown-toggle="dropdownUser" class="flex items-center justify-center w-10 h-10 bg-[#d5b893] rounded-full hover:scale-105 transition-all" type="button">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#632024]" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+        <!-- Desktop Navigation -->
+        <div class="hidden md:flex items-center gap-1">
+            <a href="{{ route('home') }}" class="px-5 py-2 rounded-xl transition-all duration-300 {{ request()->routeIs('home') ? 'bg-burgundy-500 text-white shadow-lg shadow-red-100' : 'text-gray-500 hover:text-burgundy-500 hover:bg-white/80' }} font-medium text-sm">
+                Beranda
+            </a>
+            <a href="{{ route('katalog') }}" class="px-5 py-2 rounded-xl transition-all duration-300 {{ request()->routeIs('katalog') ? 'bg-burgundy-500 text-white shadow-lg shadow-red-100' : 'text-gray-500 hover:text-burgundy-500 hover:bg-white/80' }} font-medium text-sm">
+                Katalog
+            </a>
+            <a href="{{ route('search') }}" class="px-5 py-2 rounded-xl transition-all duration-300 {{ request()->routeIs('search') ? 'bg-burgundy-500 text-white shadow-lg shadow-red-100' : 'text-gray-500 hover:text-burgundy-500 hover:bg-white/80' }} font-medium text-sm">
+                Pencarian
+            </a>
+            <a href="{{ route('about') }}" class="px-5 py-2 rounded-xl transition-all duration-300 {{ request()->routeIs('about') ? 'bg-burgundy-500 text-white shadow-lg shadow-red-100' : 'text-gray-500 hover:text-burgundy-500 hover:bg-white/80' }} font-medium text-sm">
+                Tentang
+            </a>
+        </div>
+
+        <!-- Auth & Action Section -->
+        <div class="flex items-center gap-4">
+            @auth
+            <div class="flex items-center gap-4 p-1 pl-4 bg-white/60 rounded-2xl border border-white/80">
+                <div class="text-right hidden sm:block">
+                    <p class="text-xs font-bold text-gray-800 leading-none">{{ Auth::user()->name }}</p>
+                    <p class="text-[9px] text-gray-400 mt-1 uppercase font-bold tracking-widest">{{ Auth::user()->role }}</p>
+                </div>
+                <button id="dropdownUserButton" data-dropdown-toggle="dropdownUser" class="w-9 h-9 rounded-xl bg-burgundy-500 text-white flex items-center justify-center font-bold text-sm shadow-md transition-transform hover:scale-105">
+                    {{ substr(Auth::user()->name, 0, 1) }}
+                </button>
+            </div>
+
+            <!-- Dropdown menu -->
+            <div id="dropdownUser" class="z-50 hidden bg-white/90 backdrop-blur-2xl border border-white/60 divide-y divide-gray-100 rounded-2xl shadow-2xl w-44">
+                <ul class="py-2 text-sm text-gray-700">
+                    <li><a href="{{ route('profile') }}" class="block px-4 py-2 hover:bg-red-50 hover:text-burgundy-500 transition-colors font-medium">Profil Saya</a></li>
+                </ul>
+                <div class="py-1">
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-red-500 font-bold hover:bg-red-50 transition-colors">Keluar</button>
+                    </form>
+                </div>
+            </div>
+            @else
+            <div class="flex items-center gap-2">
+                <a href="{{ route('login') }}" class="text-sm font-bold text-gray-500 hover:text-burgundy-500 px-4 transition-colors">Masuk</a>
+                <a href="{{ route('register') }}" class="px-5 py-2.5 rounded-xl bg-burgundy-500 text-white text-sm font-bold shadow-lg shadow-red-100 hover:bg-burgundy-600 transition-all hover:-translate-y-0.5">Daftar</a>
+            </div>
+            @endauth
+
+            <button class="md:hidden text-gray-500 p-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
                 </svg>
             </button>
-
-            <div id="dropdownUser" class="z-50 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 mt-2 absolute right-0 top-full">
-                <ul class="py-2 text-sm text-gray-700">
-                    <li><a href="{{ route('profile') }}" class="block px-4 py-2 hover:bg-gray-100">My Profile</a></li>
-                    <li>
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <button type="submit" class="block w-full text-left px-4 py-2 text-red-600 font-bold hover:bg-red-50">Logout</button>
-                        </form>
-                    </li>
-                </ul>
-            </div>
         </div>
-    </div>
-</nav>
+    </nav>
+</header>

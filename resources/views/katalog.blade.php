@@ -1,75 +1,126 @@
 @extends('app')
 
 @section('content')
-
-<div class="flex flex-col md:flex-row md:items-center justify-between mb-10 pb-4 border-b border-stone-200">
-    <div>
-        <h1 class="text-4xl font-extrabold text-red-950">Katalog Buku</h1>
-        <p class="text-stone-500 text-lg mt-1">Pilih dan ajukan pinjaman buku fisikmu.</p>
-    </div>
-
-    @if(request('query'))
-        <div class="mt-4 md:mt-0 text-sm bg-amber-50 px-4 py-2 rounded-lg border border-amber-100">
-            Menampilkan hasil untuk:
-            <span class="font-bold text-red-950">"{{ request('query') }}"</span>
-            <a href="/katalog" class="ml-2 text-red-700 hover:underline">Hapus Filter</a>
+<div class="py-10 space-y-10" x-data="{ view: 'grid' }">
+    
+    <!-- Page Header -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 animate-fade-up">
+        <div>
+            <h1 class="text-4xl font-bold text-gray-800">Library Catalog</h1>
+            <p class="text-gray-500 mt-2">Temukan dan pinjam koleksi digital terbaik kami.</p>
         </div>
-    @endif
-</div>
-
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-
-@forelse($daftarBuku as $buku)
-
-<div class="bg-white border border-stone-100 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 {{ $buku['status'] == 'Dipinjam' ? 'opacity-75 bg-stone-50' : '' }}">
-
-    <div class="h-56 {{ $buku['status'] == 'Dipinjam' ? 'bg-stone-200' : 'bg-amber-100' }} rounded-t-3xl flex items-center justify-center p-6 border-b border-stone-100">
-        <span class="{{ $buku['status'] == 'Dipinjam' ? 'text-stone-500' : 'text-amber-800' }} text-sm font-medium uppercase tracking-wider">
-            Cover Buku
-        </span>
-    </div>
-
-    <div class="p-6">
-        <div class="flex justify-between items-start gap-2 mb-2">
-            <h5 class="text-xl font-bold {{ $buku['status'] == 'Dipinjam' ? 'text-stone-500' : 'text-red-950' }}">
-                {{ $buku['judul'] }}
-            </h5>
-
-            <span class="{{ $buku['status'] == 'Tersedia' ? 'bg-green-100 text-green-900' : 'bg-red-100 text-red-900' }} text-[10px] font-bold px-3 py-1 rounded-full uppercase">
-                {{ $buku['status'] }}
-            </span>
-        </div>
-
-        <p class="text-sm mb-4 {{ $buku['status'] == 'Dipinjam' ? 'text-stone-400' : 'text-red-900' }}">
-            {{ $buku['penulis'] }}
-        </p>
-
-        <div class="pt-4 border-t border-stone-100 mb-6">
-            <p class="text-xs text-stone-500 uppercase font-bold mb-1">Genre</p>
-            <p class="text-sm text-stone-800">{{ $buku['genre'] }}</p>
-        </div>
-
-        @if($buku['status'] == 'Tersedia')
-            <a href="{{ route('pengajuan', ['judul' => $buku['judul'], 'id' => 'B-' . rand(100, 999)]) }}"
-               class="block text-center w-full text-white bg-[#431212] hover:bg-red-900 font-semibold rounded-full text-sm px-5 py-3 shadow-md">
-                Pinjam Buku Fisik
-            </a>
-        @else
-            <button disabled
-                class="w-full text-white bg-stone-400 font-semibold rounded-xl text-sm px-5 py-3 cursor-not-allowed">
-                Tidak Tersedia
+        
+        <!-- View Toggle -->
+        <div class="flex p-1 bg-white/60 backdrop-blur-md rounded-2xl border border-white/80 shadow-xl shadow-red-50 w-fit">
+            <button @click="view = 'grid'" :class="view === 'grid' ? 'bg-burgundy-500 shadow-lg text-white' : 'text-gray-400'" class="px-5 py-2.5 rounded-xl transition-all duration-300 flex items-center gap-2 font-bold text-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 14a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 14a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                </svg>
+                Grid
             </button>
-        @endif
+            <button @click="view = 'table'" :class="view === 'table' ? 'bg-burgundy-500 shadow-lg text-white' : 'text-gray-400'" class="px-5 py-2.5 rounded-xl transition-all duration-300 flex items-center gap-2 font-bold text-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+                </svg>
+                Table
+            </button>
+        </div>
     </div>
 
-</div>
+    <!-- Grid View -->
+    <template x-if="view === 'grid'">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            @foreach($daftarBuku as $index => $buku)
+            <div class="glass-panel p-4 flex flex-col group animate-fade-up border-white/60" style="animation-delay: {{ $index * 100 }}ms">
+                <div class="relative h-64 rounded-2xl mb-5 overflow-hidden bg-gradient-to-br from-red-50 to-rose-100 flex items-center justify-center border border-white/20">
+                    <!-- Real Image from images folder -->
+                    <img src="{{ asset('images/' . ($buku['cover'] ?? 'readspace-library.png')) }}" 
+                        class="h-4/5 object-contain shadow-2xl transform group-hover:scale-110 group-hover:rotate-2 transition-transform duration-700"
+                        onerror="this.src='{{ asset('images/readspace-library.png') }}'">
+                    
+                    <!-- Availability Badge -->
+                    <div class="absolute top-4 right-4 px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest backdrop-blur-xl {{ $buku['status'] == 'Tersedia' ? 'bg-green-500/10 text-green-600 border border-green-200' : 'bg-red-500/10 text-red-600 border border-red-200' }}">
+                        {{ $buku['status'] }}
+                    </div>
+                </div>
+                
+                <h3 class="font-bold text-gray-800 line-clamp-1 mb-1 text-lg">{{ $buku['judul'] }}</h3>
+                <p class="text-xs text-gray-400 mb-6 font-medium">{{ $buku['penulis'] }}</p>
+                
+                <div class="mt-auto pt-5 border-t border-red-50 flex items-center justify-between">
+                    <span class="px-2 py-1 rounded bg-white/80 text-[10px] font-bold text-burgundy-500 uppercase tracking-tighter border border-red-100">{{ $buku['genre'] }}</span>
+                    @if($buku['status'] == 'Tersedia')
+                    <a href="{{ route('pengajuan', ['judul' => $buku['judul'], 'id' => 'B-' . rand(100, 999), 'cover' => $buku['cover']]) }}" class="text-burgundy-500 hover:text-maroon font-bold text-xs flex items-center gap-1 transition-all group-hover:translate-x-1">
+                        Pinjam Sekarang
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                    </a>
+                    @else
+                    <span class="text-gray-300 font-bold text-xs italic tracking-wide">Dipinjam</span>
+                    @endif
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </template>
 
-@empty
-<div class="col-span-full text-center py-20 bg-stone-50 rounded-3xl border-2 border-dashed border-stone-200">
-    <p class="text-stone-500 text-lg">Buku tidak ditemukan.</p>
-</div>
-@endforelse
+    <!-- Table View -->
+    <template x-if="view === 'table'">
+        <div class="glass-panel overflow-hidden border border-white/60 animate-fade-up shadow-2xl shadow-red-50">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead class="bg-red-50/50 text-gray-400 text-[10px] font-bold uppercase tracking-widest">
+                        <tr>
+                            <th class="px-8 py-5">Info Buku</th>
+                            <th class="px-8 py-5">Genre</th>
+                            <th class="px-8 py-5">Status</th>
+                            <th class="px-8 py-5 text-right">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-red-50">
+                        @foreach($daftarBuku as $index => $buku)
+                        <tr class="group hover:bg-red-50/30 transition-colors duration-300">
+                            <td class="px-8 py-6">
+                                <div class="flex items-center gap-5">
+                                    <div class="w-12 h-16 bg-white rounded-xl shadow-md flex items-center justify-center overflow-hidden border border-white group-hover:scale-105 transition-transform duration-500">
+                                        <img src="{{ asset('images/' . ($buku['cover'] ?? 'readspace-library.png')) }}" class="w-full h-full object-cover">
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-gray-800 group-hover:text-burgundy-500 transition-colors">{{ $buku['judul'] }}</p>
+                                        <p class="text-xs text-gray-400 font-medium">{{ $buku['penulis'] }}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-8 py-6">
+                                <span class="px-3 py-1.5 rounded-lg bg-white/80 text-gray-500 text-[10px] font-bold uppercase tracking-widest border border-red-50">
+                                    {{ $buku['genre'] }}
+                                </span>
+                            </td>
+                            <td class="px-8 py-6">
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-2.5 h-2.5 rounded-full {{ $buku['status'] == 'Tersedia' ? 'bg-green-500 shadow-lg shadow-green-200' : 'bg-red-400 shadow-lg shadow-red-100' }}"></div>
+                                    <span class="text-sm font-bold {{ $buku['status'] == 'Tersedia' ? 'text-green-600' : 'text-red-400' }}">
+                                        {{ $buku['status'] }}
+                                    </span>
+                                </div>
+                            </td>
+                            <td class="px-8 py-6 text-right">
+                                @if($buku['status'] == 'Tersedia')
+                                <a href="{{ route('pengajuan', ['judul' => $buku['judul'], 'id' => 'B-' . rand(100, 999), 'cover' => $buku['cover']]) }}" class="px-5 py-2.5 bg-burgundy-500 text-white rounded-xl text-xs font-bold shadow-lg shadow-red-100 hover:bg-maroon transition-all opacity-0 group-hover:opacity-100 inline-block">
+                                    Ajukan Pinjam
+                                </a>
+                                @else
+                                <span class="text-gray-300 text-xs font-bold italic">N/A</span>
+                                @endif
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </template>
 
 </div>
-
 @endsection
