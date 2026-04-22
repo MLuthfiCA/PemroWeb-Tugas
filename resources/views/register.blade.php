@@ -1,62 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Register - ReadSpace Library</title>
+@extends('app')
 
-    <!-- Tailwind CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+@section('content')
+<div class="min-h-[80vh] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full space-y-8 animate-fade-up">
+        <div class="text-center">
+            <div class="mx-auto h-16 w-16 rounded-2xl bg-gradient-to-tr from-burgundy-500 to-maroon flex items-center justify-center shadow-2xl shadow-red-100">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                </svg>
+            </div>
+            <h2 class="mt-6 text-3xl font-extrabold text-gray-900">Buat Akun Baru</h2>
+            <p class="mt-2 text-sm text-gray-500 font-medium">Bergabunglah dengan komunitas pembaca kami</p>
+        </div>
 
-    <!-- Custom Color -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#632024'
-                    }
-                }
-            }
-        }
-    </script>
-</head>
+        <div class="glass-panel p-8 shadow-2xl shadow-red-50 border-white/60">
+            <form class="space-y-5" action="{{ route('register') }}" method="POST">
+                @csrf
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1">Username</label>
+                        <input name="username" type="text" required class="w-full px-4 py-3.5 border border-white bg-white/50 rounded-2xl placeholder-gray-400 text-gray-800 focus:outline-none focus:ring-4 focus:ring-red-100 focus:border-burgundy-500 transition-all text-sm font-medium" placeholder="Ex: crist">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1">Role</label>
+                        <select name="role" class="w-full px-4 py-3.5 border border-white bg-white/50 rounded-2xl text-gray-800 focus:outline-none focus:ring-4 focus:ring-red-100 focus:border-burgundy-500 transition-all text-sm font-medium cursor-pointer appearance-none">
+                            <option value="mahasiswa">Mahasiswa</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                    </div>
+                </div>
 
-<body class="bg-gray-100">
+                <div>
+                    <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1">Nama Lengkap</label>
+                    <input name="name" type="text" required class="w-full px-4 py-3.5 border border-white bg-white/50 rounded-2xl placeholder-gray-400 text-gray-800 focus:outline-none focus:ring-4 focus:ring-red-100 focus:border-burgundy-500 transition-all text-sm font-medium" placeholder="Nama lengkap kamu">
+                </div>
 
-<div class="flex items-center justify-center min-h-screen">
+                <div>
+                    <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1">Email</label>
+                    <input name="email" type="email" required class="w-full px-4 py-3.5 border border-white bg-white/50 rounded-2xl placeholder-gray-400 text-gray-800 focus:outline-none focus:ring-4 focus:ring-red-100 focus:border-burgundy-500 transition-all text-sm font-medium" placeholder="email@example.com">
+                </div>
 
-    <div class="bg-white p-8 rounded-2xl shadow-lg w-96">
-        
-        <div class="flex justify-center mb-6">
-    <img src="{{ asset('logo.png') }}" alt="Logo"
-        class="w-28 h-30 object-contain">
-</div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1">Password</label>
+                    <input name="password" type="password" required class="w-full px-4 py-3.5 border border-white bg-white/50 rounded-2xl placeholder-gray-400 text-gray-800 focus:outline-none focus:ring-4 focus:ring-red-100 focus:border-burgundy-500 transition-all text-sm font-medium" placeholder="••••••••">
+                </div>
 
-        <form action="/register" method="POST" class="space-y-4">
-            @csrf
-
-            <input type="text" name="name" placeholder="Nama Lengkap"
-                class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
-
-            <input type="email" name="email" placeholder="Email"
-                class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
-
-            <input type="password" name="password" placeholder="Password"
-                class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
-
-            <button type="submit"
-                class="w-full bg-primary text-white py-2 rounded-lg hover:bg-[#4e1a1d] transition">
-                Daftar
-            </button>
-        </form>
-
-        <p class="text-center mt-4 text-sm">
-            Sudah punya akun?
-            <a href="/login" class="text-primary font-semibold">Login</a>
-        </p>
-
+                <div class="pt-2">
+                    <button type="submit" class="w-full flex justify-center py-4 px-4 border border-transparent text-sm font-bold rounded-2xl text-white bg-burgundy-500 hover:bg-maroon focus:outline-none focus:ring-4 focus:ring-red-100 transition-all shadow-lg shadow-red-100 transform active:scale-95">
+                        Daftar Akun
+                    </button>
+                </div>
+            </form>
+            
+            <div class="mt-8 text-center">
+                <p class="text-sm text-gray-500 font-medium">
+                    Sudah punya akun? 
+                    <a href="{{ route('login') }}" class="font-bold text-burgundy-600 hover:text-maroon transition-colors">Masuk di sini</a>
+                </p>
+            </div>
+        </div>
     </div>
-
 </div>
-
-</body>
-</html>
+@endsection

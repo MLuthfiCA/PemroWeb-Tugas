@@ -4,113 +4,187 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ReadSpace Library</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
     
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        burgundy: {
+                            50: '#fff1f2',
+                            100: '#ffe4e6',
+                            500: '#800020',
+                            600: '#630330',
+                            900: '#4c0519',
+                        },
+                        maroon: '#630330',
+                        rose: {
+                            gold: '#E7C0B7',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
     <style>
-        .bg-custom-maroon { background-color: #632024; }
+        :root {
+            --glass: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.5);
+            --burgundy: #800020;
+            --maroon: #630330;
+        }
+
         body {
-        overflow-x: hidden;
-        margin: 0;
-        padding: 0;
-    }
+            font-family: 'DM Sans', sans-serif;
+            background: linear-gradient(135deg, #FFFDF5 0%, #F3E5D8 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            margin: 0;
+            overflow-x: hidden;
+            color: #2D1B1E;
+        }
+
+        .glass-panel {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade-up {
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(128, 0, 32, 0.1); border-radius: 10px; }
     </style>
 </head>
-<body class="bg-gray-50 flex flex-col min-h-screen font-sans">
+<body class="flex flex-col min-h-screen">
+
+    <!-- Background Elements -->
+    <div class="fixed inset-0 pointer-events-none z-[-1] overflow-hidden">
+        <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-orange-50 opacity-50 blur-[120px]"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-[#EBD8C1] opacity-30 blur-[120px]"></div>
+        <div class="absolute top-[20%] right-[10%] w-[30%] h-[30%] rounded-full bg-amber-50 opacity-40 blur-[100px]"></div>
+    </div>
 
     @include('layouts.navbar')
 
-    <main class="flex-grow w-full max-w-7xl mx-auto p-6 md:p-8">
-        @yield('content')
-    </main>
+    <div class="flex-grow pt-24 transition-all duration-300">
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            @yield('content')
+        </main>
 
-   <footer class="bg-[#d5b893] text-white pt-12 pb-6 mt-10">
-    <div class="max-w-7xl mx-auto px-6">
+        <footer class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 animate-fade-up delay-300">
+            <div class="glass-panel p-8 md:p-12 border-white/60 shadow-2xl shadow-red-50">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+                    <!-- Brand Section -->
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-burgundy-500 to-maroon flex items-center justify-center shadow-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                                </svg>
+                            </div>
+                            <span class="font-bold text-2xl text-gray-800 tracking-tight">ReadSpace</span>
+                        </div>
+                        <p class="text-sm text-gray-500 leading-relaxed">
+                            ReadSpace Library adalah platform literasi digital modern yang dirancang khusus untuk memfasilitasi mahasiswa Polibatam dalam mengakses pengetahuan tanpa batas.
+                        </p>
+                        <div class="flex gap-4">
+                            <div class="w-8 h-8 rounded-lg bg-white border border-red-50 flex items-center justify-center text-burgundy-500 hover:bg-burgundy-500 hover:text-white transition-all cursor-pointer">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
+                            </div>
+                            <div class="w-8 h-8 rounded-lg bg-white border border-red-50 flex items-center justify-center text-burgundy-500 hover:bg-burgundy-500 hover:text-white transition-all cursor-pointer">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                            </div>
+                        </div>
+                    </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+                    <!-- Navigation Links -->
+                    <div>
+                        <h4 class="font-bold text-gray-800 mb-6 uppercase text-xs tracking-widest">Menu Cepat</h4>
+                        <ul class="space-y-4">
+                            <li><a href="{{ route('home') }}" class="text-gray-500 hover:text-burgundy-500 text-sm transition-colors">Beranda</a></li>
+                            <li><a href="{{ route('katalog') }}" class="text-gray-500 hover:text-burgundy-500 text-sm transition-colors">Katalog Buku</a></li>
+                            <li><a href="{{ route('search') }}" class="text-gray-500 hover:text-burgundy-500 text-sm transition-colors">Pencarian</a></li>
+                            <li><a href="{{ route('about') }}" class="text-gray-500 hover:text-burgundy-500 text-sm transition-colors">Tentang Kami</a></li>
+                        </ul>
+                    </div>
 
-            {{-- LOGO --}}
-            <div>
-                <img src="{{ asset('images/readspace-library.png') }}" 
-                     alt="Logo Readspace" 
-                     class="h-16 mb-4">
-                <p class="text-sm text-white/80 leading-relaxed">
-                    Platform perpustakaan digital untuk memudahkan mahasiswa dalam mencari dan meminjam buku secara efisien.
-                </p>
-            </div>
+                    <!-- Contact & Location -->
+                    <div>
+                        <h4 class="font-bold text-gray-800 mb-6 uppercase text-xs tracking-widest">Kontak & Lokasi</h4>
+                        <ul class="space-y-4">
+                            <li class="flex items-start gap-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-burgundy-500 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
+                                <span class="text-sm text-gray-500">Jl. Ahmad Yani, Batam Kota, Batam, Kepulauan Riau 29461</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-burgundy-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                                <span class="text-sm text-gray-500">library@polibatam.ac.id</span>
+                            </li>
+                        </ul>
+                    </div>
 
-            {{-- ABOUT --}}
-            <div>
-                <h4 class="font-semibold text-lg mb-3">Readspace</h4>
-                <ul class="space-y-2 text-sm text-white/80">
-                    <li><a href="#" class="hover:text-[#d5b893] transition">Tentang Kami</a></li>
-                    <li><a href="#" class="hover:text-[#d5b893] transition">Katalog Buku</a></li>
-                    <li><a href="#" class="hover:text-[#d5b893] transition">Kontak</a></li>
-                </ul>
-            </div>
+                    <!-- Opening Hours -->
+                    <div>
+                        <h4 class="font-bold text-gray-800 mb-6 uppercase text-xs tracking-widest">Jam Operasional</h4>
+                        <ul class="space-y-3">
+                            <li class="flex justify-between text-sm">
+                                <span class="text-gray-400">Senin - Jumat</span>
+                                <span class="font-bold text-gray-700">08:00 - 20:00</span>
+                            </li>
+                            <li class="flex justify-between text-sm">
+                                <span class="text-gray-400">Sabtu</span>
+                                <span class="font-bold text-gray-700">09:00 - 15:00</span>
+                            </li>
+                            <li class="flex justify-between text-sm">
+                                <span class="text-gray-400">Minggu</span>
+                                <span class="font-bold text-red-500 uppercase tracking-widest text-[10px]">Tutup</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
 
-            {{-- ADDRESS --}}
-            <div>
-                <h4 class="font-semibold text-lg mb-3">Alamat</h4>
-                <p class="text-sm text-white/80 leading-relaxed">
-                    Politeknik Negeri Batam <br>
-                    Jl. Ahmad Yani, Batam Kota <br>
-                    Kepulauan Riau, Indonesia
-                </p>
-            </div>
-
-            {{-- SOCIAL MEDIA --}}
-            <div>
-                <h4 class="font-semibold text-lg mb-3">Follow Us</h4>
-
-                <div class="flex space-x-4 mt-3">
-
-                    {{-- Instagram --}}
-                    <a href="#" class="p-2 bg-white/10 rounded-full hover:bg-[#d5b893] transition">
-                        <svg xmlns="http://www.w3.org/2000/svg" 
-                             class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M7.75 2C4.678 2 2 4.678 2 7.75v8.5C2 19.322 4.678 22 7.75 22h8.5C19.322 22 22 19.322 22 16.25v-8.5C22 4.678 19.322 2 16.25 2h-8.5zm0 2h8.5C18.216 4 20 5.784 20 7.75v8.5c0 1.966-1.784 3.75-3.75 3.75h-8.5C5.784 20 4 18.216 4 16.25v-8.5C4 5.784 5.784 4 7.75 4zm8.25 1a1 1 0 100 2 1 1 0 000-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/>
-                        </svg>
-                    </a>
-
-                    {{-- Facebook --}}
-                    <a href="#" class="p-2 bg-white/10 rounded-full hover:bg-[#d5b893] transition">
-                        <svg xmlns="http://www.w3.org/2000/svg" 
-                             class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M22 12a10 10 0 10-11.563 9.875v-6.987H8.078V12h2.359V9.797c0-2.325 1.392-3.607 3.523-3.607.997 0 2.04.178 2.04.178v2.245h-1.149c-1.133 0-1.486.704-1.486 1.426V12h2.527l-.404 2.888h-2.123v6.987A10.002 10.002 0 0022 12z"/>
-                        </svg>
-                    </a>
-
-                    {{-- Twitter/X --}}
-                    <a href="#" class="p-2 bg-white/10 rounded-full hover:bg-[#d5b893] transition">
-                        <svg xmlns="http://www.w3.org/2000/svg" 
-                             class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M18.244 2H21l-6.56 7.49L22 22h-6.828l-5.35-6.993L3.64 22H1l7.02-8.01L2 2h6.828l4.86 6.36L18.244 2zm-2.396 18h1.885L7.103 4H5.07l10.778 16z"/>
-                        </svg>
-                    </a>
-
-                    {{-- Email --}}
-                    <a href="#" class="p-2 bg-white/10 rounded-full hover:bg-[#d5b893] transition">
-                        <svg xmlns="http://www.w3.org/2000/svg" 
-                             class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                  d="M16 12H8m8 0l-4 4m4-4l-4-4m8 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12"/>
-                        </svg>
-                    </a>
-
+                <!-- Copyright Section -->
+                <div class="mt-12 pt-8 border-t border-red-50 flex flex-col md:flex-row justify-between items-center gap-4">
+                    <p class="text-[11px] font-bold text-gray-400 uppercase tracking-widest">© {{ date('Y') }} Readspace Library. Built for Polibatam.</p>
+                    <div class="flex gap-8">
+                        <a href="#" class="text-[11px] font-bold text-gray-400 hover:text-burgundy-500 transition-colors uppercase tracking-widest">Terms</a>
+                        <a href="#" class="text-[11px] font-bold text-gray-400 hover:text-burgundy-500 transition-colors uppercase tracking-widest">Privacy</a>
+                        <a href="#" class="text-[11px] font-bold text-gray-400 hover:text-burgundy-500 transition-colors uppercase tracking-widest">Help Center</a>
+                    </div>
                 </div>
             </div>
-
-        </div>
-
-        {{-- COPYRIGHT --}}
-        <div class="border-t border-white/20 mt-10 pt-6 text-center text-sm text-white/60">
-            © {{ date('Y') }} Readspace Library. All rights reserved.
-        </div>
-
+        </footer>
     </div>
-</footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 </body>
