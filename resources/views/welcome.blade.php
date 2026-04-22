@@ -3,11 +3,11 @@
 @section('content')
 <div class="space-y-8">
     
-    <!-- Welcome Header -->
     <div class="glass-panel p-8 md:p-12 relative overflow-hidden animate-fade-up border-white/60">
         <div class="relative z-10 max-w-2xl">
             <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-                Hello, {{ Auth::check() ? Auth::user()->name : 'Guest' }}! 👋
+                {{-- Perbaikan: Menggunakan helper auth() untuk menghindari error 'Class not imported' --}}
+                Hello, {{ auth()->check() ? auth()->user()->name : 'Guest' }}! 
             </h1>
             <p class="text-lg text-gray-600 mb-8 leading-relaxed">
                 Selamat datang kembali di ReadSpace. Jelajahi koleksi digital kami yang luas dan temukan buku favoritmu hari ini.
@@ -22,7 +22,6 @@
             </div>
         </div>
         
-        <!-- Decorative Background Gradient Blob -->
         <div class="absolute right-[-20px] bottom-[-20px] w-64 h-64 md:w-96 md:h-96 opacity-20 md:opacity-100">
              <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
                 <path fill="#800020" d="M44.7,-76.4C58.2,-69.2,70,-58.5,77.5,-45.3C85,-32.1,88.3,-16,86.2,-0.7C84.1,14.7,76.7,29.3,67.7,42.4C58.7,55.5,48.1,67,35.2,73.5C22.3,80,7.1,81.4,-7.8,79.5C-22.7,77.6,-37.2,72.4,-49.4,63.9C-61.6,55.4,-71.4,43.5,-77.3,30.1C-83.2,16.7,-85.2,1.8,-82.4,-12.3C-79.6,-26.4,-72,-39.7,-61.5,-49.1C-51,-58.5,-37.5,-64.1,-24.8,-71.8C-12.1,-79.6,-0.1,-89.6,12.3,-90.7C24.7,-91.8,31.2,-83.6,44.7,-76.4Z" transform="translate(100 100)" />
@@ -30,7 +29,6 @@
         </div>
     </div>
 
-    <!-- Stats Grid -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div class="glass-panel p-6 animate-fade-up delay-100 group hover:bg-burgundy-500 transition-all duration-500 border-white/60">
             <div class="flex items-center justify-between mb-4">
@@ -82,10 +80,8 @@
         ];
     @endphp
 
-    <!-- Trending Genres & Chart Section -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 animate-fade-up delay-300">
         
-        <!-- Left: Genre Cards -->
         <div class="lg:col-span-1 space-y-4">
             <h2 class="text-2xl font-bold text-gray-800 mb-6 px-1">Statistik Genre</h2>
             @foreach($genres as $genre)
@@ -101,7 +97,6 @@
             @endforeach
         </div>
 
-        <!-- Right: The Graph Card -->
         <div class="lg:col-span-2 glass-panel p-8 border-white/60">
             <div class="flex items-center justify-between mb-8">
                 <div>
@@ -120,7 +115,6 @@
         </div>
     </div>
 
-    <!-- Quick Links / Popular Section -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div class="glass-panel p-8 animate-fade-up delay-300 border-white/60">
             <h3 class="text-xl font-bold text-gray-800 mb-6">Trending Category</h3>
@@ -153,45 +147,12 @@
     document.addEventListener('DOMContentLoaded', function() {
         const ctx = document.getElementById('trendingChart').getContext('2d');
         
-        new Chart(ctx, {
+        // Perbaikan: Menggunakan window.Chart dan window.ChartDataLabels untuk 
+        // menghindari error deteksi Class oleh editor (PHP vs JS)
+        new window.Chart(ctx, {
             type: 'pie',
-            plugins: [ChartDataLabels],
+            plugins: [window.ChartDataLabels],
             data: {
                 labels: ['Self-Dev', 'Technology', 'Literature', 'Psychology'],
                 datasets: [{
-                    data: [30, 20, 15, 35],
-                    backgroundColor: [
-                        '#800020', // Burgundy
-                        '#630330', // Maroon
-                        '#B45309', // Amber/Gold tone
-                        '#10B981'  // Emerald
-                    ],
-                    borderColor: '#ffffff',
-                    borderWidth: 2
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: false },
-                    datalabels: {
-                        color: '#ffffff',
-                        formatter: (value, ctx) => {
-                            let label = ctx.chart.data.labels[ctx.dataIndex];
-                            return label + '\n' + value + '%';
-                        },
-                        font: {
-                            weight: 'bold',
-                            size: 14,
-                            family: 'DM Sans'
-                        },
-                        textAlign: 'center'
-                    },
-                    tooltip: { enabled: false }
-                }
-            }
-        });
-    });
-</script>
-@endsection
+                    data
