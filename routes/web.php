@@ -63,9 +63,13 @@ Route::post('/logout', function (Request $request) {
 // --- USER / MAHASISWA ROUTES ---
 Route::get('/katalog', function (Request $request) {
     $semuaBuku = collect([
-        ['judul' => 'Laskar Pelangi', 'penulis' => 'Andrea Hirata', 'genre' => 'Drama', 'status' => 'Tersedia'],
-        ['judul' => 'Bumi', 'penulis' => 'Tere Liye', 'genre' => 'Fantasi', 'status' => 'Tersedia'],
-        ['judul' => 'Filosofi Teras', 'penulis' => 'Henry Manampiring', 'genre' => 'Self-Dev', 'status' => 'Dipinjam'],
+        ['judul' => 'Laskar Pelangi', 'penulis' => 'Andrea Hirata', 'genre' => 'Drama', 'status' => 'Tersedia', 'cover' => 'Laskar_pelangi_sampul.jpg'],
+        ['judul' => 'Filosofi Teras', 'penulis' => 'Henry Manampiring', 'genre' => 'Self-Dev', 'status' => 'Dipinjam', 'cover' => 'filosofi_teras.webp'],
+        ['judul' => 'Akuntansi Dasar', 'penulis' => 'Erlangga', 'genre' => 'Edukasi', 'status' => 'Tersedia', 'cover' => 'Cover_akutansi.jpg'],
+        ['judul' => 'Hujan', 'penulis' => 'Tere Liye', 'genre' => 'Romance', 'status' => 'Tersedia', 'cover' => 'cover_hujan.jpg'],
+        ['judul' => 'Bandung After Rain', 'penulis' => 'Viva.co', 'genre' => 'Romance', 'status' => 'Tersedia', 'cover' => 'bandung.after.rain.jpg'],
+        ['judul' => 'AI For Everyone', 'penulis' => 'Andrew Ng', 'genre' => 'Technology', 'status' => 'Tersedia', 'cover' => 'cover_AI.byerlangga.jpg'],
+        ['judul' => 'Malioboro at Midnight', 'penulis' => 'Skysphire', 'genre' => 'Romance', 'status' => 'Dipinjam', 'cover' => 'maliboro.cover.jpg'],
     ]);
 
     $query = $request->input('query');
@@ -83,9 +87,10 @@ Route::get('/katalog', function (Request $request) {
 // Route Search Mahasiswa 
 Route::get('/search', function (Request $request) {
     $semuaBuku = collect([
-        (object)['id' => 1, 'judul' => 'Laskar Pelangi', 'penulis' => 'Andrea Hirata', 'cover' => ''],
-        (object)['id' => 2, 'judul' => 'Bumi', 'penulis' => 'Tere Liye', 'cover' => ''],
-        (object)['id' => 3, 'judul' => 'Filosofi Teras', 'penulis' => 'Henry Manampiring', 'cover' => ''],
+        (object)['id' => 1, 'judul' => 'Laskar Pelangi', 'penulis' => 'Andrea Hirata', 'cover' => 'Laskar_pelangi_sampul.jpg'],
+        (object)['id' => 2, 'judul' => 'Filosofi Teras', 'penulis' => 'Henry Manampiring', 'cover' => 'filosofi_teras.webp'],
+        (object)['id' => 3, 'judul' => 'Akuntansi Dasar', 'penulis' => 'Erlangga', 'cover' => 'Cover_akutansi.jpg'],
+        (object)['id' => 4, 'judul' => 'Hujan', 'penulis' => 'Tere Liye', 'cover' => 'cover_hujan.jpg'],
     ]);
 
     $query = $request->input('query');
