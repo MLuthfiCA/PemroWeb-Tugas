@@ -16,12 +16,21 @@
             <a href="{{ route('home') }}" class="px-5 py-2 rounded-xl transition-all duration-300 {{ request()->routeIs('home') ? 'bg-burgundy-500 text-white shadow-lg shadow-red-100' : 'text-gray-500 hover:text-burgundy-500 hover:bg-white/80' }} font-medium text-sm">
                 Beranda
             </a>
-            <a href="{{ route('katalog') }}" class="px-5 py-2 rounded-xl transition-all duration-300 {{ request()->routeIs('katalog') ? 'bg-burgundy-500 text-white shadow-lg shadow-red-100' : 'text-gray-500 hover:text-burgundy-500 hover:bg-white/80' }} font-medium text-sm">
-                Katalog
-            </a>
-            <a href="{{ route('search') }}" class="px-5 py-2 rounded-xl transition-all duration-300 {{ request()->routeIs('search') ? 'bg-burgundy-500 text-white shadow-lg shadow-red-100' : 'text-gray-500 hover:text-burgundy-500 hover:bg-white/80' }} font-medium text-sm">
-                Pencarian
-            </a>
+            @if(Auth::check() && Auth::user()->role === 'admin')
+                <a href="{{ route('admin.katalog') }}" class="px-5 py-2 rounded-xl transition-all duration-300 {{ request()->routeIs('admin.katalog') ? 'bg-burgundy-500 text-white shadow-lg shadow-red-100' : 'text-gray-500 hover:text-burgundy-500 hover:bg-white/80' }} font-medium text-sm">
+                    Katalog Buku
+                </a>
+                <a href="{{ route('admin.users') }}" class="px-5 py-2 rounded-xl transition-all duration-300 {{ request()->routeIs('admin.users') ? 'bg-burgundy-500 text-white shadow-lg shadow-red-100' : 'text-gray-500 hover:text-burgundy-500 hover:bg-white/80' }} font-medium text-sm">
+                    Data User
+                </a>
+            @else
+                <a href="{{ route('katalog') }}" class="px-5 py-2 rounded-xl transition-all duration-300 {{ request()->routeIs('katalog') ? 'bg-burgundy-500 text-white shadow-lg shadow-red-100' : 'text-gray-500 hover:text-burgundy-500 hover:bg-white/80' }} font-medium text-sm">
+                    Katalog
+                </a>
+                <a href="{{ route('search') }}" class="px-5 py-2 rounded-xl transition-all duration-300 {{ request()->routeIs('search') ? 'bg-burgundy-500 text-white shadow-lg shadow-red-100' : 'text-gray-500 hover:text-burgundy-500 hover:bg-white/80' }} font-medium text-sm">
+                    Pencarian
+                </a>
+            @endif
             <a href="{{ route('about') }}" class="px-5 py-2 rounded-xl transition-all duration-300 {{ request()->routeIs('about') ? 'bg-burgundy-500 text-white shadow-lg shadow-red-100' : 'text-gray-500 hover:text-burgundy-500 hover:bg-white/80' }} font-medium text-sm">
                 Tentang
             </a>
@@ -43,7 +52,11 @@
             <!-- Dropdown menu -->
             <div id="dropdownUser" class="z-50 hidden bg-white/90 backdrop-blur-2xl border border-white/60 divide-y divide-gray-100 rounded-2xl shadow-2xl w-44">
                 <ul class="py-2 text-sm text-gray-700">
-                    <li><a href="{{ route('profile') }}" class="block px-4 py-2 hover:bg-red-50 hover:text-burgundy-500 transition-colors font-medium">Profil Saya</a></li>
+                    @if(Auth::user()->role === 'admin')
+                        <li><a href="{{ route('admin.profile') }}" class="block px-4 py-2 hover:bg-red-50 hover:text-burgundy-500 transition-colors font-medium">Profil Admin</a></li>
+                    @else
+                        <li><a href="{{ route('riwayat') }}" class="block px-4 py-2 hover:bg-red-50 hover:text-burgundy-500 transition-colors font-medium">Profil Saya</a></li>
+                    @endif
                 </ul>
                 <div class="py-1">
                     <form method="POST" action="{{ route('logout') }}">

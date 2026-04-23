@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('app')
 
 @section('content')
     <div class="py-10">

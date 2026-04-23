@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('app')
 
 @section('title', 'Katalog Buku Admin')
 

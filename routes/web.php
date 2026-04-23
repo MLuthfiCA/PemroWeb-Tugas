@@ -12,6 +12,13 @@ use App\Http\Controllers\BukuController;
 
 
 
+Route::get('/', function () {
+    if (Auth::check()) {
+        if (Auth::user()->role === 'admin') return redirect()->route('admin.katalog');
+        return redirect()->route('katalog');
+    }
+    return redirect('/home');
+});
 
 Route::get('/contact', [HomeController::class, 'contact']);
 Route::get('/dashboard', [DashboardController::class, 'index']);
@@ -44,6 +51,10 @@ Route::get('/home', function () {
 })->name('home');
 
 Route::get('/login', function () {
+    if (Auth::check()) {
+        if (Auth::user()->role === 'admin') return redirect()->route('admin.katalog');
+        return redirect()->route('katalog');
+    }
     return view('login');
 })->name('login');
 
@@ -120,7 +131,7 @@ Route::get('/profile', function () {
 
 Route::get('/pengajuan', function () {
     return view('pengajuan');
-})->name('pengajuan');
+})->name('pengajuan')->middleware('auth');
 
 Route::get('/contact', [HomeController::class, 'contact']);
 Route::get('/dashboard', [DashboardController::class, 'index']);
@@ -156,6 +167,11 @@ Route::prefix('admin')->group(function () {
     Route::get('/katalog/{id}/edit', [BukuController::class, 'edit'])->name('admin.edit');
     Route::put('/katalog/{id}', [BukuController::class, 'update'])->name('admin.update');
     Route::delete('/katalog/{id}', [BukuController::class, 'destroy'])->name('admin.delete');
+    
+    // Route Tambah Buku
+    Route::get('/buku/tambah', function () {
+        return view('admin.data-buku');
+    })->name('admin.buku.create');
 });
 
 // --- ROUTE UNTUK HALAMAN EDIT BUKU ---

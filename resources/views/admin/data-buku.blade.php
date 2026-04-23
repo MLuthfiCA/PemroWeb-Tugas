@@ -1,37 +1,82 @@
+@extends('app')
 
-                    <input type="text" name="penerbit" placeholder="Masukkan Penerbit" 
-                        class="w-full p-3 bg-stone-500 text-white placeholder-stone-300 rounded-lg focus:ring-2 focus:ring-red-300 border-none outline-none font-normal">
-                </div>
+@section('content')
+<div class="py-10 space-y-8">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 animate-fade-up">
+        <div>
+            <h1 class="text-4xl font-bold text-gray-800">Tambah Buku</h1>
+            <p class="text-gray-500 mt-2">Tambahkan koleksi buku baru ke perpustakaan.</p>
+        </div>
+        <div>
+            <a href="{{ route('admin.katalog') }}" class="px-6 py-3 rounded-xl bg-white text-gray-600 font-bold shadow-sm border border-gray-100 hover:bg-gray-50 transition-all text-sm">
+                Kembali ke Katalog
+            </a>
+        </div>
+    </div>
 
-                <div class="pt-4">
-                    <button type="submit" class="bg-red-950 text-white px-8 py-3 rounded-xl font-normal hover:bg-red-900 transition shadow-lg">
-                        Simpan Data Buku
-                    </button>
-                </div>
-            </div>
-
-            <div class="w-full md:w-1/3 flex flex-col items-center">
-                <label for="cover_input" class="cursor-pointer w-full h-[450px] bg-stone-300 border-2 border-dashed border-stone-400 rounded-2xl flex items-center justify-center hover:bg-stone-200 transition-all group relative overflow-hidden">
-                    
-                    <input type="file" id="cover_input" name="cover" class="hidden" accept="image/*" onchange="previewImage(this)">
-                    
-                    <div id="image_preview_container" class="absolute inset-0 hidden">
-                        <img id="image_preview" src="#" alt="Preview Cover" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
-                            <p class="text-white text-sm font-normal">Ganti Gambar</p>
+    <div class="glass-panel p-8 border-white/60 animate-fade-up delay-100 shadow-2xl shadow-red-50">
+        <form action="#" method="POST" enctype="multipart/form-data">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <div class="md:col-span-2 space-y-6">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1">Judul Buku</label>
+                        <input type="text" placeholder="Masukkan Judul Buku" class="w-full px-4 py-3 border border-white bg-white/50 rounded-2xl focus:outline-none focus:ring-4 focus:ring-red-100 font-medium text-sm">
+                    </div>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1">Penulis</label>
+                            <input type="text" placeholder="Nama Penulis" class="w-full px-4 py-3 border border-white bg-white/50 rounded-2xl focus:outline-none focus:ring-4 focus:ring-red-100 font-medium text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1">Penerbit</label>
+                            <input type="text" placeholder="Nama Penerbit" class="w-full px-4 py-3 border border-white bg-white/50 rounded-2xl focus:outline-none focus:ring-4 focus:ring-red-100 font-medium text-sm">
                         </div>
                     </div>
-
-                    <div id="placeholder_content" class="text-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-stone-600 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                        </svg>
-                        <p class="text-stone-600 font-normal mt-2">Tambah Sampul</p>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1">Genre</label>
+                            <select class="w-full px-4 py-3 border border-white bg-white/50 rounded-2xl focus:outline-none focus:ring-4 focus:ring-red-100 font-medium text-sm">
+                                <option>Drama</option>
+                                <option>Fantasi</option>
+                                <option>Self-Dev</option>
+                                <option>Romance</option>
+                                <option>Edukasi</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1">Status</label>
+                            <select class="w-full px-4 py-3 border border-white bg-white/50 rounded-2xl focus:outline-none focus:ring-4 focus:ring-red-100 font-medium text-sm">
+                                <option>Tersedia</option>
+                                <option>Dipinjam</option>
+                            </select>
+                        </div>
                     </div>
+                    <div class="pt-6">
+                        <button type="button" class="w-full md:w-auto px-8 py-3.5 rounded-xl bg-burgundy-500 text-white font-bold shadow-lg shadow-red-100 hover:bg-maroon transition-all text-sm">
+                            Simpan Data Buku
+                        </button>
+                    </div>
+                </div>
 
-                </label>
-                <p class="text-sm text-stone-400 mt-4 italic text-center font-light">Klik kotak untuk memilih file gambar</p>
+                <div class="w-full flex flex-col">
+                    <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1">Cover Buku</label>
+                    <label for="cover_input" class="cursor-pointer flex-1 min-h-[300px] border-2 border-dashed border-gray-300 bg-white/50 rounded-3xl flex flex-col items-center justify-center hover:bg-gray-50 hover:border-red-200 transition-all group relative overflow-hidden">
+                        <input type="file" id="cover_input" class="hidden" accept="image/*">
+                        <div class="text-center group-hover:scale-105 transition-transform">
+                            <div class="w-16 h-16 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-4 text-burgundy-500 group-hover:bg-red-100 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                                </svg>
+                            </div>
+                            <p class="text-sm font-bold text-gray-500 group-hover:text-burgundy-500 transition-colors">Upload Cover</p>
+                            <p class="text-[10px] text-gray-400 mt-1 uppercase tracking-wider">JPG, PNG max 2MB</p>
+                        </div>
+                    </label>
+                </div>
+
             </div>
-
-        </div>
-    </form>
+        </form>
+    </div>
+</div>
+@endsection
