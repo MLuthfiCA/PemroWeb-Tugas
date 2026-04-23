@@ -90,7 +90,11 @@
         <div class="absolute top-[20%] right-[10%] w-[30%] h-[30%] rounded-full bg-amber-50 opacity-40 blur-[100px]"></div>
     </div>
 
-    @include('layouts.navbar')
+    @if(session()->has('user') && session('user')['role'] === 'admin')
+        @include('admin.layouts.navbar')
+    @else
+        @include('layouts.navbar')
+    @endif
 
     <div class="flex-grow pt-24 transition-all duration-300">
         <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">

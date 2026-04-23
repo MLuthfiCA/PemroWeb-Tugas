@@ -16,6 +16,16 @@
         <div class="glass-panel p-8 shadow-2xl shadow-red-50 border-white/60">
             <form class="space-y-5" action="{{ route('register') }}" method="POST">
                 @csrf
+
+                @if($errors->any())
+                <div class="p-4 mb-4 text-sm text-red-800 rounded-2xl bg-red-50 border border-red-100" role="alert">
+                    <ul class="list-disc pl-5">
+                        @foreach($errors->all() as $error)
+                            <li class="font-medium">{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1">Username</label>

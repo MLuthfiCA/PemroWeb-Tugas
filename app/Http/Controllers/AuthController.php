@@ -17,21 +17,14 @@ class AuthController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'username' => 'required|unique:users',
-            'email' => 'required|email|unique:users',
+            'username' => 'required',
+            'email' => 'required|email',
             'password' => 'required',
             'role' => 'required'
         ]);
 
-        User::create([
-            'name' => $request->name,
-            'username' => $request->username,
-            'email' => $request->email,
-            'password' => Hash::make($request->password), // Laravel akan menghash ini
-            'role' => $request->role,
-        ]);
-
-        return redirect('/login')->with('success', 'Registrasi berhasil!');
+        // REKAYASA REGISTRASI: Tidak simpan ke DB
+        return redirect('/login')->with('success', 'Registrasi berhasil! (Mock)');
     }
     //
 }

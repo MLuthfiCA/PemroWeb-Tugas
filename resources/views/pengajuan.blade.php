@@ -18,7 +18,7 @@
                     <div class="space-y-2">
                         <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest ml-1">Nama Peminjam</label>
                         <input type="text" placeholder="Masukkan Nama Lengkap" 
-                            value="{{ Auth::check() ? Auth::user()->name : '' }}"
+                            value="{{ session()->has('user') ? session('user')['name'] : '' }}"
                             class="w-full p-4 bg-white/50 border border-white rounded-2xl focus:ring-4 focus:ring-red-100 focus:outline-none transition-all font-medium text-gray-700 shadow-sm">
                     </div>
 

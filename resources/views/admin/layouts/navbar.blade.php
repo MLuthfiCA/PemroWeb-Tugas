@@ -1,97 +1,62 @@
-<style>
-    .bg-custom-maroon { background-color: #632024; }
-</style>
-
-<nav class="flex justify-between items-center px-6 py-6 bg-[#632024] text-white shadow-md">
-    
-    <!-- LOGO -->
-    <div class="flex items-center gap-4">
-        <img src="{{ asset('images/logo.rsl.2.png') }}" 
-             class="h-14 w-auto object-contain scale-110">
+<header class="fixed top-0 left-0 right-0 z-50 px-4 py-4 pointer-events-none">
+    <nav class="max-w-7xl mx-auto glass-panel px-8 py-4 flex items-center justify-between shadow-2xl shadow-red-100 pointer-events-auto border-white/60">
         
-        <span class="font-bold text-2xl tracking-tight">
-            ReadSpace Admin
-        </span>
-    </div>
-
-    <!-- MENU + PROFILE -->
-    <div class="flex items-center gap-8" x-data="{ profileOpen: false, menuOpen: false }">
-
-        <!-- MENU -->
-        <div class="hidden md:flex items-center gap-8 text-sm font-medium">
-            <a href="{{ route('admin.katalog') }}" class="hover:text-[#d5b893] transition">Home</a>
-            <a href="{{ route('search') }}" class="hover:text-[#d5b893] transition">Search</a>
-            <a href="{{ route('admin.about') }}" class="hover:text-[#d5b893] transition">About Us</a>
+        <!-- Logo Section -->
+        <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-burgundy-500 to-maroon flex items-center justify-center shadow-lg shadow-red-200">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                </svg>
+            </div>
+            <span class="font-bold text-xl text-gray-800 tracking-tight">ReadSpace <span class="text-burgundy-500">Admin</span></span>
         </div>
 
-        <!-- PROFILE -->
-        <div class="relative">
-            <button @click="profileOpen = !profileOpen"
-                class="flex items-center justify-center w-10 h-10 bg-[#d5b893] rounded-full hover:scale-105 transition-all">
+        <!-- Desktop Navigation -->
+        <div class="hidden md:flex items-center gap-1">
+            <a href="{{ route('admin.katalog') }}" class="px-5 py-2 rounded-xl transition-all duration-300 {{ request()->routeIs('admin.katalog') ? 'bg-burgundy-500 text-white shadow-lg shadow-red-100' : 'text-gray-500 hover:text-burgundy-500 hover:bg-white/80' }} font-medium text-sm">
+                Dashboard
+            </a>
+            <a href="{{ route('admin.buku.create') }}" class="px-5 py-2 rounded-xl transition-all duration-300 {{ request()->routeIs('admin.buku.create') ? 'bg-burgundy-500 text-white shadow-lg shadow-red-100' : 'text-gray-500 hover:text-burgundy-500 hover:bg-white/80' }} font-medium text-sm">
+                Tambah Buku
+            </a>
+            <a href="{{ route('admin.users') }}" class="px-5 py-2 rounded-xl transition-all duration-300 {{ request()->routeIs('admin.users') ? 'bg-burgundy-500 text-white shadow-lg shadow-red-100' : 'text-gray-500 hover:text-burgundy-500 hover:bg-white/80' }} font-medium text-sm">
+                Data User
+            </a>
+            <a href="{{ route('admin.about') }}" class="px-5 py-2 rounded-xl transition-all duration-300 {{ request()->routeIs('admin.about') ? 'bg-burgundy-500 text-white shadow-lg shadow-red-100' : 'text-gray-500 hover:text-burgundy-500 hover:bg-white/80' }} font-medium text-sm">
+                Tentang
+            </a>
+        </div>
 
-                <svg xmlns="http://www.w3.org/2000/svg" 
-                     class="h-6 w-6 text-[#632024]" 
-                     viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" 
-                        d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                        clip-rule="evenodd" />
-                </svg>
-            </button>
-
-            <!-- DROPDOWN PROFILE -->
-            <div x-show="profileOpen"
-                 x-transition
-                 @click.outside="profileOpen = false"
-                 class="absolute right-0 mt-2 w-44 bg-white text-gray-800 rounded-lg shadow-md z-50 overflow-hidden">
-
-                <div class="px-4 py-2 border-b text-xs text-gray-400 font-bold uppercase">
-                    Administrator
+        <!-- Action Section -->
+        <div class="flex items-center gap-4">
+            <div class="flex items-center gap-4 p-1 pl-4 bg-white/60 rounded-2xl border border-white/80">
+                <div class="text-right hidden sm:block">
+                    <p class="text-xs font-bold text-gray-800 leading-none">{{ session('user')['name'] ?? 'Admin' }}</p>
+                    <p class="text-[9px] text-burgundy-500 mt-1 uppercase font-bold tracking-widest">Administrator</p>
                 </div>
-
-                <a href="{{ route('admin.profile') }}" 
-                   class="block px-4 py-2 text-sm hover:bg-gray-100 transition">
-                    👤 Profile Saya
-                </a>
-
-                <form method="POST" action="/logout">
-                    @csrf
-                    <button type="submit" 
-                        class="block w-full text-left px-4 py-2 text-sm text-red-600 font-bold hover:bg-red-50 transition">
-                        🚪 Logout
-                    </button>
-                </form>
+                <button id="dropdownAdminButton" data-dropdown-toggle="dropdownAdmin" class="w-9 h-9 rounded-xl bg-burgundy-500 text-white flex items-center justify-center font-bold text-sm shadow-md transition-transform hover:scale-105">
+                    {{ substr(session('user')['name'] ?? 'A', 0, 1) }}
+                </button>
             </div>
-        </div>
 
-        <!-- MENU ADMIN -->
-        <div class="relative">
-            <button @click="menuOpen = !menuOpen"
-                class="p-2 rounded-lg hover:bg-white/10 transition">
+            <!-- Dropdown menu -->
+            <div id="dropdownAdmin" class="z-50 hidden bg-white/90 backdrop-blur-2xl border border-white/60 divide-y divide-gray-100 rounded-2xl shadow-2xl w-44">
+                <ul class="py-2 text-sm text-gray-700">
+                    <li><a href="{{ route('admin.profile') }}" class="block px-4 py-2 hover:bg-red-50 hover:text-burgundy-500 transition-colors font-medium">Profil Admin</a></li>
+                </ul>
+                <div class="py-1">
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-red-500 font-bold hover:bg-red-50 transition-colors">Keluar</button>
+                    </form>
+                </div>
+            </div>
 
-                <svg xmlns="http://www.w3.org/2000/svg" 
-                     class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                          d="M4 6h16M4 12h16M4 18h16"/>
+            <button class="md:hidden text-gray-500 p-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
                 </svg>
             </button>
-
-            <!-- DROPDOWN ADMIN -->
-            <div x-show="menuOpen"
-                 x-transition
-                 @click.outside="menuOpen = false"
-                 class="absolute right-0 mt-2 w-48 bg-white text-gray-800 rounded-lg shadow-md z-50 overflow-hidden">
-
-                <a href="{{ route('admin.katalog') }}" 
-                   class="block px-4 py-2 text-sm hover:bg-gray-100 transition">
-                    📚 Kelola Data Buku
-                </a>
-
-                <a href="#" 
-                   class="block px-4 py-2 text-sm hover:bg-gray-100 transition">
-                    👥 Kelola Data User
-                </a>
-            </div>
         </div>
-
-    </div>
-</nav>
+    </nav>
+</header>

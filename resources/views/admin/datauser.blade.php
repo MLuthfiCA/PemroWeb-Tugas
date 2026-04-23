@@ -46,8 +46,8 @@
                                     B
                                 </div>
                                 <div>
-                                    <p class="font-bold text-gray-800">Budi Santoso</p>
-                                    <p class="text-xs text-gray-400 font-medium">budi@student.polibatam.ac.id</p>
+                                    <p class="font-bold text-gray-800">Aksel Sarira</p>
+                                    <p class="text-xs text-gray-400 font-medium">aksel@student.polibatam.ac.id</p>
                                 </div>
                             </div>
                         </td>

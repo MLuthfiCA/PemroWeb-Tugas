@@ -3,7 +3,7 @@
 @section('content')
 
 <h2 class="text-lg font-semibold mb-2">
-    Halo, {{ auth()->user()->name ?? 'Nama Pengguna' }}
+    Halo, {{ session('user')['name'] ?? 'Nama Pengguna' }}
 </h2>
 
 <p class="mb-6 text-gray-600">

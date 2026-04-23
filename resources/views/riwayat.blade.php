@@ -13,13 +13,13 @@
     <!-- User Info Card -->
     <div class="glass-panel p-8 border-white/60 animate-fade-up delay-100 shadow-2xl shadow-red-50 flex flex-col md:flex-row items-center gap-8">
         <div class="w-24 h-24 rounded-full bg-gradient-to-tr from-burgundy-500 to-maroon text-white flex items-center justify-center text-4xl font-bold shadow-xl shadow-red-100">
-            {{ substr(Auth::user()->name ?? 'User', 0, 1) }}
+            {{ substr(session('user.name', 'User'), 0, 1) }}
         </div>
         <div class="text-center md:text-left flex-1">
-            <h2 class="text-2xl font-bold text-gray-800">{{ Auth::user()->name ?? 'Nama User' }}</h2>
-            <p class="text-gray-500 font-medium">{{ Auth::user()->email ?? 'email@student.polibatam.ac.id' }}</p>
+            <h2 class="text-2xl font-bold text-gray-800">{{ session('user.name', 'Nama User') }}</h2>
+            <p class="text-gray-500 font-medium">{{ session('user.email', 'email@student.polibatam.ac.id') }}</p>
             <div class="mt-4 inline-block px-4 py-1.5 rounded-lg bg-burgundy-50 text-burgundy-600 border border-burgundy-100 text-xs font-bold uppercase tracking-widest">
-                {{ Auth::user()->role ?? 'Mahasiswa' }}
+                {{ session('user.role', 'Mahasiswa') }}
             </div>
         </div>
         <div class="w-full md:w-auto">

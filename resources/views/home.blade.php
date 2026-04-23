@@ -7,7 +7,7 @@
     <div class="glass-panel p-8 md:p-12 relative overflow-hidden animate-fade-up border-white/60">
         <div class="relative z-10 max-w-2xl">
             <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-                Hello, {{ Auth::check() ? Auth::user()->name : 'Guest' }}! 👋
+                Hello, {{ session()->has('user') ? session('user')['name'] : 'Guest' }}! 👋
             </h1>
             <p class="text-lg text-gray-600 mb-8 leading-relaxed">
                 Selamat datang kembali di ReadSpace. Jelajahi koleksi digital kami yang luas dan temukan buku favoritmu hari ini.

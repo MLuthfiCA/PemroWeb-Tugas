@@ -16,23 +16,20 @@ class LoginController extends Controller
             'role'     => 'required'
         ]);
 
-        if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
-            /** @var \App\Models\User $user */
-            $user = Auth::user();
+        // REKAYASA LOGIN: Tidak cek database
+        $user = [
+            'name' => $request->username,
+            'role' => $request->role,
+            'username' => $request->username
+        ];
 
-            // Sekarang VS Code tahu bahwa $user memiliki properti role
-            if ($user->role !== $request->role) {
-                Auth::logout();
-                return back()->withErrors(['login_error' => 'Role tidak sesuai!'])->withInput();
-            }
+        // Simpan ke session
+        session(['user' => $user]);
 
-            if ($user->role == 'admin') {
-                return redirect()->route('admin.katalog');
-            } else {
-                return redirect()->route('katalog');
-            }
+        if ($request->role == 'admin') {
+            return redirect()->route('admin.katalog');
+        } else {
+            return redirect()->route('katalog');
         }
-
-        return back()->withErrors(['login_error' => 'Username atau password salah!'])->withInput();
     }
 }

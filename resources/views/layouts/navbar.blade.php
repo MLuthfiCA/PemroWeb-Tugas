@@ -16,7 +16,7 @@
             <a href="{{ route('home') }}" class="px-5 py-2 rounded-xl transition-all duration-300 {{ request()->routeIs('home') ? 'bg-burgundy-500 text-white shadow-lg shadow-red-100' : 'text-gray-500 hover:text-burgundy-500 hover:bg-white/80' }} font-medium text-sm">
                 Beranda
             </a>
-            @if(Auth::check() && Auth::user()->role === 'admin')
+            @if(session()->has('user') && session('user')['role'] === 'admin')
                 <a href="{{ route('admin.katalog') }}" class="px-5 py-2 rounded-xl transition-all duration-300 {{ request()->routeIs('admin.katalog') ? 'bg-burgundy-500 text-white shadow-lg shadow-red-100' : 'text-gray-500 hover:text-burgundy-500 hover:bg-white/80' }} font-medium text-sm">
                     Katalog Buku
                 </a>
@@ -38,21 +38,21 @@
 
         <!-- Auth & Action Section -->
         <div class="flex items-center gap-4">
-            @auth
+            @if(session()->has('user'))
             <div class="flex items-center gap-4 p-1 pl-4 bg-white/60 rounded-2xl border border-white/80">
                 <div class="text-right hidden sm:block">
-                    <p class="text-xs font-bold text-gray-800 leading-none">{{ Auth::user()->name }}</p>
-                    <p class="text-[9px] text-gray-400 mt-1 uppercase font-bold tracking-widest">{{ Auth::user()->role }}</p>
+                    <p class="text-xs font-bold text-gray-800 leading-none">{{ session('user')['name'] }}</p>
+                    <p class="text-[9px] text-gray-400 mt-1 uppercase font-bold tracking-widest">{{ session('user')['role'] }}</p>
                 </div>
                 <button id="dropdownUserButton" data-dropdown-toggle="dropdownUser" class="w-9 h-9 rounded-xl bg-burgundy-500 text-white flex items-center justify-center font-bold text-sm shadow-md transition-transform hover:scale-105">
-                    {{ substr(Auth::user()->name, 0, 1) }}
+                    {{ substr(session('user')['name'], 0, 1) }}
                 </button>
             </div>
 
             <!-- Dropdown menu -->
             <div id="dropdownUser" class="z-50 hidden bg-white/90 backdrop-blur-2xl border border-white/60 divide-y divide-gray-100 rounded-2xl shadow-2xl w-44">
                 <ul class="py-2 text-sm text-gray-700">
-                    @if(Auth::user()->role === 'admin')
+                    @if(session('user')['role'] === 'admin')
                         <li><a href="{{ route('admin.profile') }}" class="block px-4 py-2 hover:bg-red-50 hover:text-burgundy-500 transition-colors font-medium">Profil Admin</a></li>
                     @else
                         <li><a href="{{ route('riwayat') }}" class="block px-4 py-2 hover:bg-red-50 hover:text-burgundy-500 transition-colors font-medium">Profil Saya</a></li>
@@ -70,7 +70,7 @@
                 <a href="{{ route('login') }}" class="text-sm font-bold text-gray-500 hover:text-burgundy-500 px-4 transition-colors">Masuk</a>
                 <a href="{{ route('register') }}" class="px-5 py-2.5 rounded-xl bg-burgundy-500 text-white text-sm font-bold shadow-lg shadow-red-100 hover:bg-burgundy-600 transition-all hover:-translate-y-0.5">Daftar</a>
             </div>
-            @endauth
+            @endif
 
             <button class="md:hidden text-gray-500 p-2">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

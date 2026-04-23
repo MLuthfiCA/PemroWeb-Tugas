@@ -18,6 +18,19 @@
         <div class="glass-panel p-8 shadow-2xl shadow-red-50 border-white/60">
             <form class="space-y-6" action="{{ route('login.post') }}" method="POST">
                 @csrf
+
+                @if($errors->has('login_error'))
+                <div class="p-4 mb-4 text-sm text-red-800 rounded-2xl bg-red-50 border border-red-100 animate-shake" role="alert">
+                    <span class="font-bold">Error:</span> {{ $errors->first('login_error') }}
+                </div>
+                @endif
+
+                @if(session('success'))
+                <div class="p-4 mb-4 text-sm text-green-800 rounded-2xl bg-green-50 border border-green-100" role="alert">
+                    <span class="font-bold">Sukses:</span> {{ session('success') }}
+                </div>
+                @endif
+
                 <div class="space-y-5">
                     <div>
                         <label for="username" class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1">Username</label>
@@ -35,7 +48,7 @@
                         <label for="role" class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1">Login Sebagai</label>
                         <select id="role" name="role" required 
                             class="appearance-none relative block w-full px-4 py-4 border border-white bg-white/50 rounded-2xl text-gray-800 focus:outline-none focus:ring-4 focus:ring-red-100 focus:border-burgundy-500 transition-all sm:text-sm font-medium">
-                            <option value="user">User / Mahasiswa</option>
+                            <option value="mahasiswa">User / Mahasiswa</option>
                             <option value="admin">Admin Perpustakaan</option>
                         </select>
                     </div>

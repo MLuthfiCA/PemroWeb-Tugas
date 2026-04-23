@@ -13,8 +13,8 @@ use App\Http\Controllers\BukuController;
 
 
 Route::get('/', function () {
-    if (Auth::check()) {
-        if (Auth::user()->role === 'admin') return redirect()->route('admin.katalog');
+    if (session()->has('user')) {
+        if (session('user')['role'] === 'admin') return redirect()->route('admin.katalog');
         return redirect()->route('katalog');
     }
     return redirect('/home');
@@ -22,7 +22,17 @@ Route::get('/', function () {
 
 Route::get('/contact', [HomeController::class, 'contact']);
 Route::get('/dashboard', [DashboardController::class, 'index']);
-Route::get('/riwayat', [RiwayatController::class, 'tampilkanRiwayat']);
+Route::get('/riwayat', function () {
+    if (!session()->has('user')) return redirect('/login');
+    
+    $peminjaman = [
+        ['judul' => 'Laskar Pelangi', 'id_pengguna' => 'B-742', 'tanggal_pinjam' => '2026-04-10', 'batas_kembali' => '2026-04-17'],
+    ];
+    $pengembalian = [
+        ['judul' => 'Hujan', 'id_pengguna' => 'B-128', 'tanggal_kembali' => '2026-04-05'],
+    ];
+    return view('riwayat', compact('peminjaman', 'pengembalian'));
+})->name('riwayat');
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 Route::get('/search', fn() => view('search'))->name('search');
 
@@ -51,8 +61,8 @@ Route::get('/home', function () {
 })->name('home');
 
 Route::get('/login', function () {
-    if (Auth::check()) {
-        if (Auth::user()->role === 'admin') return redirect()->route('admin.katalog');
+    if (session()->has('user')) {
+        if (session('user')['role'] === 'admin') return redirect()->route('admin.katalog');
         return redirect()->route('katalog');
     }
     return view('login');
@@ -65,6 +75,7 @@ Route::post('/register', [AuthController::class, 'register']);
 
 Route::post('/logout', function (Request $request) {
     Auth::logout();
+    $request->session()->forget('user');
     $request->session()->invalidate();
     $request->session()->regenerateToken();
     return redirect('/login');
@@ -130,12 +141,11 @@ Route::get('/profile', function () {
 })->name('profile');
 
 Route::get('/pengajuan', function () {
+    if (!session()->has('user')) return redirect('/login');
     return view('pengajuan');
-})->name('pengajuan')->middleware('auth');
+})->name('pengajuan');
 
-Route::get('/contact', [HomeController::class, 'contact']);
-Route::get('/dashboard', [DashboardController::class, 'index']);
-Route::get('/riwayat', [RiwayatController::class, 'tampilkanRiwayat']);
+
 
 // --- AREA ADMIN ---
 Route::get('/admin/about', function () {
