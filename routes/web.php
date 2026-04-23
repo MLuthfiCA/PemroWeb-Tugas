@@ -1,16 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RiwayatController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LoginController;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
 use App\Http\Controllers\BukuController;
-
-
+use App\Http\Controllers\AdminController;
 
 Route::get('/', function () {
     if (session()->has('user')) {
@@ -35,7 +34,6 @@ Route::get('/riwayat', function () {
 })->name('riwayat');
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 Route::get('/search', fn() => view('search'))->name('search');
-
 
 Route::get('/admin/profile', function () {
     $books = collect([
