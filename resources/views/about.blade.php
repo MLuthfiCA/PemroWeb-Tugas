@@ -3,8 +3,8 @@
 @section('content')
     <div class="py-10">
         <div class="text-center mb-16 animate-fade-up">
-            <h2 class="text-4xl font-bold text-gray-800 mb-4">Tim Kami</h2>
-            <p class="text-gray-500 max-w-2xl mx-auto">Para pemikir kreatif di balik ReadSpace Library, berdedikasi untuk membangun pengalaman membaca digital terbaik bagi mahasiswa Polibatam.</p>
+            <h2 class="text-4xl font-bold text-gray-800 mb-4">Our Team</h2>
+            <p class="text-gray-500 max-w-2xl mx-auto">The creative minds behind ReadSpace Library are dedicated to building the best digital reading experience for Polibatam students.</p>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -27,7 +27,7 @@
                     <p class="text-sm font-medium text-gray-400">NIM : {{ $member['nim'] }}</p>
                     <p class="text-sm font-medium text-gray-400">Prodi : Teknik Informatika</p>
                     <div class="mt-6 pt-6 border-t border-red-50">
-                        <span class="px-4 py-1.5 rounded-full bg-white text-[10px] font-bold text-gray-400 uppercase tracking-widest border border-red-50">Anggota Tim</span>
+                        <span class="px-4 py-1.5 rounded-full bg-white text-[10px] font-bold text-gray-400 uppercase tracking-widest border border-red-50">Team Member</span>
                     </div>
                 </div>
             </div>
