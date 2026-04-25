@@ -5,8 +5,8 @@
     <!-- Page Header -->
     <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 animate-fade-up">
         <div>
-            <h1 class="text-4xl font-bold text-gray-800">Profil Admin</h1>
-            <p class="text-gray-500 mt-2">Kelola informasi perpustakaan dan pantau buku yang sedang dipinjam.</p>
+            <h1 class="text-4xl font-bold text-gray-800">Admin Profile</h1>
+            <p class="text-gray-500 mt-2">Manage library information and monitor books on borrowed.</p>
         </div>
     </div>
 
@@ -16,18 +16,18 @@
             A
         </div>
         <div class="text-center md:text-left flex-1">
-            <h2 class="text-2xl font-bold text-gray-800">Admin ReadSpace</h2>
+            <h2 class="text-2xl font-bold text-gray-800">ReadSpace Admin</h2>
             <p class="text-gray-500 font-medium">admin@polibatam.ac.id</p>
             <div class="mt-4 inline-block px-4 py-1.5 rounded-lg bg-burgundy-50 text-burgundy-600 border border-burgundy-100 text-xs font-bold uppercase tracking-widest">
-                Administrator Utama
+                Main Administrator
             </div>
         </div>
         <div class="w-full md:w-auto flex flex-col sm:flex-row gap-3">
             <a href="{{ route('admin.users') }}" class="w-full md:w-auto px-6 py-3 rounded-xl bg-burgundy-500 text-white font-bold hover:bg-maroon transition-colors text-sm text-center shadow-lg shadow-red-100">
-                Kelola Pengguna
+                Manage Users
             </a>
             <a href="{{ route('admin.buku.create') }}" class="w-full md:w-auto px-6 py-3 rounded-xl border-2 border-burgundy-500 text-burgundy-600 font-bold hover:bg-red-50 transition-colors text-sm text-center">
-                + Tambah Buku
+                + Add Book
             </a>
         </div>
     </div>
@@ -39,10 +39,10 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-burgundy-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                 </svg>
-                Daftar Peminjaman Aktif
+                Active Borrowing List
             </h2>
             <span class="px-4 py-1.5 rounded-full bg-red-50 text-burgundy-600 font-bold text-sm">
-                Total: {{ count($books ?? []) }} Buku
+                Total: {{ count($books ?? []) }} Books
             </span>
         </div>
         
@@ -63,7 +63,7 @@
                 </div>
                 
                 <div class="bg-gray-50/50 rounded-xl p-4 mb-4 border border-white">
-                    <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider mb-1">Peminjam</p>
+                    <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider mb-1">Borrower</p>
                     <div class="flex items-center gap-2">
                         <div class="w-6 h-6 rounded-full bg-burgundy-500 text-white flex items-center justify-center text-[10px] font-bold">
                             {{ substr($b->peminjam, 0, 1) }}
@@ -77,11 +77,11 @@
 
                 <div class="flex justify-between items-center text-sm border-t border-red-50 pt-4">
                     <div class="flex flex-col">
-                        <p class="text-[10px] text-red-400 font-bold uppercase tracking-wider">Jatuh Tempo</p>
+                        <p class="text-[10px] text-red-400 font-bold uppercase tracking-wider">Due date</p>
                         <p class="font-bold text-red-600">{{ $b->jatuh_tempo }}</p>
                     </div>
                     <div class="flex flex-col text-right">
-                        <p class="text-[10px] text-burgundy-400 font-bold uppercase tracking-wider">Denda Terakumulasi</p>
+                        <p class="text-[10px] text-burgundy-400 font-bold uppercase tracking-wider">Accumulated Fines</p>
                         <p class="font-bold text-burgundy-600">Rp {{ number_format($b->denda ?? 0, 0, ',', '.') }}</p>
                     </div>
                 </div>
@@ -90,7 +90,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                         </svg>
-                        Beri Peringatan
+                        Give a Warning
                     </button>
                 </div>
             </div>
@@ -101,7 +101,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                     </svg>
                 </div>
-                <p class="text-gray-400 font-medium">Luar biasa! Saat ini tidak ada buku yang berstatus dipinjam (semua telah dikembalikan).</p>
+                <p class="text-gray-400 font-medium">Awesome! There are currently no books on borrowed (all have been returned).</p>
             </div>
             @endforelse
         </div>
