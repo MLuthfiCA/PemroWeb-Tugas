@@ -5,8 +5,8 @@
     <!-- Page Header -->
     <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 animate-fade-up">
         <div>
-            <h1 class="text-4xl font-bold text-gray-800">Profil Saya</h1>
-            <p class="text-gray-500 mt-2">Kelola informasi akun dan pantau aktivitas literasi kamu.</p>
+            <h1 class="text-4xl font-bold text-gray-800">My Profile</h1>
+            <p class="text-gray-500 mt-2">Manage account information and monitor your literacy activities.</p>
         </div>
     </div>
 
@@ -24,7 +24,7 @@
         </div>
         <div class="w-full md:w-auto">
             <button class="w-full px-6 py-3 rounded-xl border-2 border-burgundy-500 text-burgundy-500 font-bold hover:bg-burgundy-500 hover:text-white transition-colors text-sm">
-                Edit Profil
+                Edit Profile
             </button>
         </div>
     </div>
@@ -35,30 +35,30 @@
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-burgundy-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            Sedang Dipinjam
+            Currently Borrowed
         </h2>
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             @forelse($peminjaman ?? [] as $p)
             <div class="glass-panel p-6 border-white/60 shadow-lg shadow-red-50 hover:shadow-xl transition-all group border-l-4 border-l-burgundy-500">
                 <h3 class="font-bold text-gray-800 text-lg mb-1">{{ $p['judul'] }}</h3>
-                <p class="text-xs text-gray-400 font-medium mb-4">ID Buku: {{ $p['id_pengguna'] }}</p>
+                <p class="text-xs text-gray-400 font-medium mb-4">Book ID: {{ $p['id_pengguna'] }}</p>
                 
                 <div class="flex justify-between items-center text-sm border-t border-red-50 pt-4">
                     <div>
-                        <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Tgl Pinjam</p>
+                        <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Borrow Date</p>
                         <p class="font-bold text-gray-700">{{ $p['tanggal_pinjam'] }}</p>
                     </div>
                     <div class="text-right">
-                        <p class="text-[10px] text-red-400 font-bold uppercase tracking-wider">Batas Kembali</p>
+                        <p class="text-[10px] text-red-400 font-bold uppercase tracking-wider">Return Limit</p>
                         <p class="font-bold text-red-600">{{ $p['batas_kembali'] }}</p>
                     </div>
                 </div>
             </div>
             @empty
             <div class="col-span-full glass-panel p-10 text-center border-white/60">
-                <p class="text-gray-400 font-medium">Belum ada buku yang sedang dipinjam.</p>
-                <a href="{{ route('katalog') }}" class="inline-block mt-4 text-burgundy-500 font-bold hover:underline">Jelajahi Katalog</a>
+                <p class="text-gray-400 font-medium">There are no books currently on loan.</p>
+                <a href="{{ route('katalog') }}" class="inline-block mt-4 text-burgundy-500 font-bold hover:underline">Browse the Catalog</a>
             </div>
             @endforelse
         </div>
@@ -70,7 +70,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            Riwayat Pengembalian
+            Return History
         </h2>
         
         <div class="glass-panel overflow-hidden border border-white/60 shadow-xl shadow-red-50">
@@ -78,9 +78,9 @@
                 <table class="w-full text-left border-collapse">
                     <thead class="bg-red-50/50 text-gray-400 text-[10px] font-bold uppercase tracking-widest">
                         <tr>
-                            <th class="px-8 py-5">Judul Buku</th>
-                            <th class="px-8 py-5">ID Pinjam</th>
-                            <th class="px-8 py-5 text-right">Tgl Kembali</th>
+                            <th class="px-8 py-5">Book title</th>
+                            <th class="px-8 py-5">Borrow ID</th>
+                            <th class="px-8 py-5 text-right">Return Date</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-red-50">
@@ -96,7 +96,7 @@
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="3" class="px-8 py-10 text-center text-gray-400 font-medium">Belum ada riwayat pengembalian.</td>
+                            <td colspan="3" class="px-8 py-10 text-center text-gray-400 font-medium">There is no return history yet.</td>
                         </tr>
                         @endforelse
                     </tbody>
