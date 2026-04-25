@@ -21,7 +21,7 @@
                 <div class="space-y-1">
                     <p class="text-sm font-medium text-stone-500">NIM : 3312501056</p>
                     <p class="text-sm font-medium text-stone-500">Prodi : Teknik Informatika</p>
-                    <p class="text-sm font-bold text-stone-400 mt-4 uppercase tracking-widest">Tugas : —</p>
+                    <p class="text-sm font-bold text-stone-400 mt-4 uppercase tracking-widest">Task : —</p>
                 </div>
             </div>
 
@@ -58,22 +58,22 @@
                 <div>
                     <h6 class="font-bold mb-2">Readspace Library</h6>
                     <p class="text-sm text-gray-100 leading-relaxed">
-                        Readspace Library adalah platform perpustakaan digital yang kami rancang untuk memudahkan mahasiswa dalam peminjaman buku serta memudahkan sistem perpustakan.
+                        Readspace Library is a digital library platform that we designed to make it easier for students to borrow books and simplify the library system.
                     </p>
                 </div>
 
                 <div>
                     <h6 class="font-bold mb-2">Politeknik Negeri Batam</h6>
                     <p class="text-sm text-gray-100">
-                        Jl. Ahmad Yani, Batam Kota, Kota Batam, Kepulauan Riau, Indonesia.
+                        Ahmad Yani Street, Batam City, Kepulauan Riau, Indonesia.
                     </p>
                 </div>
 
                 <div>
-                    <h6 class="font-bold mb-2">Hubungi Kami</h6>
+                    <h6 class="font-bold mb-2">Contact us</h6>
                     <p class="text-sm text-gray-100">
                         Email: readspacelibrary@poltek.ac.id<br>
-                        Telp: (021) 673528
+                        Telephone: (021) 673528
                     </p>
                 </div>
             </div>
