@@ -26,7 +26,7 @@
                      alt="Logo Readspace" 
                      class="h-16 mb-4">
                 <p class="text-sm text-white/80 leading-relaxed">
-                    Platform perpustakaan digital untuk memudahkan mahasiswa dalam mencari dan meminjam buku secara efisien.
+                    A digital library platform to make it easier for students to search and borrow books efficiently.
                 </p>
             </div>
 
@@ -34,18 +34,18 @@
             <div>
                 <h4 class="font-semibold text-lg mb-3">Readspace</h4>
                 <ul class="space-y-2 text-sm text-white/80">
-                    <li><a href="#" class="hover:text-[#d5b893] transition">Tentang Kami</a></li>
-                    <li><a href="#" class="hover:text-[#d5b893] transition">Katalog Buku</a></li>
-                    <li><a href="#" class="hover:text-[#d5b893] transition">Kontak</a></li>
+                    <li><a href="#" class="hover:text-[#d5b893] transition">About Us</a></li>
+                    <li><a href="#" class="hover:text-[#d5b893] transition">Book Catalog</a></li>
+                    <li><a href="#" class="hover:text-[#d5b893] transition">Contact</a></li>
                 </ul>
             </div>
 
             {{-- ADDRESS --}}
             <div>
-                <h4 class="font-semibold text-lg mb-3">Alamat</h4>
+                <h4 class="font-semibold text-lg mb-3">Address</h4>
                 <p class="text-sm text-white/80 leading-relaxed">
                     Politeknik Negeri Batam <br>
-                    Jl. Ahmad Yani, Batam Kota <br>
+                    Ahmad Yani Street, Batam City <br>
                     Kepulauan Riau, Indonesia
                 </p>
             </div>
