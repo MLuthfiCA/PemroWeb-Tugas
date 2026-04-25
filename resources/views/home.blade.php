@@ -10,11 +10,11 @@
                 Hello, {{ session()->has('user') ? session('user')['name'] : 'Guest' }}! 👋
             </h1>
             <p class="text-lg text-gray-600 mb-8 leading-relaxed">
-                Selamat datang kembali di ReadSpace. Jelajahi koleksi digital kami yang luas dan temukan buku favoritmu hari ini.
+                Welcome back to ReadSpace. Explore our extensive digital collection and find your favorite book today.
             </p>
             <div class="flex gap-4">
                 <a href="{{ route('katalog') }}" class="px-6 py-3 bg-burgundy-500 text-white rounded-2xl font-bold shadow-lg shadow-red-100 hover:bg-burgundy-600 transition-all flex items-center gap-2">
-                    Mulai Jelajah
+                    Start Exploring
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
                     </svg>
@@ -39,9 +39,9 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                     </svg>
                 </div>
-                <span class="text-xs font-bold text-red-400 group-hover:text-red-200">+12% minggu ini</span>
+                <span class="text-xs font-bold text-red-400 group-hover:text-red-200">+12% this week</span>
             </div>
-            <p class="text-sm font-medium text-gray-500 group-hover:text-red-100">Total Koleksi</p>
+            <p class="text-sm font-medium text-gray-500 group-hover:text-red-100">Total Collection</p>
             <h3 class="text-3xl font-bold text-gray-800 group-hover:text-white">1,240</h3>
         </div>
 
@@ -52,9 +52,9 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                     </svg>
                 </div>
-                <span class="text-xs font-bold text-red-400 group-hover:text-red-200">Anggota Aktif</span>
+                <span class="text-xs font-bold text-red-400 group-hover:text-red-200">Active Member</span>
             </div>
-            <p class="text-sm font-medium text-gray-500 group-hover:text-red-100">User Bulanan</p>
+            <p class="text-sm font-medium text-gray-500 group-hover:text-red-100">Monthly Users</p>
             <h3 class="text-3xl font-bold text-gray-800 group-hover:text-white">852</h3>
         </div>
 
@@ -65,9 +65,9 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                 </div>
-                <span class="text-xs font-bold text-red-400 group-hover:text-red-200">Tersedia Sekarang</span>
+                <span class="text-xs font-bold text-red-400 group-hover:text-red-200">Available Now</span>
             </div>
-            <p class="text-sm font-medium text-gray-500 group-hover:text-red-100">Resource Terbuka</p>
+            <p class="text-sm font-medium text-gray-500 group-hover:text-red-100">Open Resources</p>
             <h3 class="text-3xl font-bold text-gray-800 group-hover:text-white">94%</h3>
         </div>
     </div>
@@ -87,7 +87,7 @@
         
         <!-- Left: Genre Cards -->
         <div class="lg:col-span-1 space-y-4">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6 px-1">Statistik Genre</h2>
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 px-1">Genre Statistics</h2>
             @foreach($genres as $genre)
             <div class="glass-panel p-4 flex items-center justify-between group hover:border-burgundy-500 transition-all cursor-pointer border-white/60">
                 <div class="flex items-center gap-4">
@@ -105,12 +105,12 @@
         <div class="lg:col-span-2 glass-panel p-8 border-white/60">
             <div class="flex items-center justify-between mb-8">
                 <div>
-                    <h3 class="text-xl font-bold text-gray-800">Tren Peminjaman Mingguan</h3>
-                    <p class="text-xs text-gray-400 mt-1">Data dikumpulkan dari 7 hari terakhir</p>
+                    <h3 class="text-xl font-bold text-gray-800">Weekly Lending Trends</h3>
+                    <p class="text-xs text-gray-400 mt-1">Data collected from the last 7 days</p>
                 </div>
                 <select class="text-xs font-bold text-gray-500 bg-white/50 border-none rounded-xl focus:ring-0">
-                    <option>Minggu Ini</option>
-                    <option>Minggu Lalu</option>
+                    <option>This Week</option>
+                    <option>Last Week</option>
                 </select>
             </div>
             
@@ -140,7 +140,7 @@
                     <div class="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center text-burgundy-500 font-bold text-xs group-hover:bg-burgundy-500 group-hover:text-white transition-colors">NEW</div>
                     <div>
                         <p class="text-sm font-bold text-gray-800">Extended Opening Hours</p>
-                        <p class="text-xs text-gray-500">Mulai Senin depan, kami buka pukul 07.00 WIB.</p>
+                        <p class="text-xs text-gray-500">Starting next Monday, we open at 07.00 WIB.</p>
                     </div>
                 </div>
              </div>
