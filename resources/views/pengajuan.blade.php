@@ -4,8 +4,8 @@
 <div class="py-10" x-data="{ showModal: false }">
     <!-- Header -->
     <div class="mb-12 animate-fade-up">
-        <h1 class="text-4xl font-bold text-gray-800">Form Peminjaman Buku</h1>
-        <p class="text-gray-500 mt-2">Lengkapi data di bawah untuk memproses peminjaman buku fisik.</p>
+        <h1 class="text-4xl font-bold text-gray-800">Book Loan Form</h1>
+        <p class="text-gray-500 mt-2">Complete the data below to process the physical book loan.</p>
     </div>
 
     <div class="flex flex-col lg:flex-row gap-12">
@@ -16,27 +16,27 @@
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div class="space-y-2">
-                        <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest ml-1">Nama Peminjam</label>
-                        <input type="text" placeholder="Masukkan Nama Lengkap" 
+                        <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest ml-1">Borrower Name</label>
+                        <input type="text" placeholder="Enter Your Full Name" 
                             value="{{ session()->has('user') ? session('user')['name'] : '' }}"
                             class="w-full p-4 bg-white/50 border border-white rounded-2xl focus:ring-4 focus:ring-red-100 focus:outline-none transition-all font-medium text-gray-700 shadow-sm">
                     </div>
 
                     <div class="space-y-2">
-                        <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest ml-1">NIM / ID Anggota</label>
-                        <input type="text" placeholder="Masukkan NIM Mahasiswa" 
+                        <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest ml-1">NIM / Member ID</label>
+                        <input type="text" placeholder="Enter Your NIM" 
                             class="w-full p-4 bg-white/50 border border-white rounded-2xl focus:ring-4 focus:ring-red-100 focus:outline-none transition-all font-medium text-gray-700 shadow-sm">
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div class="space-y-2">
-                        <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest ml-1">Tanggal Pinjam</label>
+                        <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest ml-1">Borrow Date</label>
                         <input type="date" id="tanggal_pinjam" required
                             class="w-full p-4 bg-white/50 border border-white rounded-2xl focus:ring-4 focus:ring-red-100 focus:outline-none transition-all font-medium text-gray-700 shadow-sm">
                     </div>
                     <div class="space-y-2">
-                        <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest ml-1">Tanggal Kembali</label>
+                        <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest ml-1">Return Date</label>
                         <input type="date" id="tanggal_kembali" readonly
                             class="w-full p-4 bg-red-50/30 border border-white rounded-2xl font-medium text-gray-400 cursor-not-allowed">
                     </div>
@@ -44,12 +44,12 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4 border-t border-red-50">
                     <div class="space-y-2">
-                        <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest ml-1">ID Buku</label>
+                        <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest ml-1">Book ID</label>
                         <input type="text" value="{{ request('id') }}" readonly 
                             class="w-full p-4 bg-red-50/30 border border-white rounded-2xl text-gray-400 font-bold cursor-not-allowed">
                     </div>
                     <div class="space-y-2">
-                        <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest ml-1">Judul Buku</label>
+                        <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest ml-1">Book title</label>
                         <input type="text" value="{{ request('judul') }}" readonly 
                             class="w-full p-4 bg-red-50/30 border border-white rounded-2xl text-gray-400 font-bold cursor-not-allowed">
                     </div>
@@ -58,7 +58,7 @@
                 <div class="pt-6">
                     <button type="submit" 
                         class="w-full md:w-auto bg-burgundy-500 text-white px-12 py-4 rounded-2xl font-bold text-lg hover:bg-maroon transition-all shadow-xl shadow-red-100 transform hover:-translate-y-1 active:scale-95">
-                        Konfirmasi Peminjaman
+                        Loan Confirmation
                     </button>
                 </div>
             </form>
@@ -89,7 +89,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0 text-burgundy-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
-                            <p>Masa peminjaman standar adalah <strong>7 hari kerja</strong>. Harap kembalikan buku sebelum jatuh tempo untuk menghindari denda.</p>
+                            <p>The standard loan period is <strong>7 working days</strong>. Harap kembalikan buku sebelum jatuh tempo untuk menghindari denda.</p>
                         </div>
                     </div>
                 </div>
