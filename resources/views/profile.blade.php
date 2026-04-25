@@ -7,7 +7,7 @@
 </h2>
 
 <p class="mb-6 text-gray-600">
-    Berikut riwayat peminjaman buku anda:
+    Here is your book borrowing history:
 </p>
 
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
@@ -22,7 +22,7 @@
             <img src="{{ asset('images/' . $buku->cover) }}"
                  class="w-full h-full object-cover">
         @else
-            <span class="text-sm">Cover Buku</span>
+            <span class="text-sm">Book Cover</span>
         @endif
 
     </div>
@@ -52,11 +52,11 @@
 
         @if(($buku->status ?? '') == 'Tersedia')
             <button class="w-full bg-red-950 text-white py-2 rounded-xl">
-                Pinjam Buku
+                Borrow Books
             </button>
         @else
             <button disabled class="w-full bg-gray-400 text-white py-2 rounded-xl">
-                Tidak Tersedia
+                Not available
             </button>
         @endif
 
@@ -65,7 +65,7 @@
 
 @empty
 <div class="col-span-full text-center">
-    Buku tidak ditemukan.
+    Book not found.
 </div>
 @endforelse
 
