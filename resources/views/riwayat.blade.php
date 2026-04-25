@@ -54,6 +54,21 @@
                         <p class="font-bold text-red-600">{{ $p['batas_kembali'] }}</p>
                     </div>
                 </div>
+
+                <!-- Late Fine Section -->
+                @if(isset($p['denda']) && $p['denda'] > 0)
+                <div class="mt-4 p-3 bg-red-50 rounded-xl border border-red-100 flex items-center justify-between animate-pulse">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-lg bg-red-500 text-white flex items-center justify-center shadow-lg shadow-red-100">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <span class="text-[10px] font-bold text-red-600 uppercase tracking-widest">Denda Keterlambatan</span>
+                    </div>
+                    <span class="font-bold text-red-700 text-sm">Rp {{ number_format($p['denda'], 0, ',', '.') }}</span>
+                </div>
+                @endif
             </div>
             @empty
             <div class="col-span-full glass-panel p-10 text-center border-white/60">
@@ -80,6 +95,7 @@
                         <tr>
                             <th class="px-8 py-5">Book title</th>
                             <th class="px-8 py-5">Borrow ID</th>
+                            <th class="px-8 py-5 text-center">Fine (Denda)</th>
                             <th class="px-8 py-5 text-right">Return Date</th>
                         </tr>
                     </thead>
@@ -88,6 +104,11 @@
                         <tr class="hover:bg-red-50/30 transition-colors">
                             <td class="px-8 py-6 font-bold text-gray-800">{{ $k['judul'] }}</td>
                             <td class="px-8 py-6 text-sm text-gray-500 font-medium">{{ $k['id_pengguna'] }}</td>
+                            <td class="px-8 py-6 text-center">
+                                <span class="font-bold {{ ($k['denda'] ?? 0) > 0 ? 'text-red-500' : 'text-gray-400' }}">
+                                    Rp {{ number_format($k['denda'] ?? 0, 0, ',', '.') }}
+                                </span>
+                            </td>
                             <td class="px-8 py-6 text-right">
                                 <span class="px-3 py-1.5 rounded-lg bg-green-50 text-green-600 text-[10px] font-bold uppercase tracking-widest border border-green-100">
                                     {{ $k['tanggal_kembali'] }}

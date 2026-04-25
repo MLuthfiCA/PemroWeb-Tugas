@@ -76,11 +76,20 @@
                 </div>
 
                 <div class="flex justify-between items-center text-sm border-t border-red-50 pt-4">
-                    <div>
+                    <div class="flex flex-col">
                         <p class="text-[10px] text-red-400 font-bold uppercase tracking-wider">Jatuh Tempo</p>
                         <p class="font-bold text-red-600">{{ $b->jatuh_tempo }}</p>
                     </div>
-                    <button class="text-xs font-bold text-burgundy-500 hover:text-maroon">
+                    <div class="flex flex-col text-right">
+                        <p class="text-[10px] text-burgundy-400 font-bold uppercase tracking-wider">Denda Terakumulasi</p>
+                        <p class="font-bold text-burgundy-600">Rp {{ number_format($b->denda ?? 0, 0, ',', '.') }}</p>
+                    </div>
+                </div>
+                <div class="mt-4 pt-3 border-t border-dashed border-red-100 flex justify-end">
+                    <button class="text-xs font-bold text-burgundy-500 hover:text-maroon flex items-center gap-1.5">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                        </svg>
                         Beri Peringatan
                     </button>
                 </div>
