@@ -115,7 +115,7 @@
                             <span class="font-bold text-2xl text-gray-800 tracking-tight">ReadSpace</span>
                         </div>
                         <p class="text-sm text-gray-500 leading-relaxed">
-                            ReadSpace Library adalah platform literasi digital modern yang dirancang khusus untuk memfasilitasi mahasiswa Polibatam dalam mengakses pengetahuan tanpa batas.
+                            ReadSpace Library is a modern digital literacy platform specifically designed to facilitate Polibatam students in accessing unlimited knowledge.
                         </p>
                         <div class="flex gap-4">
                             <div class="w-8 h-8 rounded-lg bg-white border border-red-50 flex items-center justify-center text-burgundy-500 hover:bg-burgundy-500 hover:text-white transition-all cursor-pointer">
@@ -129,24 +129,24 @@
 
                     <!-- Navigation Links -->
                     <div>
-                        <h4 class="font-bold text-gray-800 mb-6 uppercase text-xs tracking-widest">Menu Cepat</h4>
+                        <h4 class="font-bold text-gray-800 mb-6 uppercase text-xs tracking-widest">Quick Menu</h4>
                         <ul class="space-y-4">
-                            <li><a href="{{ route('home') }}" class="text-gray-500 hover:text-burgundy-500 text-sm transition-colors">Beranda</a></li>
-                            <li><a href="{{ route('katalog') }}" class="text-gray-500 hover:text-burgundy-500 text-sm transition-colors">Katalog Buku</a></li>
-                            <li><a href="{{ route('search') }}" class="text-gray-500 hover:text-burgundy-500 text-sm transition-colors">Pencarian</a></li>
-                            <li><a href="{{ route('about') }}" class="text-gray-500 hover:text-burgundy-500 text-sm transition-colors">Tentang Kami</a></li>
+                            <li><a href="{{ route('home') }}" class="text-gray-500 hover:text-burgundy-500 text-sm transition-colors">Home page</a></li>
+                            <li><a href="{{ route('katalog') }}" class="text-gray-500 hover:text-burgundy-500 text-sm transition-colors">Book Catalog</a></li>
+                            <li><a href="{{ route('search') }}" class="text-gray-500 hover:text-burgundy-500 text-sm transition-colors">Search</a></li>
+                            <li><a href="{{ route('about') }}" class="text-gray-500 hover:text-burgundy-500 text-sm transition-colors">About Us</a></li>
                         </ul>
                     </div>
 
                     <!-- Contact & Location -->
                     <div>
-                        <h4 class="font-bold text-gray-800 mb-6 uppercase text-xs tracking-widest">Kontak & Lokasi</h4>
+                        <h4 class="font-bold text-gray-800 mb-6 uppercase text-xs tracking-widest">Contacts & Locations</h4>
                         <ul class="space-y-4">
                             <li class="flex items-start gap-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-burgundy-500 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                                 </svg>
-                                <span class="text-sm text-gray-500">Jl. Ahmad Yani, Batam Kota, Batam, Kepulauan Riau 29461</span>
+                                <span class="text-sm text-gray-500">Ahmad Yani Street, Batam City, Batam,  Kepulauan Riau 29461</span>
                             </li>
                             <li class="flex items-center gap-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-burgundy-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -159,19 +159,19 @@
 
                     <!-- Opening Hours -->
                     <div>
-                        <h4 class="font-bold text-gray-800 mb-6 uppercase text-xs tracking-widest">Jam Operasional</h4>
+                        <h4 class="font-bold text-gray-800 mb-6 uppercase text-xs tracking-widest">Operating Hours</h4>
                         <ul class="space-y-3">
                             <li class="flex justify-between text-sm">
-                                <span class="text-gray-400">Senin - Jumat</span>
+                                <span class="text-gray-400">Monday - Friday</span>
                                 <span class="font-bold text-gray-700">08:00 - 20:00</span>
                             </li>
                             <li class="flex justify-between text-sm">
-                                <span class="text-gray-400">Sabtu</span>
+                                <span class="text-gray-400">Saturday</span>
                                 <span class="font-bold text-gray-700">09:00 - 15:00</span>
                             </li>
                             <li class="flex justify-between text-sm">
-                                <span class="text-gray-400">Minggu</span>
-                                <span class="font-bold text-red-500 uppercase tracking-widest text-[10px]">Tutup</span>
+                                <span class="text-gray-400">Sunday</span>
+                                <span class="font-bold text-red-500 uppercase tracking-widest text-[10px]">Closed</span>
                             </li>
                         </ul>
                     </div>
