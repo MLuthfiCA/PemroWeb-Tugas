@@ -17,15 +17,15 @@
             <h2 class="text-2xl font-bold text-gray-800">Admin ReadSpace</h2>
             <p class="text-gray-500 font-medium">admin@polibatam.ac.id</p>
             <div class="mt-4 inline-block px-4 py-1.5 rounded-lg bg-burgundy-50 text-burgundy-600 border border-burgundy-100 text-xs font-bold uppercase tracking-widest">
-                Administrator Utama
+                Main Administrator 
             </div>
         </div>
         <div class="w-full md:w-auto flex flex-col sm:flex-row gap-3">
             <a href="{{ route('admin.users') }}" class="w-full md:w-auto px-6 py-3 rounded-xl bg-burgundy-500 text-white font-bold hover:bg-maroon transition-colors text-sm text-center shadow-lg shadow-red-100">
-                Kelola Pengguna
+                Manage Users
             </a>
             <a href="{{ route('admin.buku.create') }}" class="w-full md:w-auto px-6 py-3 rounded-xl border-2 border-burgundy-500 text-burgundy-600 font-bold hover:bg-red-50 transition-colors text-sm text-center">
-                + Tambah Buku
+                + Add New Book
             </a>
         </div>
     </div>
@@ -36,19 +36,19 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-burgundy-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                 </svg>
-                Daftar Peminjaman Aktif
+                Active Loans
             </h2>
             <span class="px-4 py-1.5 rounded-full bg-red-50 text-burgundy-600 font-bold text-sm">
-                Total: {{ count($books ?? []) }} Buku
+                Total: {{ count($books ?? []) }} Books
             </span>
         </div>
         
         <div class="glass-panel border-white/60 shadow-lg shadow-red-50 rounded-2xl overflow-hidden">
             <div class="hidden md:grid grid-cols-12 gap-4 px-8 py-5 border-b border-gray-100 bg-gray-50/30 text-[11px] font-bold text-gray-400 uppercase tracking-wider">
-                <div class="col-span-4">Info Buku</div>
-                <div class="col-span-3">Peminjam</div>
-                <div class="col-span-3">Jatuh Tempo</div>
-                <div class="col-span-2 text-right">Aksi</div>
+                <div class="col-span-4">Book information</div>
+                <div class="col-span-3">Loaners</div>
+                <div class="col-span-3">Due Date</div>
+                <div class="col-span-2 text-right">Actions</div>
             </div>
 
             <div class="divide-y divide-gray-100">
@@ -81,7 +81,7 @@
                     </div>
 
                     <div class="col-span-3 flex flex-col md:flex-row md:items-center gap-2 mt-2 md:mt-0">
-                        <span class="md:hidden text-[10px] font-bold text-gray-400 uppercase">Jatuh Tempo:</span>
+                        <span class="md:hidden text-[10px] font-bold text-gray-400 uppercase">Due Date:</span>
                         <div class="flex items-center gap-2">
                             <span class="w-2.5 h-2.5 rounded-full bg-red-500"></span>
                             <p class="font-bold text-red-600 text-sm">{{ $b->jatuh_tempo }}</p>
@@ -96,7 +96,7 @@
                             </svg>
                         </div>
                         <button class="text-xs font-bold text-burgundy-500 hover:text-maroon">
-                            Beri Peringatan
+                            Issue Warning
                         </button>
                     </div>
 
@@ -108,7 +108,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                         </svg>
                     </div>
-                    <p class="text-gray-400 font-medium">Luar biasa! Saat ini tidak ada buku yang berstatus dipinjam (semua telah dikembalikan).</p>
+                    <p class="text-gray-400 font-medium">Incredible! Currently there are no books in borrowed status (all have been returned).</p>
                 </div>
                 @endforelse
             </div>
