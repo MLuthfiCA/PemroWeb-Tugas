@@ -14,25 +14,25 @@
         <!-- Desktop Navigation -->
         <div class="hidden md:flex items-center gap-1">
             <a href="{{ route('home') }}" class="px-5 py-2 rounded-xl transition-all duration-300 {{ request()->routeIs('home') ? 'bg-burgundy-500 text-white shadow-lg shadow-red-100' : 'text-gray-500 hover:text-burgundy-500 hover:bg-white/80' }} font-medium text-sm">
-                Beranda
+                Home page
             </a>
             @if(session()->has('user') && session('user')['role'] === 'admin')
                 <a href="{{ route('admin.katalog') }}" class="px-5 py-2 rounded-xl transition-all duration-300 {{ request()->routeIs('admin.katalog') ? 'bg-burgundy-500 text-white shadow-lg shadow-red-100' : 'text-gray-500 hover:text-burgundy-500 hover:bg-white/80' }} font-medium text-sm">
-                    Katalog Buku
+                    Book Catalog
                 </a>
                 <a href="{{ route('admin.users') }}" class="px-5 py-2 rounded-xl transition-all duration-300 {{ request()->routeIs('admin.users') ? 'bg-burgundy-500 text-white shadow-lg shadow-red-100' : 'text-gray-500 hover:text-burgundy-500 hover:bg-white/80' }} font-medium text-sm">
-                    Data User
+                    Users Data
                 </a>
             @else
                 <a href="{{ route('katalog') }}" class="px-5 py-2 rounded-xl transition-all duration-300 {{ request()->routeIs('katalog') ? 'bg-burgundy-500 text-white shadow-lg shadow-red-100' : 'text-gray-500 hover:text-burgundy-500 hover:bg-white/80' }} font-medium text-sm">
-                    Katalog
+                    Catalog
                 </a>
                 <a href="{{ route('search') }}" class="px-5 py-2 rounded-xl transition-all duration-300 {{ request()->routeIs('search') ? 'bg-burgundy-500 text-white shadow-lg shadow-red-100' : 'text-gray-500 hover:text-burgundy-500 hover:bg-white/80' }} font-medium text-sm">
-                    Pencarian
+                    Search
                 </a>
             @endif
             <a href="{{ route('about') }}" class="px-5 py-2 rounded-xl transition-all duration-300 {{ request()->routeIs('about') ? 'bg-burgundy-500 text-white shadow-lg shadow-red-100' : 'text-gray-500 hover:text-burgundy-500 hover:bg-white/80' }} font-medium text-sm">
-                Tentang
+                About
             </a>
         </div>
 
@@ -53,22 +53,22 @@
             <div id="dropdownUser" class="z-50 hidden bg-white/90 backdrop-blur-2xl border border-white/60 divide-y divide-gray-100 rounded-2xl shadow-2xl w-44">
                 <ul class="py-2 text-sm text-gray-700">
                     @if(session('user')['role'] === 'admin')
-                        <li><a href="{{ route('admin.profile') }}" class="block px-4 py-2 hover:bg-red-50 hover:text-burgundy-500 transition-colors font-medium">Profil Admin</a></li>
+                        <li><a href="{{ route('admin.profile') }}" class="block px-4 py-2 hover:bg-red-50 hover:text-burgundy-500 transition-colors font-medium">Admin Profile</a></li>
                     @else
-                        <li><a href="{{ route('riwayat') }}" class="block px-4 py-2 hover:bg-red-50 hover:text-burgundy-500 transition-colors font-medium">Profil Saya</a></li>
+                        <li><a href="{{ route('riwayat') }}" class="block px-4 py-2 hover:bg-red-50 hover:text-burgundy-500 transition-colors font-medium">My Profile</a></li>
                     @endif
                 </ul>
                 <div class="py-1">
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-red-500 font-bold hover:bg-red-50 transition-colors">Keluar</button>
+                        <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-red-500 font-bold hover:bg-red-50 transition-colors">Go out</button>
                     </form>
                 </div>
             </div>
             @else
             <div class="flex items-center gap-2">
-                <a href="{{ route('login') }}" class="text-sm font-bold text-gray-500 hover:text-burgundy-500 px-4 transition-colors">Masuk</a>
-                <a href="{{ route('register') }}" class="px-5 py-2.5 rounded-xl bg-burgundy-500 text-white text-sm font-bold shadow-lg shadow-red-100 hover:bg-burgundy-600 transition-all hover:-translate-y-0.5">Daftar</a>
+                <a href="{{ route('login') }}" class="text-sm font-bold text-gray-500 hover:text-burgundy-500 px-4 transition-colors">Log In</a>
+                <a href="{{ route('register') }}" class="px-5 py-2.5 rounded-xl bg-burgundy-500 text-white text-sm font-bold shadow-lg shadow-red-100 hover:bg-burgundy-600 transition-all hover:-translate-y-0.5">Register</a>
             </div>
             @endif
 

@@ -25,10 +25,10 @@ Route::get('/riwayat', function () {
     if (!session()->has('user')) return redirect('/login');
     
     $peminjaman = [
-        ['judul' => 'Laskar Pelangi', 'id_pengguna' => 'B-742', 'tanggal_pinjam' => '2026-04-10', 'batas_kembali' => '2026-04-17'],
+        ['judul' => 'Laskar Pelangi', 'id_pengguna' => 'B-742', 'tanggal_pinjam' => '2026-04-10', 'batas_kembali' => '2026-04-17', 'denda' => 45000],
     ];
     $pengembalian = [
-        ['judul' => 'Hujan', 'id_pengguna' => 'B-128', 'tanggal_kembali' => '2026-04-05'],
+        ['judul' => 'Hujan', 'id_pengguna' => 'B-128', 'tanggal_kembali' => '2026-04-05', 'denda' => 0],
     ];
     return view('riwayat', compact('peminjaman', 'pengembalian'));
 })->name('riwayat');
@@ -42,7 +42,8 @@ Route::get('/admin/profile', function () {
             'nim' => '123456',
             'judul' => 'Filosofi Teras',
             'penulis' => 'Henry Manampiring',
-            'jatuh_tempo' => '2026-04-20'
+            'jatuh_tempo' => '2026-04-20',
+            'denda' => 30000
         ],
     ]);
     return view('admin.profile', compact('books'));
@@ -83,7 +84,7 @@ Route::post('/logout', function (Request $request) {
 // --- USER / MAHASISWA ROUTES ---
 Route::get('/katalog', function (Request $request) {
     $semuaBuku = collect([
-        ['judul' => 'Laskar Pelangi', 'penulis' => 'Andrea Hirata', 'genre' => 'Drama', 'status' => 'Tersedia', 'cover' => 'Laskar_pelangi_sampul.jpg'],
+        ['judul' => 'Laskar Pelangi', 'penulis' => 'Andrea Hirata', 'genre' => 'Drama', 'status' => 'Tersedia', 'cover' => 'Laskar_Pelangi_Sampul.jpg'],
         ['judul' => 'Filosofi Teras', 'penulis' => 'Henry Manampiring', 'genre' => 'Self-Dev', 'status' => 'Dipinjam', 'cover' => 'filosofi_teras.webp'],
         ['judul' => 'Akuntansi Dasar', 'penulis' => 'Erlangga', 'genre' => 'Edukasi', 'status' => 'Tersedia', 'cover' => 'Cover_akutansi.jpg'],
         ['judul' => 'Hujan', 'penulis' => 'Tere Liye', 'genre' => 'Romance', 'status' => 'Tersedia', 'cover' => 'cover_hujan.jpg'],
@@ -107,7 +108,7 @@ Route::get('/katalog', function (Request $request) {
 // Route Search Mahasiswa 
 Route::get('/search', function (Request $request) {
     $semuaBuku = collect([
-        (object)['id' => 1, 'judul' => 'Laskar Pelangi', 'penulis' => 'Andrea Hirata', 'cover' => 'Laskar_pelangi_sampul.jpg'],
+        (object)['id' => 1, 'judul' => 'Laskar Pelangi', 'penulis' => 'Andrea Hirata', 'cover' => 'Laskar_Pelangi_Sampul.jpg'],
         (object)['id' => 2, 'judul' => 'Filosofi Teras', 'penulis' => 'Henry Manampiring', 'cover' => 'filosofi_teras.webp'],
         (object)['id' => 3, 'judul' => 'Akuntansi Dasar', 'penulis' => 'Erlangga', 'cover' => 'Cover_akutansi.jpg'],
         (object)['id' => 4, 'judul' => 'Hujan', 'penulis' => 'Tere Liye', 'cover' => 'cover_hujan.jpg'],
@@ -161,10 +162,10 @@ Route::prefix('admin')->group(function () {
                 'penulis' => 'Andrea Hirata', 
                 'genre' => 'Drama', 
                 'status' => 'Tersedia',
-                'cover' => 'cover1.jpg'
+                'cover' => 'Laskar_Pelangi_Sampul.jpg'
             ],
-            ['id' => 2, 'judul' => 'Bumi', 'penulis' => 'Tere Liye', 'genre' => 'Fantasi', 'status' => 'Tersedia'],
-            ['id' => 3, 'judul' => 'Filosofi Teras', 'penulis' => 'Henry Manampiring', 'genre' => 'Self-Dev', 'status' => 'Dipinjam'],
+            ['id' => 2, 'judul' => 'Bumi', 'penulis' => 'Tere Liye', 'genre' => 'Fantasi', 'status' => 'Tersedia', 'cover' => 'cover_buku_bumi.jpg'],
+            ['id' => 3, 'judul' => 'Filosofi Teras', 'penulis' => 'Henry Manampiring', 'genre' => 'Self-Dev', 'status' => 'Dipinjam', 'cover' => 'filosofi_teras.webp'],
         ]);
 
         // Mengirimkan variabel $Buku ke view

@@ -7,7 +7,7 @@
     <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 animate-fade-up">
         <div>
             <h1 class="text-4xl font-bold text-gray-800">Library Catalog</h1>
-            <p class="text-gray-500 mt-2">Temukan dan pinjam koleksi digital terbaik kami.</p>
+            <p class="text-gray-500 mt-2">Discover and borrow our best digital collections.</p>
         </div>
         
         <!-- View Toggle -->
@@ -51,13 +51,13 @@
                     <span class="px-2 py-1 rounded bg-white/80 text-[10px] font-bold text-burgundy-500 uppercase tracking-tighter border border-red-100">{{ $buku['genre'] }}</span>
                     @if($buku['status'] == 'Tersedia')
                     <a href="{{ route('pengajuan', ['judul' => $buku['judul'], 'id' => 'B-' . rand(100, 999), 'cover' => $buku['cover']]) }}" class="text-burgundy-500 hover:text-maroon font-bold text-xs flex items-center gap-1 transition-all group-hover:translate-x-1">
-                        Pinjam Sekarang
+                        Borrow Now
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                         </svg>
                     </a>
                     @else
-                    <span class="text-gray-300 font-bold text-xs italic tracking-wide">Dipinjam</span>
+                    <span class="text-gray-300 font-bold text-xs italic tracking-wide">Borrowed</span>
                     @endif
                 </div>
             </div>
@@ -72,10 +72,10 @@
                 <table class="w-full text-left border-collapse">
                     <thead class="bg-red-50/50 text-gray-400 text-[10px] font-bold uppercase tracking-widest">
                         <tr>
-                            <th class="px-8 py-5">Info Buku</th>
+                            <th class="px-8 py-5">Book Info</th>
                             <th class="px-8 py-5">Genre</th>
                             <th class="px-8 py-5">Status</th>
-                            <th class="px-8 py-5 text-right">Aksi</th>
+                            <th class="px-8 py-5 text-right">Action</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-red-50">
@@ -108,7 +108,7 @@
                             <td class="px-8 py-6 text-right">
                                 @if($buku['status'] == 'Tersedia')
                                 <a href="{{ route('pengajuan', ['judul' => $buku['judul'], 'id' => 'B-' . rand(100, 999), 'cover' => $buku['cover']]) }}" class="px-5 py-2.5 bg-burgundy-500 text-white rounded-xl text-xs font-bold shadow-lg shadow-red-100 hover:bg-maroon transition-all opacity-0 group-hover:opacity-100 inline-block">
-                                    Ajukan Pinjam
+                                    Apply for a loan
                                 </a>
                                 @else
                                 <span class="text-gray-300 text-xs font-bold italic">N/A</span>

@@ -9,8 +9,8 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
                 </svg>
             </div>
-            <h2 class="mt-6 text-3xl font-extrabold text-gray-900">Buat Akun Baru</h2>
-            <p class="mt-2 text-sm text-gray-500 font-medium">Bergabunglah dengan komunitas pembaca kami</p>
+            <h2 class="mt-6 text-3xl font-extrabold text-gray-900">Create a New Account</h2>
+            <p class="mt-2 text-sm text-gray-500 font-medium">Join our community of readers.</p>
         </div>
 
         <div class="glass-panel p-8 shadow-2xl shadow-red-50 border-white/60">
@@ -34,15 +34,15 @@
                     <div>
                         <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1">Role</label>
                         <select name="role" class="w-full px-4 py-3.5 border border-white bg-white/50 rounded-2xl text-gray-800 focus:outline-none focus:ring-4 focus:ring-red-100 focus:border-burgundy-500 transition-all text-sm font-medium cursor-pointer appearance-none">
-                            <option value="mahasiswa">Mahasiswa</option>
+                            <option value="mahasiswa">Student</option>
                             <option value="admin">Admin</option>
                         </select>
                     </div>
                 </div>
 
                 <div>
-                    <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1">Nama Lengkap</label>
-                    <input name="name" type="text" required class="w-full px-4 py-3.5 border border-white bg-white/50 rounded-2xl placeholder-gray-400 text-gray-800 focus:outline-none focus:ring-4 focus:ring-red-100 focus:border-burgundy-500 transition-all text-sm font-medium" placeholder="Nama lengkap kamu">
+                    <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1">Full name</label>
+                    <input name="name" type="text" required class="w-full px-4 py-3.5 border border-white bg-white/50 rounded-2xl placeholder-gray-400 text-gray-800 focus:outline-none focus:ring-4 focus:ring-red-100 focus:border-burgundy-500 transition-all text-sm font-medium" placeholder="Your full name">
                 </div>
 
                 <div>
@@ -57,15 +57,15 @@
 
                 <div class="pt-2">
                     <button type="submit" class="w-full flex justify-center py-4 px-4 border border-transparent text-sm font-bold rounded-2xl text-white bg-burgundy-500 hover:bg-maroon focus:outline-none focus:ring-4 focus:ring-red-100 transition-all shadow-lg shadow-red-100 transform active:scale-95">
-                        Daftar Akun
+                        Register Account
                     </button>
                 </div>
             </form>
             
             <div class="mt-8 text-center">
                 <p class="text-sm text-gray-500 font-medium">
-                    Sudah punya akun? 
-                    <a href="{{ route('login') }}" class="font-bold text-burgundy-600 hover:text-maroon transition-colors">Masuk di sini</a>
+                    Already have an account? 
+                    <a href="{{ route('login') }}" class="font-bold text-burgundy-600 hover:text-maroon transition-colors">Sign in here</a>
                 </p>
             </div>
         </div>
