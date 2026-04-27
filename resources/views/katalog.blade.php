@@ -32,7 +32,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             @foreach($daftarBuku as $index => $buku)
             <div class="glass-panel p-4 flex flex-col group animate-fade-up border-white/60" style="animation-delay: {{ $index * 100 }}ms">
-                <div class="relative h-64 rounded-2xl mb-5 overflow-hidden bg-gradient-to-br from-red-50 to-rose-100 flex items-center justify-center border border-white/20">
+                <a href="{{ route('katalog.detail', $buku['id']) }}" class="relative h-64 rounded-2xl mb-5 overflow-hidden bg-gradient-to-br from-red-50 to-rose-100 flex items-center justify-center border border-white/20 group-hover:shadow-2xl transition-all duration-500">
                     <!-- Real Image from images folder -->
                     <img src="{{ asset('images/' . ($buku['cover'] ?? 'readspace-library.png')) }}" 
                         class="h-4/5 object-contain shadow-2xl transform group-hover:scale-110 group-hover:rotate-2 transition-transform duration-700"
@@ -42,9 +42,11 @@
                     <div class="absolute top-4 right-4 px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest backdrop-blur-xl {{ $buku['status'] == 'Tersedia' ? 'bg-green-500/10 text-green-600 border border-green-200' : 'bg-red-500/10 text-red-600 border border-red-200' }}">
                         {{ $buku['status'] }}
                     </div>
-                </div>
+                </a>
                 
-                <h3 class="font-bold text-gray-800 line-clamp-1 mb-1 text-lg">{{ $buku['judul'] }}</h3>
+                <a href="{{ route('katalog.detail', $buku['id']) }}" class="group/title">
+                    <h3 class="font-bold text-gray-800 line-clamp-1 mb-1 text-lg group-hover/title:text-burgundy-500 transition-colors">{{ $buku['judul'] }}</h3>
+                </a>
                 <p class="text-xs text-gray-400 mb-6 font-medium">{{ $buku['penulis'] }}</p>
                 
                 <div class="mt-auto pt-5 border-t border-red-50 flex items-center justify-between">
@@ -83,11 +85,11 @@
                         <tr class="group hover:bg-red-50/30 transition-colors duration-300">
                             <td class="px-8 py-6">
                                 <div class="flex items-center gap-5">
-                                    <div class="w-12 h-16 bg-white rounded-xl shadow-md flex items-center justify-center overflow-hidden border border-white group-hover:scale-105 transition-transform duration-500">
+                                    <a href="{{ route('katalog.detail', $buku['id']) }}" class="w-12 h-16 bg-white rounded-xl shadow-md flex items-center justify-center overflow-hidden border border-white group-hover:scale-110 transition-transform duration-500">
                                         <img src="{{ asset('images/' . ($buku['cover'] ?? 'readspace-library.png')) }}" class="w-full h-full object-cover">
-                                    </div>
+                                    </a>
                                     <div>
-                                        <p class="font-bold text-gray-800 group-hover:text-burgundy-500 transition-colors">{{ $buku['judul'] }}</p>
+                                        <a href="{{ route('katalog.detail', $buku['id']) }}" class="font-bold text-gray-800 hover:text-burgundy-500 transition-colors">{{ $buku['judul'] }}</a>
                                         <p class="text-xs text-gray-400 font-medium">{{ $buku['penulis'] }}</p>
                                     </div>
                                 </div>

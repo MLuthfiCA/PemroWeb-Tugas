@@ -11,6 +11,19 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\BukuController;
 use App\Http\Controllers\AdminController;
 
+function getDummyBooks() {
+    return collect([
+        ['id' => 1, 'judul' => 'Laskar Pelangi', 'penulis' => 'Andrea Hirata', 'genre' => 'Drama', 'status' => 'Tersedia', 'cover' => 'Laskar_Pelangi_Sampul.jpg'],
+        ['id' => 2, 'judul' => 'Filosofi Teras', 'penulis' => 'Henry Manampiring', 'genre' => 'Self-Dev', 'status' => 'Dipinjam', 'cover' => 'filosofi_teras.webp'],
+        ['id' => 3, 'judul' => 'Akuntansi Dasar', 'penulis' => 'Erlangga', 'genre' => 'Edukasi', 'status' => 'Tersedia', 'cover' => 'Cover_akutansi.jpg'],
+        ['id' => 4, 'judul' => 'Hujan', 'penulis' => 'Tere Liye', 'genre' => 'Romance', 'status' => 'Tersedia', 'cover' => 'cover_hujan.jpg'],
+        ['id' => 5, 'judul' => 'Bandung After Rain', 'penulis' => 'Viva.co', 'genre' => 'Romance', 'status' => 'Tersedia', 'cover' => 'bandung.after.rain.jpg'],
+        ['id' => 6, 'judul' => 'AI For Everyone', 'penulis' => 'Andrew Ng', 'genre' => 'Technology', 'status' => 'Tersedia', 'cover' => 'cover_AI.byerlangga.jpg'],
+        ['id' => 7, 'judul' => 'Malioboro at Midnight', 'penulis' => 'Skysphire', 'genre' => 'Romance', 'status' => 'Dipinjam', 'cover' => 'maliboro.cover.jpg'],
+        ['id' => 8, 'judul' => 'Bumi', 'penulis' => 'Tere Liye', 'genre' => 'Fantasi', 'status' => 'Tersedia', 'cover' => 'cover_buku_bumi.jpg'],
+    ]);
+}
+
 Route::get('/', function () {
     if (session()->has('user')) {
         if (session('user')['role'] === 'admin') return redirect()->route('admin.katalog');
@@ -38,7 +51,7 @@ Route::get('/search', fn() => view('search'))->name('search');
 Route::get('/admin/profile', function () {
     $books = collect([
         (object)[
-            'peminjam' => 'Budi',
+            'peminjam' => 'Rayyan',
             'nim' => '123456',
             'judul' => 'Filosofi Teras',
             'penulis' => 'Henry Manampiring',
@@ -83,15 +96,7 @@ Route::post('/logout', function (Request $request) {
 
 // --- USER / MAHASISWA ROUTES ---
 Route::get('/katalog', function (Request $request) {
-    $semuaBuku = collect([
-        ['judul' => 'Laskar Pelangi', 'penulis' => 'Andrea Hirata', 'genre' => 'Drama', 'status' => 'Tersedia', 'cover' => 'Laskar_Pelangi_Sampul.jpg'],
-        ['judul' => 'Filosofi Teras', 'penulis' => 'Henry Manampiring', 'genre' => 'Self-Dev', 'status' => 'Dipinjam', 'cover' => 'filosofi_teras.webp'],
-        ['judul' => 'Akuntansi Dasar', 'penulis' => 'Erlangga', 'genre' => 'Edukasi', 'status' => 'Tersedia', 'cover' => 'Cover_akutansi.jpg'],
-        ['judul' => 'Hujan', 'penulis' => 'Tere Liye', 'genre' => 'Romance', 'status' => 'Tersedia', 'cover' => 'cover_hujan.jpg'],
-        ['judul' => 'Bandung After Rain', 'penulis' => 'Viva.co', 'genre' => 'Romance', 'status' => 'Tersedia', 'cover' => 'bandung.after.rain.jpg'],
-        ['judul' => 'AI For Everyone', 'penulis' => 'Andrew Ng', 'genre' => 'Technology', 'status' => 'Tersedia', 'cover' => 'cover_AI.byerlangga.jpg'],
-        ['judul' => 'Malioboro at Midnight', 'penulis' => 'Skysphire', 'genre' => 'Romance', 'status' => 'Dipinjam', 'cover' => 'maliboro.cover.jpg'],
-    ]);
+    $semuaBuku = getDummyBooks();
 
     $query = $request->input('query');
     if ($query) {
@@ -107,12 +112,7 @@ Route::get('/katalog', function (Request $request) {
 
 // Route Search Mahasiswa 
 Route::get('/search', function (Request $request) {
-    $semuaBuku = collect([
-        (object)['id' => 1, 'judul' => 'Laskar Pelangi', 'penulis' => 'Andrea Hirata', 'cover' => 'Laskar_Pelangi_Sampul.jpg'],
-        (object)['id' => 2, 'judul' => 'Filosofi Teras', 'penulis' => 'Henry Manampiring', 'cover' => 'filosofi_teras.webp'],
-        (object)['id' => 3, 'judul' => 'Akuntansi Dasar', 'penulis' => 'Erlangga', 'cover' => 'Cover_akutansi.jpg'],
-        (object)['id' => 4, 'judul' => 'Hujan', 'penulis' => 'Tere Liye', 'cover' => 'cover_hujan.jpg'],
-    ]);
+    $semuaBuku = getDummyBooks()->map(fn($item) => (object)$item);
 
     $query = $request->input('query');
     if ($query) {
@@ -127,7 +127,13 @@ Route::get('/search', function (Request $request) {
 })->name('search');
 
 Route::get('/katalog/{id}', function ($id) {
-    return "Halaman Detail untuk Buku ID: " . $id;
+    $buku = getDummyBooks()->firstWhere('id', (int)$id);
+    
+    if (!$buku) {
+        abort(404);
+    }
+
+    return view('detail-buku', compact('buku'));
 })->name('katalog.detail');
 
 Route::get('/about', function () {
@@ -155,18 +161,7 @@ Route::prefix('admin')->group(function () {
 
     // DATA BUKU HARUS DI DALAM SINI
     Route::get('/katalog', function () {
-        $Buku = collect([
-            [
-                'id' => 1, 
-                'judul' => 'Laskar Pelangi', 
-                'penulis' => 'Andrea Hirata', 
-                'genre' => 'Drama', 
-                'status' => 'Tersedia',
-                'cover' => 'Laskar_Pelangi_Sampul.jpg'
-            ],
-            ['id' => 2, 'judul' => 'Bumi', 'penulis' => 'Tere Liye', 'genre' => 'Fantasi', 'status' => 'Tersedia', 'cover' => 'cover_buku_bumi.jpg'],
-            ['id' => 3, 'judul' => 'Filosofi Teras', 'penulis' => 'Henry Manampiring', 'genre' => 'Self-Dev', 'status' => 'Dipinjam', 'cover' => 'filosofi_teras.webp'],
-        ]);
+        $Buku = getDummyBooks();
 
         // Mengirimkan variabel $Buku ke view
         return view('admin.katalog-admin', compact('Buku'));
@@ -185,14 +180,7 @@ Route::prefix('admin')->group(function () {
 
 // --- ROUTE UNTUK HALAMAN EDIT BUKU ---
 Route::get('/admin/buku/{id}/edit', function ($id) {
-    // Kita buat data dummy di sini supaya variabel $buku tidak undefined
-    $semuaBuku = collect([
-        ['id' => 1, 'judul' => 'Laskar Pelangi', 'penulis' => 'Andrea Hirata', 'genre' => 'Drama', 'status' => 'Tersedia'],
-        ['id' => 2, 'judul' => 'Bumi', 'penulis' => 'Tere Liye', 'genre' => 'Fantasi', 'status' => 'Tersedia'],
-        ['id' => 3, 'judul' => 'Filosofi Teras', 'penulis' => 'Henry Manampiring', 'genre' => 'Self-Dev', 'status' => 'Dipinjam'],
-    ]);
-
-    $buku = $semuaBuku->firstWhere('id', $id);
+    $buku = getDummyBooks()->firstWhere('id', (int)$id);
 
     if (!$buku) {
         abort(404);
