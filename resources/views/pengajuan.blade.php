@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('content')
-<div class="py-10" x-data="{ showModal: false }">
+<div class="py-10" x-data="{ showModal: {{ session('success') ? 'true' : 'false' }} }">
     <!-- Header -->
     <div class="mb-12 animate-fade-up">
         <h1 class="text-4xl font-bold text-gray-800">Book Loan Form</h1>
@@ -11,8 +11,9 @@
     <div class="flex flex-col lg:flex-row gap-12">
         <!-- Form Section -->
         <div class="flex-grow glass-panel p-8 md:p-10 animate-fade-up delay-100 border-white/60 shadow-2xl shadow-red-50">
-            <form @submit.prevent="showModal = true" class="space-y-8">
+            <form action="{{ route('pengajuan.store') }}" method="POST" class="space-y-8">
                 @csrf
+                <input type="hidden" name="buku_id" value="{{ request('id') }}">
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div class="space-y-2">
@@ -32,7 +33,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div class="space-y-2">
                         <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest ml-1">Borrow Date</label>
-                        <input type="date" id="tanggal_pinjam" required
+                        <input type="date" id="tanggal_pinjam" name="tanggal_pinjam" required
                             class="w-full p-4 bg-white/50 border border-white rounded-2xl focus:ring-4 focus:ring-red-100 focus:outline-none transition-all font-medium text-gray-700 shadow-sm">
                     </div>
                     <div class="space-y-2">
@@ -119,7 +120,7 @@
             
             <h2 class="text-2xl font-bold text-gray-800 mb-4">Pengajuan Berhasil!!</h2>
             <p class="text-gray-500 text-sm leading-relaxed mb-8">
-                Silahkan datangin perpustakaan agar di acc admin dan bisa mengambil buku nya.
+                {{ session('success') ?? 'Silahkan datangi perpustakaan agar di-ACC admin dan bisa mengambil bukunya.' }}
             </p>
             
             <button @click="showModal = false; window.location.href='{{ route('home') }}'" 

@@ -2,6 +2,14 @@
 
 @section('content')
 <div class="py-10 space-y-12">
+    @if(isset($db_error))
+    <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6 rounded-xl shadow-sm animate-fade-down" role="alert">
+        <p class="font-bold text-sm">Database Error!</p>
+        <p class="text-xs">Gagal terhubung ke database. Pastikan MySQL (XAMPP/Laragon) sudah menyala dan Anda sudah menjalankan <code>php artisan migrate</code>.</p>
+        <p class="text-[10px] mt-2 opacity-70 italic">{{ $db_error }}</p>
+    </div>
+    @endif
+
     <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 animate-fade-up">
         <div>
             <h1 class="text-4xl font-bold text-gray-800">Profil Admin</h1>
@@ -45,59 +53,84 @@
         
         <div class="glass-panel border-white/60 shadow-lg shadow-red-50 rounded-2xl overflow-hidden">
             <div class="hidden md:grid grid-cols-12 gap-4 px-8 py-5 border-b border-gray-100 bg-gray-50/30 text-[11px] font-bold text-gray-400 uppercase tracking-wider">
-                <div class="col-span-4">Book information</div>
+                <div class="col-span-3">Book information</div>
                 <div class="col-span-3">Loaners</div>
-                <div class="col-span-3">Due Date</div>
+                <div class="col-span-2">Due Date</div>
+                <div class="col-span-2">Fine & Status</div>
                 <div class="col-span-2 text-right">Actions</div>
             </div>
 
             <div class="divide-y divide-gray-100">
                 @forelse($books ?? [] as $b)
-                @php /** @var object $b */ @endphp
+                @php /** @var \App\Models\Peminjaman $b */ @endphp
                 <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center px-8 py-5 hover:bg-gray-50/50 transition-colors group">
                     
-                    <div class="col-span-4 flex items-center gap-4">
-                        <div class="w-12 h-16 bg-gray-100 rounded-md border border-gray-200 flex-shrink-0 flex items-center justify-center text-gray-300">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                            </svg>
+                    <div class="col-span-3 flex items-center gap-4">
+                        <div class="w-12 h-16 bg-gray-100 rounded-md border border-gray-200 flex-shrink-0 flex items-center justify-center text-gray-300 overflow-hidden">
+                            @if($b->buku->cover)
+                                <img src="{{ asset('images/' . $b->buku->cover) }}" class="w-full h-full object-cover" onerror="this.src='{{ asset('images/readspace-library.png') }}'">
+                            @else
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                                </svg>
+                            @endif
                         </div>
                         <div>
-                            <h3 class="font-bold text-gray-800 text-base line-clamp-1">{{ $b->judul }}</h3>
-                            <p class="text-xs text-gray-400 font-medium mt-0.5">{{ $b->penulis }}</p>
+                            <h3 class="font-bold text-gray-800 text-sm line-clamp-1">{{ $b->buku->judul }}</h3>
+                            <p class="text-[10px] text-gray-400 font-medium mt-0.5">{{ $b->buku->penulis }}</p>
                         </div>
                     </div>
 
                     <div class="col-span-3 flex flex-col md:flex-row md:items-center gap-2 mt-2 md:mt-0">
                         <span class="md:hidden text-[10px] font-bold text-gray-400 uppercase">Peminjam:</span>
-                        <div class="flex items-center gap-2 px-3 py-1.5 rounded-full border border-gray-100 w-fit">
+                        <div class="flex items-center gap-2 px-3 py-1.5 rounded-full border border-gray-100 w-fit bg-white shadow-sm">
                             <div class="w-5 h-5 rounded-full bg-burgundy-500 text-white flex items-center justify-center text-[10px] font-bold">
-                                {{ substr($b->peminjam, 0, 1) }}
+                                {{ substr($b->user->name, 0, 1) }}
                             </div>
                             <div>
-                                <p class="font-semibold text-gray-700 text-xs">{{ $b->peminjam }}</p>
+                                <p class="font-semibold text-gray-700 text-xs">{{ $b->user->name }}</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-span-3 flex flex-col md:flex-row md:items-center gap-2 mt-2 md:mt-0">
+                    <div class="col-span-2 flex flex-col md:flex-row md:items-center gap-2 mt-2 md:mt-0">
                         <span class="md:hidden text-[10px] font-bold text-gray-400 uppercase">Due Date:</span>
                         <div class="flex items-center gap-2">
-                            <span class="w-2.5 h-2.5 rounded-full bg-red-500"></span>
-                            <p class="font-bold text-red-600 text-sm">{{ $b->jatuh_tempo }}</p>
+                            <span class="w-2 h-2 rounded-full {{ strtotime($b->batas_kembali) < time() ? 'bg-red-500 animate-pulse' : 'bg-green-500' }}"></span>
+                            <p class="font-bold {{ strtotime($b->batas_kembali) < time() ? 'text-red-600' : 'text-gray-600' }} text-xs">{{ $b->batas_kembali }}</p>
                         </div>
                     </div>
 
-                    <div class="col-span-2 flex items-center md:justify-end gap-4 mt-4 md:mt-0 border-t md:border-t-0 border-gray-100 pt-3 md:pt-0">
-                        <div class="w-8 h-8 rounded-full bg-red-50 flex items-center justify-center text-burgundy-500 hover:bg-burgundy-500 hover:text-white transition-colors cursor-pointer" title="Lihat Detail">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                            </svg>
-                        </div>
-                        <button class="text-xs font-bold text-burgundy-500 hover:text-maroon">
-                            Issue Warning
-                        </button>
+                    <div class="col-span-2 flex flex-col justify-center gap-1 mt-2 md:mt-0">
+                        <span class="md:hidden text-[10px] font-bold text-gray-400 uppercase">Fine & Status:</span>
+                        @if($b->denda > 0)
+                            <p class="font-bold text-red-600 text-xs">Rp {{ number_format($b->denda, 0, ',', '.') }}</p>
+                            @if($b->status_denda === 'belum_lunas')
+                                <form action="{{ route('admin.peminjaman.bayar', $b->id) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="text-[9px] font-bold text-white bg-red-500 px-2 py-0.5 rounded hover:bg-red-600 transition-colors">
+                                        SET LUNAS
+                                    </button>
+                                </form>
+                            @else
+                                <span class="text-[9px] font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded border border-green-100 w-fit">LUNAS</span>
+                            @endif
+                        @else
+                            <p class="text-xs text-gray-400 font-medium">No Fines</p>
+                        @endif
+                    </div>
+
+                    <div class="col-span-2 flex items-center md:justify-end gap-2 mt-4 md:mt-0 border-t md:border-t-0 border-gray-100 pt-3 md:pt-0">
+                        @if($b->status === 'dipinjam')
+                            <form action="{{ route('admin.peminjaman.acc', $b->id) }}" method="POST" onsubmit="return confirm('Apakah buku ini benar sudah dikembalikan?')">
+                                @csrf
+                                <button type="submit" class="text-[10px] font-bold text-white bg-burgundy-500 hover:bg-maroon px-3 py-2 rounded-lg transition-all shadow-md shadow-red-50 whitespace-nowrap">
+                                    ACC KEMBALI
+                                </button>
+                            </form>
+                        @else
+                            <span class="text-[10px] font-bold text-gray-400 bg-gray-50 px-3 py-2 rounded-lg border border-gray-100 uppercase">Returned</span>
+                        @endif
                     </div>
 
                 </div>
@@ -108,7 +141,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                         </svg>
                     </div>
-                    <p class="text-gray-400 font-medium">Incredible! Currently there are no books in borrowed status (all have been returned).</p>
+                    <p class="text-gray-400 font-medium">Incredible! Currently there are no books in borrowed status.</p>
                 </div>
                 @endforelse
             </div>
