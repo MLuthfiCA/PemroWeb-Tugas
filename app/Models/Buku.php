@@ -12,6 +12,19 @@ class Buku extends Model
         'judul',
         'penulis',
         'genre',
-        'status'
+        'isbn',
+        'penerbit',
+        'tahun_terbit',
+        'kategori',
+        'stok',
+        'status',
+        'deskripsi',
+        'cover',
+        'tampil_katalog'
     ];
+
+    public function peminjamans()
+    {
+        return $this->hasMany(Peminjaman::class, 'buku_id');
+    }
 }

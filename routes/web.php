@@ -34,33 +34,11 @@ Route::get('/', function () {
 
 Route::get('/contact', [HomeController::class, 'contact']);
 Route::get('/dashboard', [DashboardController::class, 'index']);
-Route::get('/riwayat', function () {
-    if (!session()->has('user')) return redirect('/login');
-    
-    $peminjaman = [
-        ['judul' => 'Laskar Pelangi', 'id_pengguna' => 'B-742', 'tanggal_pinjam' => '2026-04-10', 'batas_kembali' => '2026-04-17', 'denda' => 45000],
-    ];
-    $pengembalian = [
-        ['judul' => 'Hujan', 'id_pengguna' => 'B-128', 'tanggal_kembali' => '2026-04-05', 'denda' => 0],
-    ];
-    return view('riwayat', compact('peminjaman', 'pengembalian'));
-})->name('riwayat');
+Route::get('/riwayat', [RiwayatController::class, 'tampilkanRiwayat'])->name('riwayat');
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 Route::get('/search', fn() => view('search'))->name('search');
 
-Route::get('/admin/profile', function () {
-    $books = collect([
-        (object)[
-            'peminjam' => 'Rayyan',
-            'nim' => '123456',
-            'judul' => 'Filosofi Teras',
-            'penulis' => 'Henry Manampiring',
-            'jatuh_tempo' => '2026-04-20',
-            'denda' => 30000
-        ],
-    ]);
-    return view('admin.profile', compact('books'));
-})->name('admin.profile');
+Route::get('/admin/profile', [AdminController::class, 'profile'])->name('admin.profile');
 
 Route::get('/admin/users', function () {
     return view('admin.datauser'); 
@@ -150,6 +128,8 @@ Route::get('/pengajuan', function () {
     return view('pengajuan');
 })->name('pengajuan');
 
+Route::post('/pengajuan', [BukuController::class, 'storePeminjaman'])->name('pengajuan.store');
+
 
 
 // --- AREA ADMIN ---
@@ -176,6 +156,10 @@ Route::prefix('admin')->group(function () {
     Route::get('/buku/tambah', function () {
         return view('admin.data-buku');
     })->name('admin.buku.create');
+
+    // Route Peminjaman Admin Actions
+    Route::post('/peminjaman/{id}/acc', [AdminController::class, 'accPengembalian'])->name('admin.peminjaman.acc');
+    Route::post('/peminjaman/{id}/bayar', [AdminController::class, 'bayarDenda'])->name('admin.peminjaman.bayar');
 });
 
 // --- ROUTE UNTUK HALAMAN EDIT BUKU ---

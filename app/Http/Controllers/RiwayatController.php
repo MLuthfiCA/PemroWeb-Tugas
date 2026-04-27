@@ -1,32 +1,28 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Peminjaman;
+use Illuminate\Http\Request;
 
 class RiwayatController extends Controller
 {
-public function tampilkanRiwayat()
-{
-    // Data simulasi peminjaman
-    $peminjaman = collect([
-        [
-            'id_pengguna' => 'USR001', 
-            'judul' => 'Laskar Pelangi', 
-            'tanggal_pinjam' => '2026-04-01',
-            // Logika fiks 1 minggu (7 hari)
-            'batas_kembali' => date('Y-m-d', strtotime('2026-04-01 + 7 days')) 
-        ],
-        [
-            'id_pengguna' => 'USR002', 
-            'judul' => 'Bumi', 
-            'tanggal_pinjam' => '2026-04-05',
-            'batas_kembali' => date('Y-m-d', strtotime('2026-04-05 + 7 days'))
-        ],
-    ]);
+    public function tampilkanRiwayat()
+    {
+        $user = session('user');
+        if (!$user) return redirect('/login');
 
-    $pengembalian = collect([
-        ['id_pengguna' => 'USR001', 'judul' => 'Filosofi Teras', 'tanggal_kembali' => '2026-03-25'],
-    ]);
+        // Fetch active loans
+        $peminjaman = Peminjaman::with('buku')
+            ->where('user_id', $user['id'])
+            ->where('status', 'dipinjam')
+            ->get();
 
-    return view('riwayat', compact('peminjaman', 'pengembalian'));
-}
+        // Fetch return history
+        $pengembalian = Peminjaman::with('buku')
+            ->where('user_id', $user['id'])
+            ->where('status', 'dikembalikan')
+            ->get();
+
+        return view('riwayat', compact('peminjaman', 'pengembalian'));
+    }
 }
