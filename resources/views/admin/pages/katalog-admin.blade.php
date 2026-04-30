@@ -3,7 +3,7 @@
 @section('title', 'Katalog Buku Admin')
 
 @section('content')
-<div class="py-10 space-y-10">
+<div class="py-10 space-y-10" x-data="{ showModal: {{ session('success') ? 'true' : 'false' }} }">
     
     <!-- Page Header -->
     <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 animate-fade-up">
@@ -76,5 +76,36 @@
         @endforelse
     </div>
 
+    <!-- Success Modal Pop-up -->
+    <div x-show="showModal" style="display: none;"
+        x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0 scale-90"
+        x-transition:enter-end="opacity-100 scale-100"
+        x-transition:leave="transition ease-in duration-200"
+        x-transition:leave-start="opacity-100 scale-100"
+        x-transition:leave-end="opacity-0 scale-90"
+        class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-maroon/20 backdrop-blur-md">
+        
+        <div class="glass-panel max-w-sm w-full p-8 text-center border-white shadow-2xl relative overflow-hidden" style="background-color: #FDFBD4;">
+            <!-- Decorative Background Icon -->
+            <div class="absolute -top-10 -right-10 w-32 h-32 bg-green-50 rounded-full opacity-20"></div>
+            
+            <div class="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg shadow-green-100/50">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                </svg>
+            </div>
+            
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">A new book was succesfully added to the archive</h2>
+            <p class="text-gray-500 text-sm leading-relaxed mb-8">
+                {{ session('success') ?? 'Buku baru telah berhasil ditambahkan ke dalam katalog.' }}
+            </p>
+            
+            <button @click="showModal = false" 
+                class="w-full bg-burgundy-500 text-white py-4 rounded-2xl font-bold hover:bg-maroon transition-all shadow-lg shadow-red-100 active:scale-95">
+                Tutup
+            </button>
+        </div>
+    </div>
 </div>
 @endsection

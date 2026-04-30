@@ -50,7 +50,7 @@
                                 <input type="text" name="book_id" value="{{ old('book_id') }}" placeholder="Book 001" class="w-full px-4 py-3 border border-white bg-white/50 rounded-2xl focus:outline-none focus:ring-4 focus:ring-red-100 font-medium text-sm @error('book_id') border-red-500 @enderror">
                                 
                                @error('book_id')
-                                    <span class="text-[10px] text-red-500 font-bold ml-1">{{ The book id field is required. }}</span>
+                                    <span class="text-[10px] text-red-500 font-bold ml-1">{{ $message }}</span>
                                 @enderror
                             </div>
                         </div>

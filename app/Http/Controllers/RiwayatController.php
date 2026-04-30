@@ -11,15 +11,17 @@ class RiwayatController extends Controller
         $user = session('user');
         if (!$user) return redirect('/login');
 
+        $userId = $user['id'] ?? 1;
+
         // Fetch active loans
         $peminjaman = Peminjaman::with('buku')
-            ->where('user_id', $user['id'])
+            ->where('user_id', $userId)
             ->where('status', 'dipinjam')
             ->get();
 
         // Fetch return history
         $pengembalian = Peminjaman::with('buku')
-            ->where('user_id', $user['id'])
+            ->where('user_id', $userId)
             ->where('status', 'dikembalikan')
             ->get();
 

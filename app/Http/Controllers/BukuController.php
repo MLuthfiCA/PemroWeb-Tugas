@@ -64,8 +64,10 @@ class BukuController extends Controller
             return back()->with('error', 'Buku sedang dipinjam.');
         }
 
+        $userId = $user['id'] ?? 1;
+
         $peminjaman = Peminjaman::create([
-            'user_id' => $user['id'],
+            'user_id' => $userId,
             'buku_id' => $request->buku_id,
             'tanggal_pinjam' => $request->tanggal_pinjam,
             'batas_kembali' => date('Y-m-d', strtotime($request->tanggal_pinjam . ' + 7 days')),
