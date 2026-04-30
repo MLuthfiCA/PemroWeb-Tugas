@@ -51,7 +51,7 @@
                     @if(session('user')['role'] === 'admin')
                         <li><a href="{{ route('admin.profile') }}" class="block px-4 py-2 hover:bg-red-50 hover:text-burgundy-500 transition-colors font-medium">Admin Profile</a></li>
                     @else
-                        <li><a href="{{ route('riwayat') }}" class="block px-4 py-2 hover:bg-red-50 hover:text-burgundy-500 transition-colors font-medium">My Profile</a></li>
+                        <li><a href="{{ route('profile') }}" class="block px-4 py-2 hover:bg-red-50 hover:text-burgundy-500 transition-colors font-medium">My Profile</a></li>
                     @endif
                 </ul>
                 <div class="py-1">

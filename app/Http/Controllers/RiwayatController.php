@@ -23,6 +23,6 @@ class RiwayatController extends Controller
             ->where('status', 'dikembalikan')
             ->get();
 
-        return view('user.pages.riwayat', compact('peminjaman', 'pengembalian'));
+        return view('user.pages.profile', compact('peminjaman', 'pengembalian'));
     }
 }

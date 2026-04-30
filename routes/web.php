@@ -34,7 +34,7 @@ Route::get('/', function () {
 
 Route::get('/contact', [HomeController::class, 'contact']);
 Route::get('/dashboard', [DashboardController::class, 'index']);
-Route::get('/riwayat', [RiwayatController::class, 'tampilkanRiwayat'])->name('riwayat');
+Route::get('/profile', [RiwayatController::class, 'tampilkanRiwayat'])->name('profile');
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 
 Route::get('/admin/profile', [AdminController::class, 'profile'])->name('admin.profile');
@@ -117,10 +117,7 @@ Route::get('/about', function () {
     return view('user.pages.about'); 
 })->name('about');
 
-Route::get('/profile', function () {
-    $daftarBuku = [['judul' => 'Laskar Pelangi'], ['judul' => 'Bumi']];
-    return view('user.pages.profile', compact('daftarBuku'));
-})->name('profile');
+
 
 Route::get('/pengajuan', function () {
     if (!session()->has('user')) return redirect('/login');

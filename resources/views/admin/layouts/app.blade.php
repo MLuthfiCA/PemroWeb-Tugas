@@ -2,18 +2,97 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>ReadSpace Library</title>
-
-    @vite('resources/css/app.css')
+    <title>ReadSpace Library Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        burgundy: {
+                            50: '#fff1f2',
+                            100: '#ffe4e6',
+                            500: '#800020',
+                            600: '#630330',
+                            900: '#4c0519',
+                        },
+                        maroon: '#630330',
+                        rose: {
+                            gold: '#E7C0B7',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --glass: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.5);
+            --burgundy: #800020;
+            --maroon: #630330;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: linear-gradient(135deg, #FFFDF5 0%, #F3E5D8 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            margin: 0;
+            overflow-x: hidden;
+            color: #2D1B1E;
+        }
+
+        .glass-panel {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade-up {
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(128, 0, 32, 0.1); border-radius: 10px; }
+    </style>
 </head>
-<body class="bg-gray-50">
+<body class="flex flex-col min-h-screen">
+
+    <!-- Background Elements -->
+    <div class="fixed inset-0 pointer-events-none z-[-1] overflow-hidden">
+        <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-orange-50 opacity-50 blur-[120px]"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-[#EBD8C1] opacity-30 blur-[120px]"></div>
+        <div class="absolute top-[20%] right-[10%] w-[30%] h-[30%] rounded-full bg-amber-50 opacity-40 blur-[100px]"></div>
+    </div>
 
     @include('admin.components.navbar')
 
-    <main>
-        @yield('content')
-    </main>
+    <div class="flex-grow pt-24 transition-all duration-300">
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            @yield('content')
+        </main>
 
     <footer class="bg-[#d5b893] text-white pt-12 pb-6 mt-10">
     <div class="max-w-7xl mx-auto px-6">
@@ -101,5 +180,7 @@
 
     </div>
 </footer>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+    </div>
 </body>
 </html>

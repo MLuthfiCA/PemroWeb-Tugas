@@ -9,25 +9,36 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             @php
+                // Untuk menambahkan foto: 
+                // 1. Buat folder 'team' di dalam folder 'public/images/' (public/images/team/)
+                // 2. Masukkan file foto ke folder tersebut
+                // 3. Pastikan nama file sesuai dengan nama di kolom 'photo' di bawah ini
                 $team = [
-                    ['name' => 'M. Luthfi Causart Azavi', 'nim' => '3312501052', 'color' => 'bg-red-50 text-burgundy-500'],
-                    ['name' => 'Muhammad Risky Kurnia', 'nim' => '3312501056', 'color' => 'bg-rose-50 text-maroon'],
-                    ['name' => 'Siti Halimah Chania', 'nim' => '3312501057', 'color' => 'bg-orange-50 text-orange-700'],
-                    ['name' => 'Zahrah Athirah Badiah', 'nim' => '3312501060', 'color' => 'bg-purple-50 text-indigo-900'],
+                    ['name' => 'M. Luthfi Causart Azavi', 'nim' => '3312501052', 'role' => 'Team Leader', 'color' => 'bg-red-50 text-burgundy-500', 'photo' => 'luthfi.jpg'],
+                    ['name' => 'Muhammad Risky Kurnia', 'nim' => '3312501056', 'role' => 'Team Member', 'color' => 'bg-rose-50 text-maroon', 'photo' => 'risky.jpg'],
+                    ['name' => 'Siti Halimah Chania', 'nim' => '3312501057', 'role' => 'Team Member', 'color' => 'bg-orange-50 text-orange-700', 'photo' => 'siti.jpg'],
+                    ['name' => 'Zahrah Athirah Badiah', 'nim' => '3312501060', 'role' => 'Team Member', 'color' => 'bg-purple-50 text-indigo-900', 'photo' => 'zahrah.jpg'],
                 ];
             @endphp
 
             @foreach($team as $index => $member)
             <div class="glass-panel p-8 text-center hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group animate-fade-up border-white/60" style="animation-delay: {{ $index * 100 }}ms">
-                <div class="w-24 h-24 mx-auto mb-6 rounded-full {{ $member['color'] }} flex items-center justify-center text-3xl font-bold shadow-inner">
-                    {{ substr($member['name'], 0, 1) }}
+                
+                <!-- FOTO ANGGOTA TIM -->
+                <div class="w-24 h-24 mx-auto mb-6 rounded-full {{ $member['color'] }} flex items-center justify-center text-3xl font-bold shadow-inner overflow-hidden relative border-4 border-white">
+                    <!-- Default inisial huruf jika foto gagal dimuat (atau belum ada) -->
+                    <span class="relative z-0">{{ substr($member['name'], 0, 1) }}</span>
+                    
+                    <!-- Foto akan muncul menutupi inisial di atas jika file fotonya tersedia di public/images/team/ -->
+                    <img src="{{ asset('images/team/' . $member['photo']) }}" alt="{{ $member['name'] }}" class="w-full h-full object-cover absolute inset-0 z-10" onerror="this.style.display='none'">
                 </div>
+
                 <p class="font-bold text-xl text-gray-800 mb-2 group-hover:text-burgundy-500 transition-colors">{{ $member['name'] }}</p>
                 <div class="space-y-1">
                     <p class="text-sm font-medium text-gray-400">NIM : {{ $member['nim'] }}</p>
                     <p class="text-sm font-medium text-gray-400">Prodi : Teknik Informatika</p>
                     <div class="mt-6 pt-6 border-t border-red-50">
-                        <span class="px-4 py-1.5 rounded-full bg-white text-[10px] font-bold text-gray-400 uppercase tracking-widest border border-red-50">Team Member</span>
+                        <span class="px-4 py-1.5 rounded-full bg-white text-[10px] font-bold text-gray-400 uppercase tracking-widest border border-red-50">{{ $member['role'] }}</span>
                     </div>
                 </div>
             </div>

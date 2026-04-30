@@ -2,48 +2,47 @@
 
 @section('content')
     <div class="py-10">
-        <h2 class="text-3xl font-extrabold mb-10 text-center text-[#632024]">About Us</h2>
+        <div class="text-center mb-16 animate-fade-up">
+            <h2 class="text-4xl font-bold text-gray-800 mb-4">Our Team</h2>
+            <p class="text-gray-500 max-w-2xl mx-auto">The creative minds behind ReadSpace Library are dedicated to building the best digital reading experience for Polibatam students.</p>
+        </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div class="bg-white rounded-3xl shadow-sm border border-stone-100 p-8 text-center hover:shadow-2xl hover:-translate-y-2 transition duration-500 group">
-                <div class="bg-[#632024] h-40 mb-6 rounded-2xl shadow-inner group-hover:bg-red-900 transition-colors"></div>
-                <p class="font-bold text-xl text-[#632024] mb-2">M. Luthfi Causart Azavi</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            @php
+                // Untuk menambahkan foto: 
+                // 1. Buat folder 'team' di dalam folder 'public/images/' (public/images/team/)
+                // 2. Masukkan file foto ke folder tersebut
+                // 3. Pastikan nama file sesuai dengan nama di kolom 'photo' di bawah ini
+                $team = [
+                    ['name' => 'M. Luthfi Causart Azavi', 'nim' => '3312501052', 'role' => 'Team Leader', 'color' => 'bg-red-50 text-burgundy-500', 'photo' => 'luthfi.jpg'],
+                    ['name' => 'Muhammad Risky Kurnia', 'nim' => '3312501056', 'role' => 'Team Member', 'color' => 'bg-rose-50 text-maroon', 'photo' => 'risky.jpg'],
+                    ['name' => 'Siti Halimah Chania', 'nim' => '3312501057', 'role' => 'Team Member', 'color' => 'bg-orange-50 text-orange-700', 'photo' => 'siti.jpg'],
+                    ['name' => 'Zahrah Athirah Badiah', 'nim' => '3312501060', 'role' => 'Team Member', 'color' => 'bg-purple-50 text-indigo-900', 'photo' => 'zahrah.jpg'],
+                ];
+            @endphp
+
+            @foreach($team as $index => $member)
+            <div class="glass-panel p-8 text-center hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group animate-fade-up border-white/60" style="animation-delay: {{ $index * 100 }}ms">
+                
+                <!-- FOTO ANGGOTA TIM -->
+                <div class="w-24 h-24 mx-auto mb-6 rounded-full {{ $member['color'] }} flex items-center justify-center text-3xl font-bold shadow-inner overflow-hidden relative border-4 border-white">
+                    <!-- Default inisial huruf jika foto gagal dimuat (atau belum ada) -->
+                    <span class="relative z-0">{{ substr($member['name'], 0, 1) }}</span>
+                    
+                    <!-- Foto akan muncul menutupi inisial di atas jika file fotonya tersedia di public/images/team/ -->
+                    <img src="{{ asset('images/team/' . $member['photo']) }}" alt="{{ $member['name'] }}" class="w-full h-full object-cover absolute inset-0 z-10" onerror="this.style.display='none'">
+                </div>
+
+                <p class="font-bold text-xl text-gray-800 mb-2 group-hover:text-burgundy-500 transition-colors">{{ $member['name'] }}</p>
                 <div class="space-y-1">
-                    <p class="text-sm font-medium text-stone-500">NIM : 3312501052</p>
-                    <p class="text-sm font-medium text-stone-500">Prodi : Teknik Informatika</p>
-                    <p class="text-sm font-bold text-stone-400 mt-4 uppercase tracking-widest">Tugas : —</p>
+                    <p class="text-sm font-medium text-gray-400">NIM : {{ $member['nim'] }}</p>
+                    <p class="text-sm font-medium text-gray-400">Prodi : Teknik Informatika</p>
+                    <div class="mt-6 pt-6 border-t border-red-50">
+                        <span class="px-4 py-1.5 rounded-full bg-white text-[10px] font-bold text-gray-400 uppercase tracking-widest border border-red-50">{{ $member['role'] }}</span>
+                    </div>
                 </div>
             </div>
-
-            <div class="bg-white rounded-3xl shadow-sm border border-stone-100 p-8 text-center hover:shadow-2xl hover:-translate-y-2 transition duration-500 group">
-                <div class="bg-[#632024] h-40 mb-6 rounded-2xl shadow-inner group-hover:bg-red-900 transition-colors"></div>
-                <p class="font-bold text-xl text-[#632024] mb-2">Muhammad Risky Kurnia</p>
-                <div class="space-y-1">
-                    <p class="text-sm font-medium text-stone-500">NIM : 3312501056</p>
-                    <p class="text-sm font-medium text-stone-500">Prodi : Teknik Informatika</p>
-                    <p class="text-sm font-bold text-stone-400 mt-4 uppercase tracking-widest">Tugas : —</p>
-                </div>
-            </div>
-
-            <div class="bg-white rounded-3xl shadow-sm border border-stone-100 p-8 text-center hover:shadow-2xl hover:-translate-y-2 transition duration-500 group">
-                <div class="bg-[#632024] h-40 mb-6 rounded-2xl shadow-inner group-hover:bg-red-900 transition-colors"></div>
-                <p class="font-bold text-xl text-[#632024] mb-2">Siti Halimah Chania</p>
-                <div class="space-y-1">
-                    <p class="text-sm font-medium text-stone-500">NIM : 3312501057</p>
-                    <p class="text-sm font-medium text-stone-500">Prodi : Teknik Informatika</p>
-                    <p class="text-sm font-bold text-stone-400 mt-4 uppercase tracking-widest">Tugas : —</p>
-                </div>
-            </div>
-
-            <div class="bg-white rounded-3xl shadow-sm border border-stone-100 p-8 text-center hover:shadow-2xl hover:-translate-y-2 transition duration-500 group">
-                <div class="bg-[#632024] h-40 mb-6 rounded-2xl shadow-inner group-hover:bg-red-900 transition-colors"></div>
-                <p class="font-bold text-xl text-[#632024] mb-2">Zahrah Athirah Badiah</p>
-                <div class="space-y-1">
-                    <p class="text-sm font-medium text-stone-500">NIM : 3312501060</p>
-                    <p class="text-sm font-medium text-stone-500">Prodi : Teknik Informatika</p>
-                    <p class="text-sm font-bold text-stone-400 mt-4 uppercase tracking-widest">Tugas : —</p>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 @endsection
