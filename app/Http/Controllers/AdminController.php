@@ -14,7 +14,7 @@ class AdminController extends Controller
     {
         // Mengambil data dari database (tabel users)
         $users = User::all();
-        return view('admin.data_user', compact('users'));
+        return view('admin.pages.datauser', compact('users'));
     }
     
     public function destroy($id)
@@ -32,10 +32,10 @@ class AdminController extends Controller
                 ->orderBy('status', 'desc') // 'dipinjam' akan muncul di atas 'dikembalikan'
                 ->orderBy('created_at', 'desc')
                 ->get();
-            return view('admin.profile', compact('books'));
+            return view('admin.pages.profile', compact('books'));
         } catch (\Exception $e) {
             // Jika database error (misal MySQL belum nyala), tampilkan halaman dengan pesan error
-            return view('admin.profile', ['books' => collect(), 'db_error' => $e->getMessage()]);
+            return view('admin.pages.profile', ['books' => collect(), 'db_error' => $e->getMessage()]);
         }
     }
 

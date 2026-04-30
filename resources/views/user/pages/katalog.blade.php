@@ -1,4 +1,4 @@
-@extends('app')
+@extends('user.layouts.app')
 
 @section('content')
 <div class="py-10 space-y-10" x-data="{ view: 'grid' }">

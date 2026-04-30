@@ -9,7 +9,7 @@
 </head>
 <body class="bg-gray-50">
 
-    @include('admin.layouts.navbar')
+    @include('admin.components.navbar')
 
     <main>
         @yield('content')

@@ -91,9 +91,9 @@
     </div>
 
     @if(session()->has('user') && session('user')['role'] === 'admin')
-        @include('admin.layouts.navbar')
+        @include('admin.components.navbar')
     @else
-        @include('layouts.navbar')
+        @include('user.components.navbar')
     @endif
 
     <div class="flex-grow pt-24 transition-all duration-300">

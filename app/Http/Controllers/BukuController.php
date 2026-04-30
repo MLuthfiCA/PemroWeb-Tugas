@@ -18,7 +18,7 @@ class BukuController extends Controller
 
     $buku = $Buku->firstWhere('id', $id);
 
-    return view('admin.edit', compact('buku'));
+    return view('admin.pages.edit-buku', compact('buku'));
 }
 
     public function update(Request $request, $id)
@@ -45,7 +45,7 @@ class BukuController extends Controller
     public function index()
 {
     $Buku = Buku::all(); // ambil dari database
-    return view('admin.katalog-admin', compact('Buku'));
+    return view('admin.pages.katalog-admin', compact('Buku'));
 }
 
     public function storePeminjaman(Request $request)

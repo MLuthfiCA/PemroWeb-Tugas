@@ -1,4 +1,4 @@
-@extends('app')
+@extends('user.layouts.app')
 
 @section('content')
 <div class="space-y-8">

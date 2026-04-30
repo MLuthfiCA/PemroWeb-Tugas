@@ -1,4 +1,4 @@
-@extends('app')
+@extends('user.layouts.app')
 
 @section('title', 'Detail Buku - ' . $buku['judul'])
 

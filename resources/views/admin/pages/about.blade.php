@@ -1,4 +1,4 @@
-@extends('app')
+@extends('admin.layouts.app')
 
 @section('content')
     <div class="py-10">
@@ -21,7 +21,7 @@
                 <div class="space-y-1">
                     <p class="text-sm font-medium text-stone-500">NIM : 3312501056</p>
                     <p class="text-sm font-medium text-stone-500">Prodi : Teknik Informatika</p>
-                    <p class="text-sm font-bold text-stone-400 mt-4 uppercase tracking-widest">Task : —</p>
+                    <p class="text-sm font-bold text-stone-400 mt-4 uppercase tracking-widest">Tugas : —</p>
                 </div>
             </div>
 
@@ -46,38 +46,4 @@
             </div>
         </div>
     </div>
-
-    <footer class="bg-[#d5b893] text-white py-10">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
-                
-                <div class="flex justify-center md:justify-start items-center">
-                    <img src="{{ asset('images/readspace-library.png') }}" alt="Logo Readspace" class="h-20 w-auto object-contain">
-                </div>
-
-                <div>
-                    <h6 class="font-bold mb-2">Readspace Library</h6>
-                    <p class="text-sm text-gray-100 leading-relaxed">
-                        Readspace Library is a digital library platform that we designed to make it easier for students to borrow books and simplify the library system.
-                    </p>
-                </div>
-
-                <div>
-                    <h6 class="font-bold mb-2">Politeknik Negeri Batam</h6>
-                    <p class="text-sm text-gray-100">
-                        Ahmad Yani Street, Batam City, Kepulauan Riau, Indonesia.
-                    </p>
-                </div>
-
-                <div>
-                    <h6 class="font-bold mb-2">Contact us</h6>
-                    <p class="text-sm text-gray-100">
-                        Email: readspacelibrary@poltek.ac.id<br>
-                        Telephone: (021) 673528
-                    </p>
-                </div>
-            </div>
-        </div>
-    </footer>
-
 @endsection

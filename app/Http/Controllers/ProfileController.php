@@ -22,5 +22,5 @@ class ProfileController extends Controller
         ],
     ];
 
-    return view('admin.profile', compact('books'));
+    return view('admin.pages.profile', compact('books'));
 }}

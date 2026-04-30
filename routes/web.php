@@ -36,18 +36,17 @@ Route::get('/contact', [HomeController::class, 'contact']);
 Route::get('/dashboard', [DashboardController::class, 'index']);
 Route::get('/riwayat', [RiwayatController::class, 'tampilkanRiwayat'])->name('riwayat');
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
-Route::get('/search', fn() => view('search'))->name('search');
 
 Route::get('/admin/profile', [AdminController::class, 'profile'])->name('admin.profile');
 
 Route::get('/admin/users', function () {
-    return view('admin.datauser'); 
+    return view('admin.pages.datauser'); 
 })->name('admin.users');
 
 // --- GUEST & AUTH ROUTES ---
 
 Route::get('/home', function () {
-    return view('home');
+    return view('user.pages.home');
 })->name('home');
 
 Route::get('/login', function () {
@@ -55,7 +54,7 @@ Route::get('/login', function () {
         if (session('user')['role'] === 'admin') return redirect()->route('admin.katalog');
         return redirect()->route('katalog');
     }
-    return view('login');
+    return view('user.pages.login');
 })->name('login');
 
 Route::post('/login', [LoginController::class, 'login'])->name('login.post');
@@ -85,7 +84,7 @@ Route::get('/katalog', function (Request $request) {
     } else {
         $hasilBuku = $semuaBuku;
     }
-    return view('katalog', ['daftarBuku' => $hasilBuku]);
+    return view('user.pages.katalog', ['daftarBuku' => $hasilBuku]);
 })->name('katalog');
 
 // Route Search Mahasiswa 
@@ -101,7 +100,7 @@ Route::get('/search', function (Request $request) {
     } else {
         $books = collect(); 
     }
-    return view('search', compact('books'));
+    return view('user.pages.search', compact('books'));
 })->name('search');
 
 Route::get('/katalog/{id}', function ($id) {
@@ -111,21 +110,21 @@ Route::get('/katalog/{id}', function ($id) {
         abort(404);
     }
 
-    return view('detail-buku', compact('buku'));
+    return view('user.pages.detail-buku', compact('buku'));
 })->name('katalog.detail');
 
 Route::get('/about', function () {
-    return view('about'); 
+    return view('user.pages.about'); 
 })->name('about');
 
 Route::get('/profile', function () {
     $daftarBuku = [['judul' => 'Laskar Pelangi'], ['judul' => 'Bumi']];
-    return view('profile', compact('daftarBuku'));
+    return view('user.pages.profile', compact('daftarBuku'));
 })->name('profile');
 
 Route::get('/pengajuan', function () {
     if (!session()->has('user')) return redirect('/login');
-    return view('pengajuan');
+    return view('user.pages.pengajuan');
 })->name('pengajuan');
 
 Route::post('/pengajuan', [BukuController::class, 'storePeminjaman'])->name('pengajuan.store');
@@ -134,7 +133,7 @@ Route::post('/pengajuan', [BukuController::class, 'storePeminjaman'])->name('pen
 
 // --- AREA ADMIN ---
 Route::get('/admin/about', function () {
-    return view('admin.about');
+    return view('admin.pages.about');
 })->name('admin.about');
 
 Route::prefix('admin')->group(function () {
@@ -144,7 +143,7 @@ Route::prefix('admin')->group(function () {
         $Buku = getDummyBooks();
 
         // Mengirimkan variabel $Buku ke view
-        return view('admin.katalog-admin', compact('Buku'));
+        return view('admin.pages.katalog-admin', compact('Buku'));
     })->name('admin.katalog');
 
     // Route edit, update, dan delete tetap seperti sebelumnya
@@ -154,7 +153,7 @@ Route::prefix('admin')->group(function () {
     
     // Route Tambah Buku
     Route::get('/buku/tambah', function () {
-        return view('admin.data-buku');
+        return view('admin.pages.data-buku');
     })->name('admin.buku.create');
 
     // Route Peminjaman Admin Actions
@@ -170,7 +169,7 @@ Route::get('/admin/buku/{id}/edit', function ($id) {
         abort(404);
     }
 
-    return view('admin.edit-buku', compact('buku'));
+    return view('admin.pages.edit-buku', compact('buku'));
 })->name('admin.edit_buku'); 
 
 // Route untuk proses updatenya
