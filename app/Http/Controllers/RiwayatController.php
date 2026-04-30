@@ -14,16 +14,10 @@ class RiwayatController extends Controller
         $userId = $user['id'] ?? 1;
 
         // Fetch active loans
-        $peminjaman = Peminjaman::with('buku')
-            ->where('user_id', $userId)
-            ->where('status', 'dipinjam')
-            ->get();
+        $peminjaman = collect([]);
 
         // Fetch return history
-        $pengembalian = Peminjaman::with('buku')
-            ->where('user_id', $userId)
-            ->where('status', 'dikembalikan')
-            ->get();
+        $pengembalian = collect([]);
 
         return view('user.pages.profile', compact('peminjaman', 'pengembalian'));
     }
