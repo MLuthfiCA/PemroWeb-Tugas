@@ -22,11 +22,6 @@
                 {{ session('user.role', 'Mahasiswa') }}
             </div>
         </div>
-        <div class="w-full md:w-auto">
-            <button class="w-full px-6 py-3 rounded-xl border-2 border-burgundy-500 text-burgundy-500 font-bold hover:bg-burgundy-500 hover:text-white transition-colors text-sm">
-                Edit Profile
-            </button>
-        </div>
     </div>
 
     <!-- Currently Borrowed -->

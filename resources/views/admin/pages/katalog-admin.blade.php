@@ -34,7 +34,7 @@
                 
                 <!-- Availability Badge -->
                 <div class="absolute top-4 right-4 px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest backdrop-blur-xl {{ $buku['status'] == 'Tersedia' ? 'bg-green-500/10 text-green-600 border border-green-200' : 'bg-red-500/10 text-red-600 border border-red-200' }}">
-                    {{ $buku['status'] }}
+                    {{ $buku['status'] == 'Tersedia' ? 'AVAILABLE' : 'BORROWED' }}
                 </div>
 
                 <!-- Admin Action Overlay -->
@@ -61,7 +61,7 @@
             
             <div class="mt-auto pt-5 border-t border-red-50 flex items-center justify-between">
                 <span class="px-2 py-1 rounded bg-white/80 text-[10px] font-bold text-burgundy-500 uppercase tracking-tighter border border-red-100">{{ $buku['genre'] }}</span>
-                <span class="text-[10px] font-bold text-gray-300 uppercase tracking-widest">ID: #00{{ $buku['id'] }}</span>
+                <span class="text-[10px] font-bold text-gray-300 uppercase tracking-widest">ID: {{ $buku['book_id'] ?? '#00'.$buku['id'] }}</span>
             </div>
         </div>
         @empty
@@ -98,12 +98,12 @@
             
             <h2 class="text-2xl font-bold text-gray-800 mb-4">A new book was succesfully added to the archive</h2>
             <p class="text-gray-500 text-sm leading-relaxed mb-8">
-                {{ session('success') ?? 'Buku baru telah berhasil ditambahkan ke dalam katalog.' }}
+                {{ session('success') ?? 'A new book has been successfully added to the catalog.' }}
             </p>
             
             <button @click="showModal = false" 
                 class="w-full bg-burgundy-500 text-white py-4 rounded-2xl font-bold hover:bg-maroon transition-all shadow-lg shadow-red-100 active:scale-95">
-                Tutup
+                Close
             </button>
         </div>
     </div>

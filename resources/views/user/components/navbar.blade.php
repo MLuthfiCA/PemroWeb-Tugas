@@ -10,14 +10,14 @@
         <!-- Desktop Navigation -->
         <div class="hidden md:flex items-center gap-1">
             <a href="{{ route('home') }}" class="px-5 py-2 rounded-xl transition-all duration-300 {{ request()->routeIs('home') ? 'bg-burgundy-500 text-white shadow-lg shadow-red-100' : 'text-gray-500 hover:text-burgundy-500 hover:bg-white/80' }} font-medium text-sm">
-                Home page
+                Home
             </a>
             @if(session()->has('user') && session('user')['role'] === 'admin')
                 <a href="{{ route('admin.katalog') }}" class="px-5 py-2 rounded-xl transition-all duration-300 {{ request()->routeIs('admin.katalog') ? 'bg-burgundy-500 text-white shadow-lg shadow-red-100' : 'text-gray-500 hover:text-burgundy-500 hover:bg-white/80' }} font-medium text-sm">
                     Book Catalog
                 </a>
                 <a href="{{ route('admin.users') }}" class="px-5 py-2 rounded-xl transition-all duration-300 {{ request()->routeIs('admin.users') ? 'bg-burgundy-500 text-white shadow-lg shadow-red-100' : 'text-gray-500 hover:text-burgundy-500 hover:bg-white/80' }} font-medium text-sm">
-                    Users Data
+                    User Data
                 </a>
             @else
                 <a href="{{ route('katalog') }}" class="px-5 py-2 rounded-xl transition-all duration-300 {{ request()->routeIs('katalog') ? 'bg-burgundy-500 text-white shadow-lg shadow-red-100' : 'text-gray-500 hover:text-burgundy-500 hover:bg-white/80' }} font-medium text-sm">
@@ -57,7 +57,7 @@
                 <div class="py-1">
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-red-500 font-bold hover:bg-red-50 transition-colors">Go out</button>
+                        <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-red-500 font-bold hover:bg-red-50 transition-colors">Log Out</button>
                     </form>
                 </div>
             </div>

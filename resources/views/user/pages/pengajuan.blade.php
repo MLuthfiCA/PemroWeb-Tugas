@@ -90,7 +90,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0 text-burgundy-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
-                            <p>The standard loan period is <strong>7 working days</strong>. Harap kembalikan buku sebelum jatuh tempo untuk menghindari denda.</p>
+                            <p>The standard loan period is <strong>7 working days</strong>. Please return the book before the due date to avoid a late fee of <strong>Rp 5.000 per day</strong>.</p>
                         </div>
                     </div>
                 </div>
@@ -118,14 +118,14 @@
                 </svg>
             </div>
             
-            <h2 class="text-2xl font-bold text-gray-800 mb-4">Pengajuan Berhasil!!</h2>
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Submission Successful!!</h2>
             <p class="text-gray-500 text-sm leading-relaxed mb-8">
-                {{ session('success') ?? 'Silahkan datangi perpustakaan agar di-ACC admin dan bisa mengambil bukunya.' }}
+                {{ session('success') ?? 'Please visit the library to get admin approval and pick up your book.' }}
             </p>
             
             <button @click="showModal = false; window.location.href='{{ route('home') }}'" 
                 class="w-full bg-burgundy-500 text-white py-4 rounded-2xl font-bold hover:bg-maroon transition-all shadow-lg shadow-red-100 active:scale-95">
-                Kembali ke Beranda
+                Return to Home
             </button>
         </div>
     </div>

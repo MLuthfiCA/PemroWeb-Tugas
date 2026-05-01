@@ -9,6 +9,7 @@ class Buku extends Model
     protected $table = 'buku'; // sesuaikan dengan nama tabel kamu
 
     protected $fillable = [
+        'book_id',
         'judul',
         'penulis',
         'genre',

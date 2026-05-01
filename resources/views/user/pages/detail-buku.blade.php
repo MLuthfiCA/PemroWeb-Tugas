@@ -28,7 +28,7 @@
 
                 <!-- Status Badge Floating -->
                 <div class="absolute -top-4 -right-4 px-6 py-3 rounded-2xl shadow-xl backdrop-blur-xl border-2 {{ $buku['status'] == 'Tersedia' ? 'bg-green-500/90 text-white border-green-400' : 'bg-red-500/90 text-white border-red-400' }} font-black text-xs uppercase tracking-widest animate-bounce-slow">
-                    {{ $buku['status'] }}
+                    {{ $buku['status'] == 'Tersedia' ? 'AVAILABLE' : 'BORROWED' }}
                 </div>
             </div>
         </div>
@@ -40,7 +40,7 @@
                     <span class="px-4 py-1.5 rounded-full bg-burgundy-50 text-burgundy-500 text-[10px] font-black uppercase tracking-widest border border-burgundy-100">
                         {{ $buku['genre'] }}
                     </span>
-                    <span class="text-gray-300 font-medium text-xs">ID BUKU: #{{ str_pad($buku['id'], 3, '0', STR_PAD_LEFT) }}</span>
+                    <span class="text-gray-300 font-medium text-xs">BOOK ID: {{ $buku['book_id'] ?? '#00'.$buku['id'] }}</span>
                 </div>
                 <h1 class="text-5xl font-black text-gray-800 leading-tight mb-4">{{ $buku['judul'] }}</h1>
                 <p class="text-2xl font-medium text-gray-400 italic">by {{ $buku['penulis'] }}</p>
@@ -53,7 +53,7 @@
                 </div>
                 <div class="glass-panel p-6 border-white/40 bg-white/20">
                     <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Availability</p>
-                    <p class="text-lg font-bold {{ $buku['status'] == 'Tersedia' ? 'text-green-600' : 'text-red-500' }}">{{ $buku['status'] }}</p>
+                    <p class="text-lg font-bold {{ $buku['status'] == 'Tersedia' ? 'text-green-600' : 'text-red-500' }}">{{ $buku['status'] == 'Tersedia' ? 'Available' : 'Borrowed' }}</p>
                 </div>
             </div>
 
@@ -85,12 +85,6 @@
                 </button>
                 @endif
 
-                <button class="px-10 py-5 bg-white text-gray-700 border border-gray-200 rounded-2xl font-bold text-lg hover:bg-gray-50 transition-all flex items-center justify-center gap-3 shadow-xl shadow-gray-100">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
-                    </svg>
-                    Add to Wishlist
-                </button>
             </div>
         </div>
     </div>

@@ -13,14 +13,14 @@ use App\Http\Controllers\AdminController;
 
 function getDummyBooks() {
     return collect([
-        ['id' => 1, 'judul' => 'Laskar Pelangi', 'penulis' => 'Andrea Hirata', 'genre' => 'Drama', 'status' => 'Tersedia', 'cover' => 'Laskar_Pelangi_Sampul.jpg'],
-        ['id' => 2, 'judul' => 'Filosofi Teras', 'penulis' => 'Henry Manampiring', 'genre' => 'Self-Dev', 'status' => 'Dipinjam', 'cover' => 'filosofi_teras.webp'],
-        ['id' => 3, 'judul' => 'Akuntansi Dasar', 'penulis' => 'Erlangga', 'genre' => 'Edukasi', 'status' => 'Tersedia', 'cover' => 'Cover_akutansi.jpg'],
-        ['id' => 4, 'judul' => 'Hujan', 'penulis' => 'Tere Liye', 'genre' => 'Romance', 'status' => 'Tersedia', 'cover' => 'cover_hujan.jpg'],
-        ['id' => 5, 'judul' => 'Bandung After Rain', 'penulis' => 'Viva.co', 'genre' => 'Romance', 'status' => 'Tersedia', 'cover' => 'bandung.after.rain.jpg'],
-        ['id' => 6, 'judul' => 'AI For Everyone', 'penulis' => 'Andrew Ng', 'genre' => 'Technology', 'status' => 'Tersedia', 'cover' => 'cover_AI.byerlangga.jpg'],
-        ['id' => 7, 'judul' => 'Malioboro at Midnight', 'penulis' => 'Skysphire', 'genre' => 'Romance', 'status' => 'Dipinjam', 'cover' => 'maliboro.cover.jpg'],
-        ['id' => 8, 'judul' => 'Bumi', 'penulis' => 'Tere Liye', 'genre' => 'Fantasi', 'status' => 'Tersedia', 'cover' => 'cover_buku_bumi.jpg'],
+        ['id' => 1, 'book_id' => 'B001', 'judul' => 'Laskar Pelangi', 'penulis' => 'Andrea Hirata', 'genre' => 'Drama', 'status' => 'Tersedia', 'cover' => 'Laskar_Pelangi_Sampul.jpg'],
+        ['id' => 2, 'book_id' => 'B002', 'judul' => 'Filosofi Teras', 'penulis' => 'Henry Manampiring', 'genre' => 'Self-Dev', 'status' => 'Dipinjam', 'cover' => 'filosofi_teras.webp'],
+        ['id' => 3, 'book_id' => 'B003', 'judul' => 'Akuntansi Dasar', 'penulis' => 'Erlangga', 'genre' => 'Edukasi', 'status' => 'Tersedia', 'cover' => 'Cover_akutansi.jpg'],
+        ['id' => 4, 'book_id' => 'B004', 'judul' => 'Hujan', 'penulis' => 'Tere Liye', 'genre' => 'Romance', 'status' => 'Tersedia', 'cover' => 'cover_hujan.jpg'],
+        ['id' => 5, 'book_id' => 'B005', 'judul' => 'Bandung After Rain', 'penulis' => 'Viva.co', 'genre' => 'Romance', 'status' => 'Tersedia', 'cover' => 'bandung.after.rain.jpg'],
+        ['id' => 6, 'book_id' => 'B006', 'judul' => 'AI For Everyone', 'penulis' => 'Andrew Ng', 'genre' => 'Technology', 'status' => 'Tersedia', 'cover' => 'cover_AI.byerlangga.jpg'],
+        ['id' => 7, 'book_id' => 'B007', 'judul' => 'Malioboro at Midnight', 'penulis' => 'Skysphire', 'genre' => 'Romance', 'status' => 'Dipinjam', 'cover' => 'maliboro.cover.jpg'],
+        ['id' => 8, 'book_id' => 'B008', 'judul' => 'Bumi', 'penulis' => 'Tere Liye', 'genre' => 'Fantasi', 'status' => 'Tersedia', 'cover' => 'cover_buku_bumi.jpg'],
     ]);
 }
 
@@ -152,6 +152,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/buku/tambah', function () {
         return view('admin.pages.data-buku');
     })->name('admin.buku.create');
+    Route::post('/buku/tambah', [BukuController::class, 'store'])->name('admin.buku.store');
 
     // Route Peminjaman Admin Actions
     Route::post('/peminjaman/{id}/acc', [AdminController::class, 'accPengembalian'])->name('admin.peminjaman.acc');
