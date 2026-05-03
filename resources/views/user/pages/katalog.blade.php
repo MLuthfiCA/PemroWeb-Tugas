@@ -4,12 +4,10 @@
 <div class="py-10 space-y-10" x-data="{ view: 'grid' }">
     
     <!-- Page Header -->
-    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 animate-fade-up">
-        <div>
-            <h1 class="text-4xl font-bold text-gray-800">Library Catalog</h1>
-            <p class="text-gray-500 mt-2">Discover and borrow our best digital collections.</p>
-        </div>
-        
+    <x-ui.page-header 
+        title="Library Catalog"
+        subtitle="Discover and borrow our best digital collections."
+    >
         <!-- View Toggle -->
         <div class="flex p-1 bg-white/60 backdrop-blur-md rounded-2xl border border-white/80 shadow-xl shadow-red-50 w-fit">
             <button @click="view = 'grid'" :class="view === 'grid' ? 'bg-burgundy-500 shadow-lg text-white' : 'text-gray-400'" class="px-5 py-2.5 rounded-xl transition-all duration-300 flex items-center gap-2 font-bold text-sm">
@@ -25,13 +23,13 @@
                 Table
             </button>
         </div>
-    </div>
+    </x-ui.page-header>
 
     <!-- Grid View -->
     <template x-if="view === 'grid'">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             @foreach($daftarBuku as $index => $buku)
-            <div class="glass-panel p-4 flex flex-col group animate-fade-up border-white/60" style="animation-delay: {{ $index * 100 }}ms">
+            <x-ui.glass-card class="p-4 flex flex-col group animate-fade-up border-white/60" style="animation-delay: {{ $index * 100 }}ms">
                 <a href="{{ route('katalog.detail', $buku['id']) }}" class="relative h-64 rounded-2xl mb-5 overflow-hidden bg-gradient-to-br from-red-50 to-rose-100 flex items-center justify-center border border-white/20 group-hover:shadow-2xl transition-all duration-500">
                     <!-- Real Image from images folder -->
                     <img src="{{ asset('images/' . ($buku['cover'] ?? 'readspace-library.png')) }}" 
@@ -62,14 +60,14 @@
                     <span class="text-gray-300 font-bold text-xs italic tracking-wide">Borrowed</span>
                     @endif
                 </div>
-            </div>
+            </x-ui.glass-card>
             @endforeach
         </div>
     </template>
 
     <!-- Table View -->
     <template x-if="view === 'table'">
-        <div class="glass-panel overflow-hidden border border-white/60 animate-fade-up shadow-2xl shadow-red-50">
+        <x-ui.glass-card class="overflow-hidden border border-white/60 animate-fade-up shadow-2xl shadow-red-50">
             <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse">
                     <thead class="bg-red-50/50 text-gray-400 text-[10px] font-bold uppercase tracking-widest">
@@ -121,7 +119,7 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+        </x-ui.glass-card>
     </template>
 
 </div>

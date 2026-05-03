@@ -6,26 +6,22 @@
 <div class="py-10 space-y-10" x-data="{ showModal: {{ session('success') ? 'true' : 'false' }} }">
     
     <!-- Page Header -->
-    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 animate-fade-up">
-        <div>
-            <h1 class="text-4xl font-bold text-gray-800">Catalog Management</h1>
-            <p class="text-gray-500 mt-2">Manage all books available in the Readspace Library.</p>
-        </div>
-        
-        <div>
-            <a href="{{ route('admin.buku.create') }}" class="px-6 py-3.5 bg-burgundy-500 text-white rounded-2xl text-sm font-bold shadow-lg shadow-red-100 hover:bg-maroon transition-all transform active:scale-95 flex items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                </svg>
-                Add New Book
-            </a>
-        </div>
-    </div>
+    <x-ui.page-header 
+        title="Catalog Management" 
+        subtitle="Manage all books available in the Readspace Library."
+    >
+        <a href="{{ route('admin.buku.create') }}" class="px-6 py-3.5 bg-burgundy-500 text-white rounded-2xl text-sm font-bold shadow-lg shadow-red-100 hover:bg-maroon transition-all transform active:scale-95 flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+            </svg>
+            Add New Book
+        </a>
+    </x-ui.page-header>
 
     <!-- Grid View -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
         @forelse($Buku as $index => $buku)
-        <div class="glass-panel p-4 flex flex-col group animate-fade-up border-white/60" style="animation-delay: {{ $index * 100 }}ms">
+        <x-ui.glass-card class="p-4 flex flex-col group animate-fade-up" style="animation-delay: {{ $index * 100 }}ms">
             <div class="relative h-64 rounded-2xl mb-5 overflow-hidden bg-gradient-to-br from-red-50 to-rose-100 flex items-center justify-center border border-white/20">
                 <!-- Real Image from images folder -->
                 <img src="{{ asset('images/' . ($buku['cover'] ?? 'readspace-library.png')) }}" 
@@ -63,7 +59,7 @@
                 <span class="px-2 py-1 rounded bg-white/80 text-[10px] font-bold text-burgundy-500 uppercase tracking-tighter border border-red-100">{{ $buku['genre'] }}</span>
                 <span class="text-[10px] font-bold text-gray-300 uppercase tracking-widest">ID: {{ $buku['book_id'] ?? '#00'.$buku['id'] }}</span>
             </div>
-        </div>
+        </x-ui.glass-card>
         @empty
         <div class="col-span-full py-20 text-center">
             <div class="w-20 h-20 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-4 text-burgundy-200">
@@ -86,7 +82,7 @@
         x-transition:leave-end="opacity-0 scale-90"
         class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-maroon/20 backdrop-blur-md">
         
-        <div class="glass-panel max-w-sm w-full p-8 text-center border-white shadow-2xl relative overflow-hidden" style="background-color: #FDFBD4;">
+        <x-ui.glass-card class="max-w-sm w-full p-8 text-center border-white shadow-2xl relative overflow-hidden" style="background-color: #FDFBD4;">
             <!-- Decorative Background Icon -->
             <div class="absolute -top-10 -right-10 w-32 h-32 bg-green-50 rounded-full opacity-20"></div>
             
@@ -105,7 +101,7 @@
                 class="w-full bg-burgundy-500 text-white py-4 rounded-2xl font-bold hover:bg-maroon transition-all shadow-lg shadow-red-100 active:scale-95">
                 Close
             </button>
-        </div>
+        </x-ui.glass-card>
     </div>
 </div>
 @endsection

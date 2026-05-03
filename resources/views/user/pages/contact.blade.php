@@ -4,12 +4,10 @@
 <div class="py-10 space-y-8">
     
     <!-- Page Header -->
-    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 animate-fade-up">
-        <div>
-            <h1 class="text-4xl font-bold text-gray-800">Contact Us</h1>
-            <p class="text-gray-500 mt-2">Have questions? We'd love to hear from you. Get in touch with ReadSpace Library.</p>
-        </div>
-    </div>
+    <x-ui.page-header 
+        title="Contact Us" 
+        subtitle="Have questions? We'd love to hear from you. Get in touch with ReadSpace Library." 
+    />
 
     <!-- Contact Form & Info Grid -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -18,7 +16,7 @@
         <div class="md:col-span-1 space-y-6">
             
             <!-- Email -->
-            <div class="glass-panel p-6 border-white/60 animate-fade-up delay-100 group">
+            <x-ui.glass-card class="p-6 animate-fade-up delay-100 group">
                 <div class="flex items-center gap-4 mb-3">
                     <div class="p-3 rounded-2xl bg-burgundy-50 text-burgundy-500 group-hover:bg-burgundy-500 group-hover:text-white transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -30,10 +28,10 @@
                         <a href="mailto:readspacelibrary@poltek.ac.id" class="text-lg font-bold text-gray-800 hover:text-burgundy-500 transition-colors">readspacelibrary@poltek.ac.id</a>
                     </div>
                 </div>
-            </div>
+            </x-ui.glass-card>
 
             <!-- Phone -->
-            <div class="glass-panel p-6 border-white/60 animate-fade-up delay-200 group">
+            <x-ui.glass-card class="p-6 animate-fade-up delay-200 group">
                 <div class="flex items-center gap-4 mb-3">
                     <div class="p-3 rounded-2xl bg-burgundy-50 text-burgundy-500 group-hover:bg-burgundy-500 group-hover:text-white transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -45,10 +43,10 @@
                         <a href="tel:+622167352800" class="text-lg font-bold text-gray-800 hover:text-burgundy-500 transition-colors">(021) 673528</a>
                     </div>
                 </div>
-            </div>
+            </x-ui.glass-card>
 
             <!-- Address -->
-            <div class="glass-panel p-6 border-white/60 animate-fade-up delay-300 group">
+            <x-ui.glass-card class="p-6 animate-fade-up delay-300 group">
                 <div class="flex items-start gap-4 mb-3">
                     <div class="p-3 rounded-2xl bg-burgundy-50 text-burgundy-500 group-hover:bg-burgundy-500 group-hover:text-white transition-colors flex-shrink-0">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -61,13 +59,13 @@
                         <p class="text-sm font-semibold text-gray-800">Ahmad Yani Street, Batam City, Kepulauan Riau, Indonesia</p>
                     </div>
                 </div>
-            </div>
+            </x-ui.glass-card>
 
         </div>
 
         <!-- Contact Form -->
         <div class="md:col-span-2">
-            <div class="glass-panel p-8 border-white/60 animate-fade-up delay-100 shadow-2xl shadow-red-50">
+            <x-ui.glass-card class="p-8 animate-fade-up delay-100 shadow-2xl shadow-red-50">
                 <h2 class="text-2xl font-bold text-gray-800 mb-6">Send us a Message</h2>
                 
                 <form action="#" method="POST" class="space-y-5">
@@ -105,7 +103,7 @@
                     </button>
 
                 </form>
-            </div>
+            </x-ui.glass-card>
         </div>
 
     </div>

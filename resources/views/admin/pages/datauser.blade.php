@@ -4,21 +4,17 @@
 <div class="py-10 space-y-8">
     
     <!-- Page Header -->
-    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 animate-fade-up">
-        <div>
-            <h1 class="text-4xl font-bold text-gray-800">Users Data</h1>
-            <p class="text-gray-500 mt-2">Manage library user and student data.</p>
-        </div>
-        
-        <div>
-            <button onclick="openModal('add')" class="px-6 py-3 rounded-xl bg-burgundy-500 text-white font-bold shadow-lg shadow-red-100 hover:bg-maroon transition-all">
-                + Add User
-            </button>
-        </div>
-    </div>
+    <x-ui.page-header 
+        title="Users Data" 
+        subtitle="Manage library user and student data."
+    >
+        <button onclick="openModal('add')" class="px-6 py-3 rounded-xl bg-burgundy-500 text-white font-bold shadow-lg shadow-red-100 hover:bg-maroon transition-all">
+            + Add User
+        </button>
+    </x-ui.page-header>
 
     <!-- Table Section -->
-    <div class="glass-panel overflow-hidden border border-white/60 animate-fade-up delay-100 shadow-2xl shadow-red-50">
+    <x-ui.glass-card class="overflow-hidden border border-white/60 animate-fade-up delay-100 shadow-2xl shadow-red-50">
         <div class="p-6 border-b border-red-50/50 flex justify-between items-center bg-white/40">
             <div class="relative w-full md:w-1/3">
                 <input type="text" placeholder="Search Users..." class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-white bg-white/50 focus:ring-2 focus:ring-red-200 outline-none transition-all font-medium text-sm">
@@ -88,7 +84,7 @@
                 </tbody>
             </table>
         </div>
-    </div>
+    </x-ui.glass-card>
 
     <!-- Modal -->
     <div id="userModal" class="fixed inset-0 bg-gray-900/40 backdrop-blur-sm hidden items-center justify-center p-4 z-[100] transition-all duration-300 opacity-0 data-[show=true]:opacity-100">

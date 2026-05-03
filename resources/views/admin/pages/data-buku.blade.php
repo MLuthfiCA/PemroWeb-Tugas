@@ -2,19 +2,16 @@
 
 @section('content')
 <div class="py-10 space-y-8">
-    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 animate-fade-up">
-        <div>
-            <h1 class="text-4xl font-bold text-gray-800">Add Book</h1>
-            <p class="text-gray-500 mt-2">Add new book collections to the library.</p>
-        </div>
-        <div>
-            <a href="{{ route('admin.katalog') }}" class="px-6 py-3 rounded-xl bg-white text-gray-600 font-bold shadow-sm border border-gray-100 hover:bg-gray-50 transition-all text-sm">
-                Return to Catalog
-            </a>
-        </div>
-    </div>
+    <x-ui.page-header 
+        title="Add Book" 
+        subtitle="Add new book collections to the library."
+    >
+        <a href="{{ route('admin.katalog') }}" class="px-6 py-3 rounded-xl bg-white text-gray-600 font-bold shadow-sm border border-gray-100 hover:bg-gray-50 transition-all text-sm">
+            Return to Catalog
+        </a>
+    </x-ui.page-header>
 
-    <div class="glass-panel p-8 border-white/60 animate-fade-up delay-100 shadow-2xl shadow-red-50">
+    <x-ui.glass-card class="p-8 border-white/60 animate-fade-up delay-100 shadow-2xl shadow-red-50">
         <form action="{{ route('admin.buku.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -88,6 +85,6 @@
 
             </div>
         </form>
-    </div>
+    </x-ui.glass-card>
 </div>
 @endsection

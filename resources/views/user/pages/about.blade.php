@@ -22,7 +22,7 @@
             @endphp
 
             @foreach($team as $index => $member)
-            <div class="glass-panel p-8 text-center hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group animate-fade-up border-white/60" style="animation-delay: {{ $index * 100 }}ms">
+            <x-ui.glass-card class="p-8 text-center hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group animate-fade-up" style="animation-delay: {{ $index * 100 }}ms">
                 
                 <!-- FOTO ANGGOTA TIM -->
                 <div class="w-24 h-24 mx-auto mb-6 rounded-full {{ $member['color'] }} flex items-center justify-center text-3xl font-bold shadow-inner overflow-hidden relative border-4 border-white">
@@ -41,7 +41,7 @@
                         <span class="px-4 py-1.5 rounded-full bg-white text-[10px] font-bold text-gray-400 uppercase tracking-widest border border-red-50">{{ $member['role'] }}</span>
                     </div>
                 </div>
-            </div>
+            </x-ui.glass-card>
             @endforeach
         </div>
     </div>
