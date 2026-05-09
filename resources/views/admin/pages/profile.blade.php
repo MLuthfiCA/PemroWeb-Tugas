@@ -103,17 +103,26 @@
 
                     <div class="col-span-2 flex flex-col justify-center gap-1 mt-2 md:mt-0">
                         <span class="md:hidden text-[10px] font-bold text-gray-400 uppercase">Fine & Status:</span>
-                        @if($b->denda > 0)
-                            <p class="font-bold text-red-600 text-xs">Rp {{ number_format($b->denda, 0, ',', '.') }}</p>
-                            @if($b->status_denda === 'belum_lunas')
+                        @php
+                            $calculated_denda = $b->denda;
+                            if ($b->status === 'dipinjam' && strtotime($b->batas_kembali) < time()) {
+                                $hari_terlambat = ceil((time() - strtotime($b->batas_kembali)) / (60 * 60 * 24));
+                                $calculated_denda = max(0, $hari_terlambat * 5000);
+                            }
+                        @endphp
+                        @if($calculated_denda > 0)
+                            <p class="font-bold text-red-600 text-xs">Rp {{ number_format($calculated_denda, 0, ',', '.') }}</p>
+                            @if($b->status === 'dikembalikan' && $b->status_denda === 'belum_lunas')
                                 <form action="{{ route('admin.peminjaman.bayar', $b->id) }}" method="POST">
                                     @csrf
                                     <button type="submit" class="text-[9px] font-bold text-white bg-red-500 px-2 py-0.5 rounded hover:bg-red-600 transition-colors">
                                         SET LUNAS
                                     </button>
                                 </form>
-                            @else
+                            @elseif($b->status === 'dikembalikan' && $b->status_denda === 'lunas')
                                 <span class="text-[9px] font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded border border-green-100 w-fit">LUNAS</span>
+                            @elseif($b->status === 'dipinjam')
+                                <span class="text-[9px] font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded border border-red-100 w-fit">BELUM BAYAR</span>
                             @endif
                         @else
                             <p class="text-xs text-gray-400 font-medium">No Fines</p>

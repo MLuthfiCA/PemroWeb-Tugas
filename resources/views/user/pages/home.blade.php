@@ -74,11 +74,11 @@
 
     @php
         $genres = [
-            ['name' => 'Self-Dev', 'icon' => '🌱', 'growth' => '+25%', 'color' => 'from-red-400 to-burgundy-500'],
-            ['name' => 'Technology', 'icon' => '💻', 'growth' => '+18%', 'color' => 'from-rose-400 to-maroon'],
-            ['name' => 'Finance', 'icon' => '💰', 'growth' => '+15%', 'color' => 'from-amber-600 to-orange-700'],
-            ['name' => 'Literature', 'icon' => '📚', 'growth' => '+10%', 'color' => 'from-purple-600 to-indigo-900'],
-            ['name' => 'Psychology', 'icon' => '🧠', 'growth' => '+22%', 'color' => 'from-pink-500 to-rose-700'],
+            ['name' => 'Self-Dev', 'icon' => '🌱', 'growth' => '25%', 'color' => 'from-red-400 to-burgundy-500'],
+            ['name' => 'Technology', 'icon' => '💻', 'growth' => '18%', 'color' => 'from-rose-400 to-maroon'],
+            ['name' => 'Finance', 'icon' => '💰', 'growth' => '15%', 'color' => 'from-amber-600 to-orange-700'],
+            ['name' => 'Literature', 'icon' => '📚', 'growth' => '10%', 'color' => 'from-purple-600 to-indigo-900'],
+            ['name' => 'Psychology', 'icon' => '🧠', 'growth' => '22%', 'color' => 'from-pink-500 to-rose-700'],
         ];
     @endphp
 
@@ -183,7 +183,7 @@
                         },
                         font: {
                             weight: 'bold',
-                            size: 14,
+                            size: 11,
                             family: 'DM Sans'
                         },
                         textAlign: 'center'

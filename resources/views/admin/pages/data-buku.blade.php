@@ -21,7 +21,7 @@
                         <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1">Book title</label>
                         <input type="text" name="judul" required placeholder="Enter the Book Title" class="w-full px-4 py-3 border border-white bg-white/50 rounded-2xl focus:outline-none focus:ring-4 focus:ring-red-100 font-medium text-sm">
                     </div>
-                    <div class="grid grid-cols-2 gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1">Author</label>
                             <input type="text" name="penulis" required placeholder="Author Name" class="w-full px-4 py-3 border border-white bg-white/50 rounded-2xl focus:outline-none focus:ring-4 focus:ring-red-100 font-medium text-sm">
@@ -31,7 +31,7 @@
                             <input type="text" name="penerbit" placeholder="Publisher Name" class="w-full px-4 py-3 border border-white bg-white/50 rounded-2xl focus:outline-none focus:ring-4 focus:ring-red-100 font-medium text-sm">
                         </div>
                     </div>
-                    <div class="grid grid-cols-2 gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1">Genre</label>
                             <select name="genre" class="w-full px-4 py-3 border border-white bg-white/50 rounded-2xl focus:outline-none focus:ring-4 focus:ring-red-100 font-medium text-sm">
@@ -42,15 +42,13 @@
                                 <option value="Edukasi">Education</option>
                             </select>
                         </div>
-                        <div class="grid grid-cols-2 gap-6 mt-6">
-                            <div>
-                                <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1">Book ID</label>
-                                <input type="text" name="book_id" required value="{{ old('book_id') }}" placeholder="Book 001" class="w-full px-4 py-3 border border-white bg-white/50 rounded-2xl focus:outline-none focus:ring-4 focus:ring-red-100 font-medium text-sm @error('book_id') border-red-500 @enderror">
-                                
-                               @error('book_id')
-                                    <span class="text-[10px] text-red-500 font-bold ml-1">{{ $message }}</span>
-                                @enderror
-                            </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1">Book ID</label>
+                            <input type="text" name="book_id" required value="{{ old('book_id') }}" placeholder="Book 001" class="w-full px-4 py-3 border border-white bg-white/50 rounded-2xl focus:outline-none focus:ring-4 focus:ring-red-100 font-medium text-sm @error('book_id') border-red-500 @enderror">
+                            
+                            @error('book_id')
+                                <span class="text-[10px] text-red-500 font-bold ml-1">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1">Status</label>

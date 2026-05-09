@@ -1,7 +1,7 @@
 @extends('user.layouts.app')
 
 @section('content')
-<div class="min-h-[80vh] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+<div class="md:min-h-[80vh] flex items-center justify-center py-4 md:py-12 px-4 sm:px-6 lg:px-8 mt-8 md:mt-0">
     <div class="max-w-md w-full space-y-8 animate-fade-up">
         <div class="text-center">
             <div class="mx-auto flex items-center justify-center">

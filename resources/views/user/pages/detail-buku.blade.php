@@ -69,7 +69,7 @@
 
             <div class="pt-8 flex flex-col sm:flex-row gap-4">
                 @if($buku['status'] == 'Tersedia')
-                <a href="{{ route('pengajuan', ['judul' => $buku['judul'], 'id' => 'B-' . str_pad($buku['id'], 3, '0', STR_PAD_LEFT), 'cover' => $buku['cover']]) }}" 
+                <a href="{{ route('pengajuan', ['judul' => $buku['judul'], 'id' => $buku['id'], 'book_id' => $buku['book_id'] ?? ('B-' . str_pad($buku['id'], 3, '0', STR_PAD_LEFT)), 'cover' => $buku['cover']]) }}" 
                     class="px-10 py-5 bg-burgundy-500 text-white rounded-2xl font-bold text-lg shadow-2xl shadow-red-200 hover:bg-maroon hover:-translate-y-1 transition-all flex items-center justify-center gap-3">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />

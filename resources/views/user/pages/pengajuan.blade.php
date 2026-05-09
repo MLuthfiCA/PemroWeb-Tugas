@@ -46,7 +46,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4 border-t border-red-50">
                     <div class="space-y-2">
                         <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest ml-1">Book ID</label>
-                        <input type="text" value="{{ request('id') }}" readonly 
+                        <input type="text" value="{{ request('book_id') }}" readonly 
                             class="w-full p-4 bg-red-50/30 border border-white rounded-2xl text-gray-400 font-bold cursor-not-allowed">
                     </div>
                     <div class="space-y-2">

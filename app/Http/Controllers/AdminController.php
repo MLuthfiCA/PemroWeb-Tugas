@@ -43,10 +43,19 @@ class AdminController extends Controller
     {
         $peminjaman = Peminjaman::findOrFail($id);
         
+        // Hitung denda jika terlambat
+        $denda = 0;
+        if (strtotime($peminjaman->batas_kembali) < time()) {
+            $hari_terlambat = ceil((time() - strtotime($peminjaman->batas_kembali)) / (60 * 60 * 24));
+            $denda = max(0, $hari_terlambat * 5000);
+        }
+
         // Update status peminjaman
         $peminjaman->update([
             'status' => 'dikembalikan',
             'tanggal_kembali' => now(),
+            'denda' => $denda,
+            'status_denda' => $denda > 0 ? 'belum_lunas' : 'lunas',
         ]);
 
         // Update status buku
