@@ -34,8 +34,37 @@ class AdminController extends Controller
                 ->get();
             return view('admin.pages.profile', compact('books'));
         } catch (\Exception $e) {
-            // Jika database error (misal MySQL belum nyala), tampilkan halaman dengan pesan error
-            return view('admin.pages.profile', ['books' => collect(), 'db_error' => $e->getMessage()]);
+            // Jika database error (misal MySQL belum nyala), gunakan data dummy
+            $dummyBooks = collect([
+                (object)[
+                    'id' => 1,
+                    'user' => (object)['name' => 'Siti Aminah'],
+                    'buku' => (object)['judul' => 'Laskar Pelangi', 'penulis' => 'Andrea Hirata', 'cover' => 'Laskar_Pelangi_Sampul.jpg'],
+                    'batas_kembali' => date('Y-m-d', strtotime('-3 days')), // Terlambat 3 hari
+                    'status' => 'dipinjam',
+                    'denda' => 0,
+                    'status_denda' => 'lunas'
+                ],
+                (object)[
+                    'id' => 2,
+                    'user' => (object)['name' => 'Budi Santoso'],
+                    'buku' => (object)['judul' => 'Filosofi Teras', 'penulis' => 'Henry Manampiring', 'cover' => 'filosofi_teras.webp'],
+                    'batas_kembali' => date('Y-m-d', strtotime('+2 days')), // Belum terlambat
+                    'status' => 'dipinjam',
+                    'denda' => 0,
+                    'status_denda' => 'lunas'
+                ],
+                (object)[
+                    'id' => 3,
+                    'user' => (object)['name' => 'Andi Darmawan'],
+                    'buku' => (object)['judul' => 'Bumi', 'penulis' => 'Tere Liye', 'cover' => 'cover_buku_bumi.jpg'],
+                    'batas_kembali' => date('Y-m-d', strtotime('-5 days')), // Dikembalikan terlambat, denda belum dibayar
+                    'status' => 'dikembalikan',
+                    'denda' => 25000,
+                    'status_denda' => 'belum_lunas'
+                ]
+            ]);
+            return view('admin.pages.profile', ['books' => $dummyBooks, 'db_error' => $e->getMessage()]);
         }
     }
 
