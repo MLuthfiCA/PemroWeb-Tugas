@@ -156,3 +156,4 @@
                 labels: ['Self-Dev', 'Technology', 'Literature', 'Psychology'],
                 datasets: [{
                     data
+                    
