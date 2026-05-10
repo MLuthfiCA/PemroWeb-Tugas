@@ -85,45 +85,66 @@
             </table>
         </div>
     </x-ui.glass-card>
+</div>
 
-    <!-- Modal -->
-    <div id="userModal" class="fixed inset-0 bg-gray-900/40 backdrop-blur-sm hidden items-center justify-center p-4 z-[100] transition-all duration-300 opacity-0 data-[show=true]:opacity-100">
-        <div class="bg-white/90 backdrop-blur-xl border border-white/60 w-full max-w-2xl rounded-3xl shadow-2xl overflow-hidden relative transform scale-95 data-[show=true]:scale-100 transition-transform duration-300">
-            <div class="p-8">
-                <h3 class="text-2xl font-bold text-gray-800 mb-6" id="modalTitle">Add User</h3>
-                
-                <div class="space-y-4">
-                    <div class="grid grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1">Nama Lengkap</label>
-                            <input type="text" placeholder="Full Name" class="w-full px-4 py-3 border border-white bg-white/50 rounded-2xl focus:outline-none focus:ring-4 focus:ring-red-100 font-medium text-sm">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1">NIM / ID</label>
-                            <input type="text" placeholder="ID Number" class="w-full px-4 py-3 border border-white bg-white/50 rounded-2xl focus:outline-none focus:ring-4 focus:ring-red-100 font-medium text-sm">
-                        </div>
+<!-- Modal (Moved outside of space-y-8 to prevent layout issues) -->
+<div id="userModal" class="fixed inset-0 bg-gray-900/40 backdrop-blur-sm hidden items-center justify-center p-4 z-[100] transition-all duration-300 opacity-0 data-[show=true]:opacity-100 !m-0">
+    <div class="bg-white/90 backdrop-blur-xl border border-white/60 w-full max-w-2xl rounded-3xl shadow-2xl overflow-hidden relative transform scale-95 data-[show=true]:scale-100 transition-transform duration-300">
+        <div class="p-8">
+            <h3 class="text-2xl font-bold text-gray-800 mb-6" id="modalTitle">Add User</h3>
+            
+            <div class="space-y-4">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1">Full Name</label>
+                        <input type="text" placeholder="Full Name" class="w-full px-4 py-3 border border-white bg-white/50 rounded-2xl focus:outline-none focus:ring-4 focus:ring-red-100 font-medium text-sm transition-all">
                     </div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1">Email</label>
-                            <input type="email" placeholder="Email Address" class="w-full px-4 py-3 border border-white bg-white/50 rounded-2xl focus:outline-none focus:ring-4 focus:ring-red-100 font-medium text-sm">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1">Role</label>
-                            <select class="w-full px-4 py-3 border border-white bg-white/50 rounded-2xl focus:outline-none focus:ring-4 focus:ring-red-100 font-medium text-sm">
-                                <option>Student</option>
-                                <option>Admin</option>
-                            </select>
-                        </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1">ID Number</label>
+                        <input type="text" placeholder="ID Number" class="w-full px-4 py-3 border border-white bg-white/50 rounded-2xl focus:outline-none focus:ring-4 focus:ring-red-100 font-medium text-sm transition-all">
                     </div>
                 </div>
-
-                <div class="mt-8 flex justify-end gap-3">
-                    <button onclick="closeModal()" class="px-6 py-2.5 rounded-xl font-bold text-gray-500 hover:bg-gray-100 transition-colors">Cancel</button>
-                    <button onclick="closeModal()" class="px-6 py-2.5 rounded-xl font-bold text-white bg-burgundy-500 shadow-lg shadow-red-100 hover:bg-maroon transition-all">Save</button>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1">Email</label>
+                        <input type="email" placeholder="Email Address" class="w-full px-4 py-3 border border-white bg-white/50 rounded-2xl focus:outline-none focus:ring-4 focus:ring-red-100 font-medium text-sm transition-all">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1">Role</label>
+                        <select class="w-full px-4 py-3 border border-white bg-white/50 rounded-2xl focus:outline-none focus:ring-4 focus:ring-red-100 font-medium text-sm transition-all text-gray-700">
+                            <option>Student</option>
+                            <option>Admin</option>
+                        </select>
+                    </div>
                 </div>
             </div>
+
+            <div class="mt-8 flex justify-end gap-3">
+                <button onclick="closeModal()" class="px-6 py-2.5 rounded-xl font-bold text-gray-500 hover:bg-gray-100 transition-colors">Cancel</button>
+                <button onclick="saveUser()" class="px-6 py-2.5 rounded-xl font-bold text-white bg-burgundy-500 shadow-lg shadow-red-100 hover:bg-maroon transition-all">Save</button>
+            </div>
         </div>
+    </div>
+</div>
+
+<!-- Success Toast Notification -->
+<div id="successToast" class="fixed top-5 right-5 z-[200] transform transition-all duration-500 translate-x-full opacity-0">
+    <div class="bg-white/90 backdrop-blur-xl border border-white/60 p-4 rounded-2xl shadow-2xl flex items-center gap-4 w-80 relative overflow-hidden">
+        <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-green-500"></div>
+        <div class="bg-green-100 p-2.5 rounded-full ml-1">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+            </svg>
+        </div>
+        <div>
+            <h4 class="text-sm font-bold text-gray-800">Success</h4>
+            <p class="text-xs text-gray-500 font-medium">New user successfully added!</p>
+        </div>
+        <button onclick="hideToast()" class="ml-auto text-gray-400 hover:text-gray-600 hover:bg-gray-100 p-1 rounded-lg transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
     </div>
 </div>
 
@@ -133,13 +154,16 @@
         modal.classList.remove('hidden');
         modal.classList.add('flex');
         
+        // Prevent body scroll
+        document.body.style.overflow = 'hidden';
+        
         // Timeout for transition
         setTimeout(() => {
             modal.setAttribute('data-show', 'true');
             modal.querySelector('div').setAttribute('data-show', 'true');
         }, 10);
         
-        document.getElementById('modalTitle').innerText = mode === 'add' ? 'Tambah User Baru' : 'Edit User';
+        document.getElementById('modalTitle').innerText = mode === 'add' ? 'Add New User' : 'Edit User';
     }
     
     function closeModal() {
@@ -147,10 +171,37 @@
         modal.setAttribute('data-show', 'false');
         modal.querySelector('div').setAttribute('data-show', 'false');
         
+        // Restore body scroll
+        document.body.style.overflow = 'auto';
+        
         setTimeout(() => {
             modal.classList.add('hidden');
             modal.classList.remove('flex');
         }, 300); // match transition duration
+    }
+
+    function saveUser() {
+        closeModal();
+        
+        // Show success toast instead of SweetAlert
+        setTimeout(() => {
+            showToast();
+        }, 300);
+    }
+
+    function showToast() {
+        const toast = document.getElementById('successToast');
+        toast.classList.remove('translate-x-full', 'opacity-0');
+        
+        // Auto hide after 4 seconds
+        setTimeout(() => {
+            hideToast();
+        }, 4000);
+    }
+
+    function hideToast() {
+        const toast = document.getElementById('successToast');
+        toast.classList.add('translate-x-full', 'opacity-0');
     }
 </script>
 @endsection
