@@ -1,4 +1,4 @@
-@extends('app')
+@extends('user.layouts.app')
 
 @section('content')
 <div class="space-y-8">
@@ -156,3 +156,4 @@
                 labels: ['Self-Dev', 'Technology', 'Literature', 'Psychology'],
                 datasets: [{
                     data
+                    

@@ -16,20 +16,26 @@ class LoginController extends Controller
             'role'     => 'required'
         ]);
 
-        // REKAYASA LOGIN: Tidak cek database
-        $user = [
-            'name' => $request->username,
-            'role' => $request->role,
-            'username' => $request->username
-        ];
+        // MELAKUKAN LOGIN ASLI KE DATABASE
+        if (Auth::attempt(['username' => $request->username, 'password' => $request->password, 'role' => $request->role])) {
+            $user = Auth::user();
+            
+            // Simpan data esensial ke session agar sesuai dengan arsitektur saat ini
+            session(['user' => [
+                'id' => $user->id,
+                'name' => $user->name,
+                'role' => $user->role,
+                'username' => $user->username
+            ]]);
 
-        // Simpan ke session
-        session(['user' => $user]);
-
-        if ($request->role == 'admin') {
-            return redirect()->route('admin.katalog');
-        } else {
-            return redirect()->route('katalog');
+            if ($user->role == 'admin') {
+                return redirect()->route('admin.katalog');
+            } else {
+                return redirect()->route('katalog');
+            }
         }
+
+        // Jika username/password salah
+        return back()->withErrors(['login_error' => 'Invalid username, password, or role. Only registered accounts can log in.']);
     }
 }

@@ -43,7 +43,7 @@
                             placeholder="••••••••">
                     </div>
                     <div>
-                        <label for="role" class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1">Login Sebagai</label>
+                        <label for="role" class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 ml-1">Login As</label>
                         <select id="role" name="role" required 
                             class="appearance-none relative block w-full px-4 py-4 border border-white bg-white/50 rounded-2xl text-gray-800 focus:outline-none focus:ring-4 focus:ring-red-100 focus:border-burgundy-500 transition-all sm:text-sm font-medium">
                             <option value="mahasiswa">User / Student</option>

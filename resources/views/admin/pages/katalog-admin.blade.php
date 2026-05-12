@@ -3,14 +3,14 @@
 @section('title', 'Katalog Buku Admin')
 
 @section('content')
-<div class="py-10 space-y-10" x-data="{ showModal: {{ session('success') ? 'true' : 'false' }} }">
+<div class="py-4 md:py-10 space-y-6 md:space-y-10" x-data="{ showModal: {{ session('success') ? 'true' : 'false' }} }">
     
     <!-- Page Header -->
     <x-ui.page-header 
         title="Catalog Management" 
         subtitle="Manage all books available in the Readspace Library."
     >
-        <a href="{{ route('admin.buku.create') }}" class="px-6 py-3.5 bg-burgundy-500 text-white rounded-2xl text-sm font-bold shadow-lg shadow-red-100 hover:bg-maroon transition-all transform active:scale-95 flex items-center gap-2">
+        <a href="{{ route('admin.buku.create') }}" class="w-full md:w-auto justify-center px-6 py-3.5 bg-burgundy-500 text-white rounded-2xl text-sm font-bold shadow-lg shadow-red-100 hover:bg-maroon transition-all transform active:scale-95 flex items-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
             </svg>
@@ -19,9 +19,9 @@
     </x-ui.page-header>
 
     <!-- Grid View -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
         @forelse($Buku as $index => $buku)
-        <x-ui.glass-card class="p-4 flex flex-col group animate-fade-up" style="animation-delay: {{ $index * 100 }}ms">
+        <x-ui.glass-card class="p-4 flex flex-col group animate-fade-up border-white/60" style="animation-delay: {{ $index * 100 }}ms">
             <div class="relative h-64 rounded-2xl mb-5 overflow-hidden bg-gradient-to-br from-red-50 to-rose-100 flex items-center justify-center border border-white/20">
                 <!-- Real Image from images folder -->
                 <img src="{{ asset('images/' . ($buku['cover'] ?? 'readspace-library.png')) }}" 
@@ -33,8 +33,8 @@
                     {{ $buku['status'] == 'Tersedia' ? 'AVAILABLE' : 'BORROWED' }}
                 </div>
 
-                <!-- Admin Action Overlay -->
-                <div class="absolute inset-0 bg-burgundy-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3 backdrop-blur-[2px]">
+                <!-- Admin Action Overlay (Desktop only) -->
+                <div class="absolute inset-0 bg-burgundy-900/40 opacity-0 md:group-hover:opacity-100 transition-opacity hidden md:flex items-center justify-center gap-3 backdrop-blur-[2px]">
                     <a href="{{ route('admin.edit_buku', $buku['id']) }}" class="p-3 bg-white rounded-xl text-burgundy-500 shadow-xl hover:scale-110 transition-transform" title="Edit Buku">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
@@ -57,7 +57,17 @@
             
             <div class="mt-auto pt-5 border-t border-red-50 flex items-center justify-between">
                 <span class="px-2 py-1 rounded bg-white/80 text-[10px] font-bold text-burgundy-500 uppercase tracking-tighter border border-red-100">{{ $buku['genre'] }}</span>
-                <span class="text-[10px] font-bold text-gray-300 uppercase tracking-widest">ID: {{ $buku['book_id'] ?? '#00'.$buku['id'] }}</span>
+                <span class="hidden md:inline text-[10px] font-bold text-gray-300 uppercase tracking-widest">ID: {{ $buku['book_id'] ?? '#00'.$buku['id'] }}</span>
+                
+                <!-- Mobile Actions -->
+                <div class="flex md:hidden items-center gap-1.5">
+                    <a href="{{ route('admin.edit_buku', $buku['id']) }}" class="text-burgundy-500 font-bold text-[10px] bg-red-50 px-2 py-1.5 rounded-lg border border-red-100 uppercase tracking-widest">Edit</a>
+                    <form action="{{ route('admin.delete', $buku['id']) }}" method="POST" onsubmit="return confirm('Hapus buku ini dari katalog?')">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="text-red-500 font-bold text-[10px] bg-red-50 px-2 py-1.5 rounded-lg border border-red-100 uppercase tracking-widest">Del</button>
+                    </form>
+                </div>
             </div>
         </x-ui.glass-card>
         @empty
